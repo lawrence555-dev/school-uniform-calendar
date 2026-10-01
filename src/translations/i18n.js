@@ -45,6 +45,13 @@ export const translations = {
     holiday: '假期不上課',
     holidayDesc: '今日學校放假，學生無需到校',
 
+    // Short Badges for Calendar Grid
+    shortUniform: '校服',
+    shortPE: '體育',
+    shortHouse: '學院',
+    shortHoliday: '放假',
+    shortSwim: '游泳',
+
     // View & Filters
     monthSelect: '選擇月份',
     calendarView: '月曆視圖',
@@ -67,6 +74,17 @@ export const translations = {
     april: '2027年 4月',
     may: '2027年 5月',
     june: '2027年 6月',
+    monthsShort: {
+      10: '10月',
+      11: '11月',
+      12: '12月',
+      1: '1月',
+      2: '2月',
+      3: '3月',
+      4: '4月',
+      5: '5月',
+      6: '6月',
+    },
     prevMonth: '上個月',
     nextMonth: '下個月',
 
@@ -130,6 +148,13 @@ export const translations = {
     holiday: 'School Holiday',
     holidayDesc: 'No school today. Enjoy your break!',
 
+    // Short Badges for Calendar Grid
+    shortUniform: 'Uniform',
+    shortPE: 'PE',
+    shortHouse: 'House',
+    shortHoliday: 'Off',
+    shortSwim: 'Swim',
+
     // View & Filters
     monthSelect: 'Select Month',
     calendarView: 'Calendar Grid',
@@ -152,6 +177,17 @@ export const translations = {
     april: 'April 2027',
     may: 'May 2027',
     june: 'June 2027',
+    monthsShort: {
+      10: 'Oct',
+      11: 'Nov',
+      12: 'Dec',
+      1: 'Jan',
+      2: 'Feb',
+      3: 'Mar',
+      4: 'Apr',
+      5: 'May',
+      6: 'Jun',
+    },
     prevMonth: 'Prev Month',
     nextMonth: 'Next Month',
     selectDateToView: 'Tap any date for full uniform details & schedule',
@@ -214,6 +250,13 @@ export const translations = {
     holiday: 'วันหยุดโรงเรียน',
     holidayDesc: 'วันนี้ไม่มีการเรียนการสอน พักผ่อนให้เต็มที่',
 
+    // Short Badges for Calendar Grid
+    shortUniform: 'ชุดนร.',
+    shortPE: 'พละ',
+    shortHouse: 'บ้าน',
+    shortHoliday: 'หยุด',
+    shortSwim: 'ว่ายน้ำ',
+
     // View & Filters
     monthSelect: 'เลือกเดือน',
     calendarView: 'มุมมองปฏิทิน',
@@ -236,6 +279,17 @@ export const translations = {
     april: 'เมษายน 2027',
     may: 'พฤษภาคม 2027',
     june: 'มิถุนายน 2027',
+    monthsShort: {
+      10: 'ต.ค.',
+      11: 'พ.ย.',
+      12: 'ธ.ค.',
+      1: 'ม.ค.',
+      2: 'ก.พ.',
+      3: 'มี.ค.',
+      4: 'เม.ย.',
+      5: 'พ.ค.',
+      6: 'มิ.ย.',
+    },
     prevMonth: 'เดือนก่อนหน้า',
     nextMonth: 'เดือนถัดไป',
 

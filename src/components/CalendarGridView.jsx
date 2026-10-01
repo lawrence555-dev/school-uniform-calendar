@@ -29,22 +29,32 @@ export default function CalendarGridView({
   const firstDayWeekday = monthItems[0].weekdayIndex;
   const paddingCellsCount = firstDayWeekday;
 
-  const getUniformBadge = (type) => {
+  const getBaseAttireInfo = (type) => {
     switch (type) {
       case 'house_shirt':
-        return { label: t.houseShirt, bg: 'bg-amber-500/20 text-amber-300 border-amber-500/30' };
+        return { 
+          label: t.shortHouse || '學院', 
+          bg: 'bg-amber-500/25 text-amber-300 border-amber-500/40 shadow-xs' 
+        };
       case 'pe':
-        return { label: t.pe, bg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' };
       case 'pe_swimming':
-        return { label: t.peSwimming, bg: 'bg-emerald-500/20 text-cyan-300 border-cyan-500/40 ring-1 ring-cyan-500/20' };
-      case 'uniform_swimming':
-        return { label: t.uniformSwimming, bg: 'bg-blue-500/20 text-cyan-300 border-cyan-500/40 ring-1 ring-cyan-500/20' };
+        return { 
+          label: t.shortPE || '體育', 
+          bg: 'bg-emerald-500/25 text-emerald-300 border-emerald-500/40 shadow-xs' 
+        };
       case 'holiday':
       case 'weekend':
-        return { label: t.weekend, bg: 'bg-rose-500/15 text-rose-300 border-rose-500/30' };
+        return { 
+          label: t.shortHoliday || '放假', 
+          bg: 'bg-rose-500/20 text-rose-300 border-rose-500/30 shadow-xs' 
+        };
       case 'uniform':
+      case 'uniform_swimming':
       default:
-        return { label: t.uniform, bg: 'bg-blue-500/20 text-blue-300 border-blue-500/30' };
+        return { 
+          label: t.shortUniform || '校服', 
+          bg: 'bg-blue-500/25 text-blue-300 border-blue-500/40 shadow-xs' 
+        };
     }
   };
 
@@ -60,7 +70,7 @@ export default function CalendarGridView({
   };
 
   return (
-    <div className="glass-card rounded-3xl p-3 sm:p-5 border border-slate-800 shadow-2xl space-y-3">
+    <div className="glass-card rounded-3xl p-2.5 sm:p-5 border border-slate-800 shadow-2xl space-y-2.5 sm:space-y-3">
       {/* Weekday Column Headers (Sun to Sat) */}
       <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center pb-2 border-b border-slate-800/80">
         {t.weekdaysShort.map((dayName, idx) => (
@@ -81,7 +91,7 @@ export default function CalendarGridView({
         {Array.from({ length: paddingCellsCount }).map((_, padIdx) => (
           <div
             key={`pad-${padIdx}`}
-            className="min-h-[72px] sm:min-h-[96px] rounded-2xl bg-slate-950/30 border border-slate-900/40 opacity-30 pointer-events-none"
+            className="min-h-[82px] sm:min-h-[104px] rounded-2xl bg-slate-950/30 border border-slate-900/40 opacity-30 pointer-events-none"
           />
         ))}
 
@@ -89,8 +99,8 @@ export default function CalendarGridView({
         {monthItems.map((item) => {
           const isSelected = item.dateStr === selectedDateStr;
           const isToday = item.dateStr === '2026-10-01';
-          const badge = getUniformBadge(item.uniformType);
-          const meta = uniformMeta[item.uniformType] || uniformMeta.uniform;
+          const baseAttire = getBaseAttireInfo(item.uniformType);
+          const isSwimDay = item.hasSwimming || item.uniformType === 'pe_swimming' || item.uniformType === 'uniform_swimming';
           const matchesFilter = isMatchedFilter(item);
 
           return (
@@ -98,7 +108,7 @@ export default function CalendarGridView({
               key={item.dateStr}
               type="button"
               onClick={() => setSelectedDateStr(item.dateStr)}
-              className={`relative min-h-[74px] sm:min-h-[100px] p-1.5 sm:p-2.5 rounded-2xl text-left transition flex flex-col justify-between border tap-effect ${
+              className={`relative min-h-[82px] sm:min-h-[104px] p-1.5 sm:p-2 rounded-2xl text-left transition flex flex-col justify-between border tap-effect ${
                 !matchesFilter ? 'opacity-25 grayscale' : ''
               } ${
                 isSelected
@@ -111,7 +121,7 @@ export default function CalendarGridView({
                 <span
                   className={`text-xs sm:text-sm font-bold font-mono ${
                     isToday
-                      ? 'w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-black'
+                      ? 'w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-black shadow-sm'
                       : isSelected
                       ? 'text-white font-black'
                       : item.isWeekend || item.uniformType === 'weekend'
@@ -123,7 +133,7 @@ export default function CalendarGridView({
                 </span>
 
                 {item.cycleDay ? (
-                  <span className={`text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.2 rounded ${
+                  <span className={`text-[9px] sm:text-[10px] font-mono font-bold px-1 sm:px-1.5 py-0.2 rounded ${
                     item.cycleDay === 7 
                       ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' 
                       : 'bg-slate-900 text-slate-400 border border-slate-700'
@@ -137,28 +147,34 @@ export default function CalendarGridView({
                 ) : null}
               </div>
 
-              {/* Uniform Indicator Pill */}
-              <div className="w-full space-y-1 my-auto">
+              {/* Uniform & Swimming Indicator Boxes (2 distinct pills when swimming) */}
+              <div className="w-full flex flex-col gap-1 my-auto">
+                {/* Box 1: Primary Attire (校服 / 體育 / 學院 / 放假) */}
                 <div
-                  className={`w-full py-0.5 px-1 sm:px-1.5 rounded-md text-[9px] sm:text-[10px] font-bold text-center truncate border ${badge.bg}`}
+                  className={`w-full py-0.5 px-0.5 sm:px-1 rounded-md text-[10px] sm:text-xs font-bold text-center truncate border ${baseAttire.bg}`}
                 >
-                  {item.uniformType === 'house_shirt' && 'House'}
-                  {item.uniformType === 'uniform' && 'Uniform'}
-                  {item.uniformType === 'uniform_swimming' && 'Uniform+Swim'}
-                  {item.uniformType === 'pe' && 'PE'}
-                  {item.uniformType === 'pe_swimming' && 'PE+Swim'}
-                  {(item.uniformType === 'holiday' || item.uniformType === 'weekend') && (lang === 'zh' ? '放假' : lang === 'th' ? 'หยุด' : 'Holiday')}
+                  {baseAttire.label}
                 </div>
+
+                {/* Box 2: Swimming Gear Badge (if swimming on that day) */}
+                {isSwimDay && (
+                  <div
+                    className="w-full py-0.5 px-0.5 sm:px-1 rounded-md text-[9px] sm:text-[10px] font-bold text-center border bg-cyan-500/25 text-cyan-200 border-cyan-400/40 flex items-center justify-center gap-0.5 shadow-xs"
+                  >
+                    <Waves className="w-2.5 h-2.5 text-cyan-300 flex-shrink-0" />
+                    <span className="truncate">{t.shortSwim || '游泳'}</span>
+                  </div>
+                )}
               </div>
 
               {/* Event Dot / Indicator */}
               {item.event ? (
-                <div className="flex items-center gap-1 text-[8px] sm:text-[9px] text-amber-300 truncate w-full font-medium">
+                <div className="flex items-center gap-1 text-[8px] sm:text-[9px] text-amber-300 truncate w-full font-medium mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0 animate-pulse" />
                   <span className="truncate hidden sm:inline">{item.event[lang] || item.event.en}</span>
                 </div>
               ) : (
-                <div className="h-2" />
+                <div className="h-1.5" />
               )}
             </button>
           );
