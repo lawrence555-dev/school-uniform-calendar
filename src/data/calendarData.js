@@ -327,7 +327,72 @@ export const rawCalendarStructure = [
   { dateStr: '2027-01-28', year: 2027, month: 1, day: 28, weekdayIndex: 4, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
   { dateStr: '2027-01-29', year: 2027, month: 1, day: 29, weekdayIndex: 5, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
   { dateStr: '2027-01-30', year: 2027, month: 1, day: 30, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
-  { dateStr: '2027-01-31', year: 2027, month: 1, day: 31, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null }
+  { dateStr: '2027-01-31', year: 2027, month: 1, day: 31, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+
+  // ==========================================
+  // 2027年 2月 (February 2027)
+  // ==========================================
+  { dateStr: '2027-02-01', year: 2027, month: 2, day: 1, weekdayIndex: 1, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-02-02', year: 2027, month: 2, day: 2, weekdayIndex: 2, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-02-03', year: 2027, month: 2, day: 3, weekdayIndex: 3, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2027-02-04', year: 2027, month: 2, day: 4, weekdayIndex: 4, cycleDay: 3, isHoliday: false, isWeekend: false, 
+    event: { zh: '農曆春節慶祝活動', en: 'Lunar New Year Celebrations', th: 'กิจกรรมฉลองเทศกาลตรุษจีน (Lunar New Year)' } 
+  },
+  { 
+    dateStr: '2027-02-05', year: 2027, month: 2, day: 5, weekdayIndex: 5, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '教職員進修日 (學生放假不上課)', en: 'Faculty PD Day (Non-School Day for Students)', th: 'วันพัฒนาบุคลากรครู (นักเรียนหยุดเรียน)' } 
+  },
+  { dateStr: '2027-02-06', year: 2027, month: 2, day: 6, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-02-07', year: 2027, month: 2, day: 7, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-02-08', year: 2027, month: 2, day: 8, weekdayIndex: 1, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-02-09', year: 2027, month: 2, day: 9, weekdayIndex: 2, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2027-02-10', year: 2027, month: 2, day: 10, weekdayIndex: 3, cycleDay: 6, isHoliday: false, isWeekend: false, 
+    event: { zh: '幼兒/小學部運動會', en: 'EY / Lower ES / Upper ES Sports Days', th: 'วันกีฬาสีระดับชั้นปฐมวัยและประถม (Sports Days)' } 
+  },
+  { 
+    dateStr: '2027-02-11', year: 2027, month: 2, day: 11, weekdayIndex: 4, cycleDay: 7, isHoliday: false, isWeekend: false, 
+    event: { zh: '幼兒/小學部運動會', en: 'EY / Lower ES / Upper ES Sports Days', th: 'วันกีฬาสีระดับชั้นปฐมวัยและประถม (Sports Days)' } 
+  },
+  { 
+    dateStr: '2027-02-12', year: 2027, month: 2, day: 12, weekdayIndex: 5, cycleDay: 8, isHoliday: false, isWeekend: false, 
+    event: { zh: '幼兒/小學部運動會', en: 'EY / Lower ES / Upper ES Sports Days', th: 'วันกีฬาสีระดับชั้นปฐมวัยและประถม (Sports Days)' } 
+  },
+  { dateStr: '2027-02-13', year: 2027, month: 2, day: 13, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-02-14', year: 2027, month: 2, day: 14, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-02-15', year: 2027, month: 2, day: 15, weekdayIndex: 1, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-02-16', year: 2027, month: 2, day: 16, weekdayIndex: 2, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-02-17', year: 2027, month: 2, day: 17, weekdayIndex: 3, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-02-18', year: 2027, month: 2, day: 18, weekdayIndex: 4, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2027-02-19', year: 2027, month: 2, day: 19, weekdayIndex: 5, cycleDay: 5, isHoliday: false, isWeekend: false, 
+    event: { zh: '中學部運動會', en: 'MS / HS Sports Day', th: 'วันกีฬาสีระดับมัธยมศึกษา (MS / HS Sports Day)' } 
+  },
+  { dateStr: '2027-02-20', year: 2027, month: 2, day: 20, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-02-21', year: 2027, month: 2, day: 21, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { 
+    dateStr: '2027-02-22', year: 2027, month: 2, day: 22, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '萬佛節國定假日 / 二月春假 (放假)', en: 'Holiday (Maka Bucha Day) / February Break', th: 'วันมาฆบูชา / วันหยุดเดือนกุมภาพันธ์ (February Break)' } 
+  },
+  { 
+    dateStr: '2027-02-23', year: 2027, month: 2, day: 23, weekdayIndex: 2, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '二月春假 (學生與教師放假)', en: 'February Break for Students and Teachers', th: 'วันหยุดเดือนกุมภาพันธ์สำหรับนักเรียนและครู (February Break)' } 
+  },
+  { 
+    dateStr: '2027-02-24', year: 2027, month: 2, day: 24, weekdayIndex: 3, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '二月春假 (學生與教師放假)', en: 'February Break for Students and Teachers', th: 'วันหยุดเดือนกุมภาพันธ์สำหรับนักเรียนและครู (February Break)' } 
+  },
+  { 
+    dateStr: '2027-02-25', year: 2027, month: 2, day: 25, weekdayIndex: 4, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '二月春假 (學生與教師放假)', en: 'February Break for Students and Teachers', th: 'วันหยุดเดือนกุมภาพันธ์สำหรับนักเรียนและครู (February Break)' } 
+  },
+  { 
+    dateStr: '2027-02-26', year: 2027, month: 2, day: 26, weekdayIndex: 5, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '二月春假 (學生與教師放假)', en: 'February Break for Students and Teachers', th: 'วันหยุดเดือนกุมภาพันธ์สำหรับนักเรียนและครู (February Break)' } 
+  },
+  { dateStr: '2027-02-27', year: 2027, month: 2, day: 27, weekdayIndex: 6, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+  { dateStr: '2027-02-28', year: 2027, month: 2, day: 28, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: true, event: null }
 ];
 
 

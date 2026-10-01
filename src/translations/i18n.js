@@ -62,6 +62,7 @@ export const translations = {
     november: '2026年 11月',
     december: '2026年 12月',
     january: '2027年 1月',
+    february: '2027年 2月',
     prevMonth: '上個月',
     nextMonth: '下個月',
 
@@ -142,6 +143,7 @@ export const translations = {
     november: 'November 2026',
     december: 'December 2026',
     january: 'January 2027',
+    february: 'February 2027',
     prevMonth: 'Prev Month',
     nextMonth: 'Next Month',
     selectDateToView: 'Tap any date for full uniform details & schedule',
@@ -221,6 +223,7 @@ export const translations = {
     november: 'พฤศจิกายน 2026',
     december: 'ธันวาคม 2026',
     january: 'มกราคม 2027',
+    february: 'กุมภาพันธ์ 2027',
     prevMonth: 'เดือนก่อนหน้า',
     nextMonth: 'เดือนถัดไป',
 

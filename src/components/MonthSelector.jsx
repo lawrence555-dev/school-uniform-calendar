@@ -17,6 +17,7 @@ export default function MonthSelector({
     { num: 11, label: t.november },
     { num: 12, label: t.december },
     { num: 1, label: t.january },
+    { num: 2, label: t.february },
   ];
 
 
