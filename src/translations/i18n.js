@@ -33,15 +33,15 @@ export const translations = {
 
     // Uniform Types
     houseShirt: '學院服 (House Shirt)',
-    houseShirtDesc: '著所屬學院代表色 T 恤 + 運動褲/短褲 + 運動鞋',
+    houseShirtDesc: '著所屬學院代表色 T 恤 + 運動褲',
     uniform: '一般校服 (Uniform)',
-    uniformDesc: '標準短袖制服上衣 + 學校制服褲/裙 + 皮鞋/黑白襪',
+    uniformDesc: '標準短袖制服上衣 + 學校制服褲/裙',
     uniformSwimming: '一般校服 + 帶游泳裝備 (Uniform + Swim)',
-    uniformSwimmingDesc: '穿著標準校服上衣與制服褲/裙，並另外攜帶防水游泳袋（泳衣、泳帽、泳鏡、浴巾）',
+    uniformSwimmingDesc: '標準短袖制服上衣 + 學校制服褲/裙，並另外攜帶防水游泳袋（泳衣、泳帽、泳鏡、浴巾）',
     pe: '體育服 (PE Kit)',
-    peDesc: '學校運動短袖 T 恤 + 運動短褲 + 專業運動鞋',
+    peDesc: '學校運動短袖 T 恤 + 運動短褲',
     peSwimming: '體育服 + 帶游泳裝備 (PE + Swim)',
-    peSwimmingDesc: '穿著學校體育短袖與運動短褲，並另外攜帶防水游泳袋（泳衣、泳帽、泳鏡、浴巾）',
+    peSwimmingDesc: '學校運動短袖 T 恤 + 運動短褲，並另外攜帶防水游泳袋（泳衣、泳帽、泳鏡、浴巾）',
     holiday: '假期不上課',
     holidayDesc: '今日學校放假，學生無需到校',
 
@@ -111,15 +111,15 @@ export const translations = {
 
     // Uniform Types
     houseShirt: 'House Shirt',
-    houseShirtDesc: 'Wear House color t-shirt + school shorts/trousers + sports trainers',
+    houseShirtDesc: 'Wear House color t-shirt + track pants / sports trousers',
     uniform: 'School Uniform',
-    uniformDesc: 'Standard collared school uniform + formal shorts/skirt + leather shoes/socks',
+    uniformDesc: 'Standard collared school uniform + formal shorts/skirt',
     uniformSwimming: 'Uniform + Bring Swim Gear',
-    uniformSwimmingDesc: 'Wear standard collared school uniform, and pack separate swimming bag (swimwear, swim cap, goggles, towel)',
+    uniformSwimmingDesc: 'Standard collared school uniform + formal shorts/skirt, and pack separate swimming bag',
     pe: 'PE Kit',
-    peDesc: 'Physical Education sports top + PE shorts + athletic running shoes',
+    peDesc: 'School PE sports t-shirt + PE shorts',
     peSwimming: 'PE Kit + Bring Swim Gear',
-    peSwimmingDesc: 'Wear school PE sports top and shorts, and pack separate swimming bag (swimwear, swim cap, goggles, towel)',
+    peSwimmingDesc: 'School PE sports t-shirt + PE shorts, and pack separate swimming bag',
     holiday: 'School Holiday',
     holidayDesc: 'No school today. Enjoy your break!',
 
@@ -189,15 +189,15 @@ export const translations = {
 
     // Uniform Types
     houseShirt: 'เสื้อประจำบ้าน (House Shirt)',
-    houseShirtDesc: 'เสื้อยืดสีประจำบ้าน + กางเกง/กระโปรงนักเรียน + รองเท้ากีฬา',
+    houseShirtDesc: 'เสื้อยืดสีประจำบ้าน + กางเกงวอร์ม',
     uniform: 'เครื่องแบบนักเรียน (Uniform)',
-    uniformDesc: 'ชุดเครื่องแบบนักเรียนทางการ + รองเท้านักเรียน',
+    uniformDesc: 'ชุดเครื่องแบบนักเรียนทางการ + กางเกง/กระโปรงนักเรียน',
     uniformSwimming: 'ชุดนักเรียน + กระเป๋าว่ายน้ำ (Uniform + Swim)',
-    uniformSwimmingDesc: 'สวมชุดเครื่องแบบนักเรียนตามปกติ และเตรียมกระเป๋ากันน้ำใส่ชุดว่ายน้ำ แว่นตา หมวกว่ายน้ำ และผ้าเช็ดตัว',
+    uniformSwimmingDesc: 'ชุดเครื่องแบบนักเรียนทางการ + กางเกง/กระโปรงนักเรียน และเตรียมกระเป๋าว่ายน้ำ',
     pe: 'ชุดพละ (PE Kit)',
-    peDesc: 'เสื้อยืดพละของโรงเรียน + กางเกงพละ + รองเท้าผ้าใบสำหรับวิ่ง',
+    peDesc: 'เสื้อยืดพละของโรงเรียน + กางเกงพละ',
     peSwimming: 'ชุดพละ + กระเป๋าว่ายน้ำ (PE + Swim)',
-    peSwimmingDesc: 'สวมชุดพละของโรงเรียน และเตรียมกระเป๋ากันน้ำใส่ชุดว่ายน้ำ แว่นตา หมวกว่ายน้ำ และผ้าเช็ดตัว',
+    peSwimmingDesc: 'เสื้อยืดพละของโรงเรียน + กางเกงพละ และเตรียมกระเป๋าว่ายน้ำ',
     holiday: 'วันหยุดโรงเรียน',
     holidayDesc: 'วันนี้ไม่มีการเรียนการสอน พักผ่อนให้เต็มที่',
 
