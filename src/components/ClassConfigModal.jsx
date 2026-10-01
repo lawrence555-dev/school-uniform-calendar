@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   Settings2, 
@@ -43,6 +43,24 @@ export default function ClassConfigModal({
     }
     return classConfig?.id === 'even_pe' ? 6 : 5;
   });
+
+  // Re-sync local state whenever modal opens or classConfig updates
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedPresetId(classConfig?.id === 'even_pe' ? 'even_pe' : 'odd_pe');
+      if (classConfig?.swimmingDay === null || classConfig?.swimmingDay === 0) {
+        setSwimmingDay(null);
+      } else {
+        const current = Number(classConfig?.swimmingDay);
+        if (current === 4 || current === 5 || current === 6) {
+          setSwimmingDay(current);
+        } else {
+          setSwimmingDay(classConfig?.id === 'even_pe' ? 6 : 5);
+        }
+      }
+    }
+  }, [isOpen, classConfig]);
+
 
   const handleSelectPreset = (presetId) => {
     setSelectedPresetId(presetId);
