@@ -40,9 +40,8 @@ export default function CalendarGridView({
       case 'uniform_swimming':
         return { label: t.uniformSwimming, bg: 'bg-blue-500/20 text-cyan-300 border-cyan-500/40 ring-1 ring-cyan-500/20' };
       case 'holiday':
-        return { label: t.holiday, bg: 'bg-rose-500/20 text-rose-300 border-rose-500/30' };
       case 'weekend':
-        return { label: t.weekend, bg: 'bg-slate-800 text-slate-400 border-slate-700' };
+        return { label: t.weekend, bg: 'bg-rose-500/15 text-rose-300 border-rose-500/30' };
       case 'uniform':
       default:
         return { label: t.uniform, bg: 'bg-blue-500/20 text-blue-300 border-blue-500/30' };
@@ -55,7 +54,7 @@ export default function CalendarGridView({
     if (filterType === 'uniform') return item.uniformType === 'uniform' || item.uniformType === 'uniform_swimming';
     if (filterType === 'pe') return item.uniformType === 'pe' || item.uniformType === 'pe_swimming';
     if (filterType === 'swimming') return item.hasSwimming || item.uniformType === 'pe_swimming' || item.uniformType === 'uniform_swimming';
-    if (filterType === 'holiday') return item.uniformType === 'holiday';
+    if (filterType === 'holiday') return item.uniformType === 'holiday' || item.uniformType === 'weekend' || item.isHoliday || item.isWeekend;
     if (filterType === 'event') return item.event !== null;
     return true;
   };
@@ -68,7 +67,7 @@ export default function CalendarGridView({
           <div
             key={idx}
             className={`text-xs font-mono font-bold uppercase py-1 ${
-              idx === 0 || idx === 6 ? 'text-slate-500' : 'text-slate-300'
+              idx === 0 || idx === 6 ? 'text-rose-400/80 font-bold' : 'text-slate-300'
             }`}
           >
             {dayName}
@@ -115,6 +114,8 @@ export default function CalendarGridView({
                       ? 'w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-black'
                       : isSelected
                       ? 'text-white font-black'
+                      : item.isWeekend || item.uniformType === 'weekend'
+                      ? 'text-slate-400'
                       : 'text-slate-300'
                   }`}
                 >
@@ -129,8 +130,8 @@ export default function CalendarGridView({
                   }`}>
                     D{item.cycleDay}
                   </span>
-                ) : item.uniformType === 'holiday' ? (
-                  <span className="text-[8px] sm:text-[9px] font-bold px-1 py-0.2 rounded bg-rose-500/20 text-rose-300">
+                ) : (item.uniformType === 'holiday' || item.uniformType === 'weekend' || item.isHoliday || item.isWeekend) ? (
+                  <span className="text-[8px] sm:text-[9px] font-bold px-1 py-0.2 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">
                     OFF
                   </span>
                 ) : null}
@@ -146,8 +147,7 @@ export default function CalendarGridView({
                   {item.uniformType === 'uniform_swimming' && 'Uniform+Swim'}
                   {item.uniformType === 'pe' && 'PE'}
                   {item.uniformType === 'pe_swimming' && 'PE+Swim'}
-                  {item.uniformType === 'holiday' && (lang === 'zh' ? '放假' : lang === 'th' ? 'หยุด' : 'Holiday')}
-                  {item.uniformType === 'weekend' && '—'}
+                  {(item.uniformType === 'holiday' || item.uniformType === 'weekend') && (lang === 'zh' ? '放假' : lang === 'th' ? 'หยุด' : 'Holiday')}
                 </div>
               </div>
 

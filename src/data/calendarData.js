@@ -63,11 +63,11 @@ export const uniformMeta = {
     key: 'weekend',
     nameKey: 'weekend',
     descKey: 'holidayDesc',
-    color: 'bg-slate-800/40 text-slate-400 border-slate-800',
-    badgeColor: 'bg-slate-800 text-slate-400',
-    dotColor: 'bg-slate-600',
-    heroBg: 'from-slate-900 to-slate-950 border-slate-800',
-    iconType: 'weekend'
+    color: 'bg-rose-500/10 text-rose-300 border-rose-500/30',
+    badgeColor: 'bg-rose-600 text-white font-bold',
+    dotColor: 'bg-rose-400',
+    heroBg: 'from-rose-950/40 via-slate-900 to-slate-950 border-rose-500/30',
+    iconType: 'holiday'
   }
 };
 

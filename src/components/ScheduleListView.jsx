@@ -71,7 +71,7 @@ export default function ScheduleListView({
     if (filterType === 'uniform') return item.uniformType === 'uniform' || item.uniformType === 'uniform_swimming';
     if (filterType === 'pe') return item.uniformType === 'pe' || item.uniformType === 'pe_swimming';
     if (filterType === 'swimming') return item.hasSwimming || item.uniformType === 'pe_swimming' || item.uniformType === 'uniform_swimming';
-    if (filterType === 'holiday') return item.uniformType === 'holiday';
+    if (filterType === 'holiday') return item.uniformType === 'holiday' || item.uniformType === 'weekend' || item.isHoliday || item.isWeekend;
     if (filterType === 'event') return item.event !== null;
     return true;
   };
@@ -99,8 +99,14 @@ export default function ScheduleListView({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               {/* Left Column: Date & Day Cycle */}
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex flex-col items-center justify-center flex-shrink-0 shadow-xs">
-                  <span className="text-[10px] font-mono text-slate-400 font-bold uppercase">
+                <div className={`w-12 h-12 rounded-xl border flex flex-col items-center justify-center flex-shrink-0 shadow-xs ${
+                  item.isWeekend || item.uniformType === 'weekend'
+                    ? 'bg-rose-950/20 border-rose-500/20 text-rose-300'
+                    : 'bg-slate-900 border-slate-800'
+                }`}>
+                  <span className={`text-[10px] font-mono font-bold uppercase ${
+                    item.isWeekend || item.uniformType === 'weekend' ? 'text-rose-400/80' : 'text-slate-400'
+                  }`}>
                     {t.weekdaysShort[item.weekdayIndex]}
                   </span>
                   <span className={`text-base font-black font-mono ${isToday ? 'text-blue-400' : 'text-white'}`}>
@@ -118,7 +124,7 @@ export default function ScheduleListView({
                         TODAY
                       </span>
                     )}
-                    {item.cycleDay && (
+                    {item.cycleDay ? (
                       <span className={`px-2 py-0.2 rounded text-[10px] font-mono font-bold border ${
                         item.cycleDay === 7
                           ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
@@ -126,7 +132,11 @@ export default function ScheduleListView({
                       }`}>
                         DAY {item.cycleDay}
                       </span>
-                    )}
+                    ) : (item.uniformType === 'holiday' || item.uniformType === 'weekend' || item.isHoliday || item.isWeekend) ? (
+                      <span className="px-2 py-0.2 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                        {lang === 'zh' ? '放假' : lang === 'th' ? 'หยุด' : 'OFF'}
+                      </span>
+                    ) : null}
                     {isSwimDay && (
                       <span className="px-2 py-0.2 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
                         <Waves className="w-2.5 h-2.5" />
