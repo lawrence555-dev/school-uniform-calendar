@@ -109,24 +109,28 @@ export default function TodayHeroBanner({
 
   const activePresetLabel = classConfig?.id === 'even_pe'
     ? t.presetEven
-    : classConfig?.id === 'custom'
-    ? t.presetCustom
     : t.presetOdd;
+
+  const swimDayNum = classConfig?.swimmingDay || (classConfig?.id === 'even_pe' ? 6 : 5);
 
   return (
     <div className="space-y-4">
       {/* Active Class Preset Indicator Bar */}
-      <div className="flex items-center justify-between px-3 py-2 rounded-2xl bg-slate-900/70 border border-slate-800 text-xs">
+      <div className="flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-slate-900/70 border border-slate-800 text-xs">
         <div className="flex items-center gap-2 truncate">
           <Settings2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
           <span className="text-slate-400">{t.activeClassSetting}:</span>
           <span className="font-bold text-white truncate">{activePresetLabel}</span>
+          <span className="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex-shrink-0">
+            Day {swimDayNum} Swim
+          </span>
         </div>
         <button
           onClick={onOpenClassConfig}
-          className="text-blue-400 hover:text-blue-300 font-bold hover:underline ml-2 flex-shrink-0 tap-effect"
+          className="text-blue-400 hover:text-blue-300 font-bold hover:underline ml-2 flex-shrink-0 flex items-center gap-1 tap-effect"
         >
-          {t.changeSetting} ➔
+          <span>{t.changeSetting}</span>
+          <ChevronRight className="w-3 h-3" />
         </button>
       </div>
 
@@ -159,6 +163,12 @@ export default function TodayHeroBanner({
                   <span className="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
                     <Lock className="w-2.5 h-2.5" />
                     <span>FIXED HOUSE</span>
+                  </span>
+                )}
+                {currentItem.cycleDay === swimDayNum && (
+                  <span className="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
+                    <Waves className="w-2.5 h-2.5" />
+                    <span>SWIM</span>
                   </span>
                 )}
                 <span className="px-3 py-1 rounded-xl text-xs font-mono font-black tracking-wider bg-slate-900/90 text-amber-300 border border-amber-500/30 shadow-xs">
@@ -260,8 +270,9 @@ export default function TodayHeroBanner({
               <div className="text-sm font-bold text-white mt-0.5 flex items-center gap-2">
                 <span>{getUniformTitle(nextItem.uniformType)}</span>
                 {nextItem.uniformType === 'pe_swimming' && (
-                  <span className="text-xs text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20 font-medium">
-                    ⚠️ {lang === 'zh' ? '記得備妥泳衣與泳鏡' : lang === 'th' ? 'อย่าลืมเตรียมชุดว่ายน้ำ' : 'Pack swim gear tonight!'}
+                  <span className="text-xs text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20 font-medium flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>{t.packSwimGearNotice}</span>
                   </span>
                 )}
               </div>

@@ -9,10 +9,10 @@ import {
   Waves, 
   Flame, 
   Activity, 
-  Sun,
-  ChevronRight,
-  Info,
-  Lock
+  Sun, 
+  ChevronRight, 
+  Info, 
+  Lock 
 } from 'lucide-react';
 import HeaderNavbar from './components/HeaderNavbar';
 import TodayHeroBanner from './components/TodayHeroBanner';
@@ -24,7 +24,7 @@ import ClassConfigModal from './components/ClassConfigModal';
 import { translations } from './translations/i18n';
 import { classPresets, buildDynamicCalendar, uniformMeta } from './data/calendarData';
 
-const STORAGE_KEY = 'school_class_uniform_config';
+const STORAGE_KEY = 'school_class_uniform_config_v2';
 
 export default function App() {
   const [lang, setLang] = useState('zh');
@@ -39,7 +39,10 @@ export default function App() {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (parsed.id === 'odd_pe' || parsed.id === 'even_pe') {
+          return parsed;
+        }
       }
     } catch (e) {
       console.warn('Failed to load class configuration:', e);
@@ -56,7 +59,7 @@ export default function App() {
         setIsConfigModalOpen(true);
       }
     } catch (e) {
-      // ignore localStorage errors in restricted environments
+      // ignore localStorage errors
     }
   }, []);
 
@@ -165,7 +168,8 @@ export default function App() {
               className="text-blue-400 hover:text-blue-300 font-bold hover:underline flex items-center gap-1 tap-effect"
             >
               <Settings2 className="w-3 h-3" />
-              <span>{t.classConfigBtn} ➔</span>
+              <span>{t.classConfigBtn}</span>
+              <ChevronRight className="w-3 h-3" />
             </button>
           </div>
 
@@ -174,14 +178,14 @@ export default function App() {
               <span className="w-2.5 h-2.5 rounded-full bg-amber-400 flex-shrink-0" />
               <div className="truncate">
                 <span className="text-amber-300 font-bold">{t.houseShirt}</span>
-                <span className="text-[10px] text-amber-400/80 block">Day 7 (🔒 固定)</span>
+                <span className="text-[10px] text-amber-400/80 block">{lang === 'zh' ? 'Day 7 (固定學院服)' : lang === 'th' ? 'Day 7 (เสื้อบ้าน)' : 'Day 7 (Fixed House)'}</span>
               </div>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-blue-950/20 border border-blue-500/30">
               <span className="w-2.5 h-2.5 rounded-full bg-blue-400 flex-shrink-0" />
               <div className="truncate">
                 <span className="text-blue-300 font-bold">{t.uniform}</span>
-                <span className="text-[10px] text-blue-400/80 block">{lang === 'zh' ? '校服日' : lang === 'th' ? 'ชุดนักเรียน' : 'Uniform Days'}</span>
+                <span className="text-[10px] text-blue-400/80 block">{lang === 'zh' ? '一般校服日' : lang === 'th' ? 'ชุดนักเรียน' : 'Uniform Days'}</span>
               </div>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-emerald-950/20 border border-emerald-500/30">
@@ -195,7 +199,7 @@ export default function App() {
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 flex-shrink-0" />
               <div className="truncate">
                 <span className="text-cyan-300 font-bold">{t.peSwimming}</span>
-                <span className="text-[10px] text-cyan-400/80 block">{lang === 'zh' ? '體育+游泳' : lang === 'th' ? 'พละ+ว่ายน้ำ' : 'PE & Swimming'}</span>
+                <span className="text-[10px] text-cyan-400/80 block">{lang === 'zh' ? `Day ${classConfig?.swimmingDay || 5} 游泳` : lang === 'th' ? `Day ${classConfig?.swimmingDay || 5} ว่ายน้ำ` : `Day ${classConfig?.swimmingDay || 5} Swim`}</span>
               </div>
             </div>
           </div>
@@ -214,9 +218,9 @@ export default function App() {
 
       {/* Footer */}
       <footer className="max-w-3xl mx-auto px-4 text-center text-xs text-slate-500 space-y-1.5 pt-6">
-        <div>International School Calendar & Uniform Notifier • 2026 Term 1</div>
+        <div>International School Calendar & Uniform Notifier - 2026 Term 1</div>
         <div className="text-[11px] text-slate-600">
-          October – December 2026 • 8-Day Rotation Cycle • Multi-language Support (EN / TH / 繁中)
+          October - December 2026 - 8-Day Rotation Cycle - Multi-language Support (EN / TH / 繁中)
         </div>
       </footer>
     </div>

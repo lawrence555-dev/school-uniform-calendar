@@ -61,57 +61,40 @@ export const uniformMeta = {
   }
 };
 
-// Preset Configurations for 8-Day Cycle
+// Preset Configurations for 8-Day Cycle (Odd / Even)
 export const classPresets = {
   odd_pe: {
     id: 'odd_pe',
     nameKey: 'presetOdd',
     descKey: 'presetOddDesc',
-    swimmingDay: 5,
-    days: {
-      1: 'pe',
-      2: 'uniform',
-      3: 'pe',
-      4: 'uniform',
-      5: 'pe_swimming',
-      6: 'uniform',
-      7: 'house_shirt', // FIXED FOR ALL CLASSES
-      8: 'uniform'
-    }
+    swimmingDay: 5
   },
   even_pe: {
     id: 'even_pe',
     nameKey: 'presetEven',
     descKey: 'presetEvenDesc',
-    swimmingDay: 6,
-    days: {
-      1: 'uniform',
-      2: 'pe',
-      3: 'uniform',
-      4: 'pe',
-      5: 'uniform',
-      6: 'pe_swimming',
-      7: 'house_shirt', // FIXED FOR ALL CLASSES
-      8: 'pe'
-    }
-  },
-  custom: {
-    id: 'custom',
-    nameKey: 'presetCustom',
-    descKey: 'presetCustomDesc',
-    swimmingDay: 5,
-    days: {
-      1: 'pe',
-      2: 'uniform',
-      3: 'pe',
-      4: 'uniform',
-      5: 'pe_swimming',
-      6: 'uniform',
-      7: 'house_shirt', // FIXED FOR ALL CLASSES
-      8: 'uniform'
-    }
+    swimmingDay: 6
   }
 };
+
+/**
+ * Calculates uniform type for any cycle day (1 to 8)
+ * Day 7 is ALWAYS fixed as house_shirt.
+ * Day 4, 5, or 6 can be the selected swimming day (pe_swimming).
+ */
+export function getCycleDayUniform(cycleDay, presetId = 'odd_pe', swimmingDay = 5) {
+  if (cycleDay === 7) {
+    return 'house_shirt';
+  }
+  if (cycleDay === Number(swimmingDay)) {
+    return 'pe_swimming';
+  }
+  if (presetId === 'even_pe') {
+    return (cycleDay === 2 || cycleDay === 4 || cycleDay === 6 || cycleDay === 8) ? 'pe' : 'uniform';
+  }
+  // Default: odd_pe
+  return (cycleDay === 1 || cycleDay === 3 || cycleDay === 5) ? 'pe' : 'uniform';
+}
 
 // Base Calendar Dates & Events for Oct, Nov, Dec 2026
 export const rawCalendarStructure = [
@@ -266,12 +249,12 @@ export const rawCalendarStructure = [
 
 /**
  * Dynamic Schedule Builder
- * Generates the full 3-month calendar dynamically according to the active class's 8-day cycle config
+ * Generates the full 3-month calendar dynamically according to the active class's preset and swimming day.
  * Note: Day 7 is STRICTLY FIXED as 'house_shirt' for all classes.
  */
 export function buildDynamicCalendar(classConfig) {
-  const daysMapping = classConfig?.days || classPresets.odd_pe.days;
-  const swimmingDay = classConfig?.swimmingDay !== undefined ? classConfig.swimmingDay : 5;
+  const presetId = classConfig?.id || 'odd_pe';
+  const swimmingDay = classConfig?.swimmingDay !== undefined ? Number(classConfig.swimmingDay) : (presetId === 'odd_pe' ? 5 : 6);
 
   return rawCalendarStructure.map((item) => {
     if (item.isHoliday) {
@@ -282,19 +265,8 @@ export function buildDynamicCalendar(classConfig) {
     }
 
     if (item.cycleDay) {
-      // Day 7 is ALWAYS fixed as House Shirt!
-      if (item.cycleDay === 7) {
-        return { ...item, uniformType: 'house_shirt' };
-      }
-
-      // If this cycle day is designated as swimming day
-      if (item.cycleDay === swimmingDay) {
-        return { ...item, uniformType: 'pe_swimming' };
-      }
-
-      // Check class mapping for this day
-      const mappedUniform = daysMapping[item.cycleDay] || (item.cycleDay % 2 === 1 ? 'pe' : 'uniform');
-      return { ...item, uniformType: mappedUniform };
+      const uniformType = getCycleDayUniform(item.cycleDay, presetId, swimmingDay);
+      return { ...item, uniformType };
     }
 
     return { ...item, uniformType: 'weekend' };

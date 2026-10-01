@@ -30,17 +30,17 @@ export default function ScheduleListView({
   const getUniformIcon = (type) => {
     switch (type) {
       case 'house_shirt':
-        return <Flame className="w-5 h-5 text-amber-400" />;
+        return <Flame className="w-4 h-4 text-amber-400" />;
       case 'pe':
-        return <Activity className="w-5 h-5 text-emerald-400" />;
+        return <Activity className="w-4 h-4 text-emerald-400" />;
       case 'pe_swimming':
-        return <Waves className="w-5 h-5 text-cyan-300" />;
+        return <Waves className="w-4 h-4 text-cyan-300" />;
       case 'holiday':
       case 'weekend':
-        return <Sun className="w-5 h-5 text-rose-400" />;
+        return <Sun className="w-4 h-4 text-rose-400" />;
       case 'uniform':
       default:
-        return <Shirt className="w-5 h-5 text-blue-400" />;
+        return <Shirt className="w-4 h-4 text-blue-400" />;
     }
   };
 
@@ -126,7 +126,7 @@ export default function ScheduleListView({
                   </div>
 
                   <div className="flex items-center gap-2 mt-1">
-                    <span className={`text-sm sm:text-base font-bold text-white flex items-center gap-1.5`}>
+                    <span className="text-sm sm:text-base font-bold text-white flex items-center gap-1.5">
                       {getUniformIcon(item.uniformType)}
                       <span>{getUniformTitle(item.uniformType)}</span>
                     </span>
@@ -136,12 +136,9 @@ export default function ScheduleListView({
 
               {/* Right Column: Uniform Tag & Event */}
               <div className="flex flex-wrap items-center sm:justify-end gap-2">
-                <span className={`px-2.5 py-1 rounded-xl text-xs font-semibold border ${meta.color}`}>
-                  {meta.key === 'pe_swimming' && '🏊 '}
-                  {meta.key === 'house_shirt' && '🔥 '}
-                  {meta.key === 'pe' && '🏃 '}
-                  {meta.key === 'uniform' && '👔 '}
-                  {getUniformTitle(item.uniformType)}
+                <span className={`px-2.5 py-1 rounded-xl text-xs font-semibold border flex items-center gap-1.5 ${meta.color}`}>
+                  {getUniformIcon(item.uniformType)}
+                  <span>{getUniformTitle(item.uniformType)}</span>
                 </span>
               </div>
             </div>
