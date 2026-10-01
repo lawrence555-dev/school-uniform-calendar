@@ -86,6 +86,7 @@ export default function App() {
   };
 
   const t = translations[lang] || translations.zh;
+  const swimDayNum = classConfig?.swimmingDay || (classConfig?.id === 'even_pe' ? 6 : 5);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-20 font-sans selection:bg-blue-600 selection:text-white">
@@ -198,8 +199,8 @@ export default function App() {
             <div className="flex items-center gap-2 p-2 rounded-xl bg-cyan-950/20 border border-cyan-500/30">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 flex-shrink-0" />
               <div className="truncate">
-                <span className="text-cyan-300 font-bold">{t.peSwimming}</span>
-                <span className="text-[10px] text-cyan-400/80 block">{lang === 'zh' ? `Day ${classConfig?.swimmingDay || 5} 游泳` : lang === 'th' ? `Day ${classConfig?.swimmingDay || 5} ว่ายน้ำ` : `Day ${classConfig?.swimmingDay || 5} Swim`}</span>
+                <span className="text-cyan-300 font-bold">{lang === 'zh' ? '攜帶游泳裝備' : lang === 'th' ? 'เตรียมชุดว่ายน้ำ' : 'Swim Gear'}</span>
+                <span className="text-[10px] text-cyan-400/80 block">{lang === 'zh' ? `Day ${swimDayNum} 游泳` : lang === 'th' ? `Day ${swimDayNum} ว่ายน้ำ` : `Day ${swimDayNum} Swim`}</span>
               </div>
             </div>
           </div>

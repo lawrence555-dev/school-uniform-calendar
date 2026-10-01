@@ -9,7 +9,8 @@ import {
   PartyPopper, 
   CheckCircle2, 
   Sparkles, 
-  Lock 
+  Lock,
+  Luggage
 } from 'lucide-react';
 import { translations } from '../translations/i18n';
 import { uniformMeta } from '../data/calendarData';
@@ -30,17 +31,17 @@ export default function ScheduleListView({
   const getUniformIcon = (type) => {
     switch (type) {
       case 'house_shirt':
-        return <Flame className="w-4 h-4 text-amber-400" />;
+        return <Flame className="w-5 h-5 text-amber-400" />;
       case 'pe':
-        return <Activity className="w-4 h-4 text-emerald-400" />;
       case 'pe_swimming':
-        return <Waves className="w-4 h-4 text-cyan-300" />;
+        return <Activity className="w-5 h-5 text-emerald-400" />;
       case 'holiday':
       case 'weekend':
-        return <Sun className="w-4 h-4 text-rose-400" />;
+        return <Sun className="w-5 h-5 text-rose-400" />;
       case 'uniform':
+      case 'uniform_swimming':
       default:
-        return <Shirt className="w-4 h-4 text-blue-400" />;
+        return <Shirt className="w-5 h-5 text-blue-400" />;
     }
   };
 
@@ -52,6 +53,8 @@ export default function ScheduleListView({
         return t.pe;
       case 'pe_swimming':
         return t.peSwimming;
+      case 'uniform_swimming':
+        return t.uniformSwimming;
       case 'holiday':
         return t.holiday;
       case 'weekend':
@@ -65,9 +68,9 @@ export default function ScheduleListView({
   const isMatchedFilter = (item) => {
     if (filterType === 'all') return true;
     if (filterType === 'house_shirt') return item.uniformType === 'house_shirt';
-    if (filterType === 'uniform') return item.uniformType === 'uniform';
+    if (filterType === 'uniform') return item.uniformType === 'uniform' || item.uniformType === 'uniform_swimming';
     if (filterType === 'pe') return item.uniformType === 'pe' || item.uniformType === 'pe_swimming';
-    if (filterType === 'swimming') return item.uniformType === 'pe_swimming';
+    if (filterType === 'swimming') return item.hasSwimming || item.uniformType === 'pe_swimming' || item.uniformType === 'uniform_swimming';
     if (filterType === 'holiday') return item.uniformType === 'holiday';
     if (filterType === 'event') return item.event !== null;
     return true;
@@ -81,6 +84,7 @@ export default function ScheduleListView({
         const isSelected = item.dateStr === selectedDateStr;
         const isToday = item.dateStr === '2026-10-01';
         const meta = uniformMeta[item.uniformType] || uniformMeta.uniform;
+        const isSwimDay = item.hasSwimming || item.uniformType === 'pe_swimming' || item.uniformType === 'uniform_swimming';
 
         return (
           <div
@@ -123,6 +127,12 @@ export default function ScheduleListView({
                         DAY {item.cycleDay}
                       </span>
                     )}
+                    {isSwimDay && (
+                      <span className="px-2 py-0.2 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
+                        <Waves className="w-2.5 h-2.5" />
+                        <span>SWIM</span>
+                      </span>
+                    )}
                   </div>
 
                   <div className="flex items-center gap-2 mt-1">
@@ -140,6 +150,12 @@ export default function ScheduleListView({
                   {getUniformIcon(item.uniformType)}
                   <span>{getUniformTitle(item.uniformType)}</span>
                 </span>
+                {isSwimDay && (
+                  <span className="px-2 py-1 rounded-xl text-xs font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
+                    <Waves className="w-3 h-3" />
+                    <span>{t.bringSwimGearBadge}</span>
+                  </span>
+                )}
               </div>
             </div>
 

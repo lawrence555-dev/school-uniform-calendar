@@ -36,7 +36,9 @@ export default function CalendarGridView({
       case 'pe':
         return { label: t.pe, bg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' };
       case 'pe_swimming':
-        return { label: t.peSwimming, bg: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30' };
+        return { label: t.peSwimming, bg: 'bg-emerald-500/20 text-cyan-300 border-cyan-500/40 ring-1 ring-cyan-500/20' };
+      case 'uniform_swimming':
+        return { label: t.uniformSwimming, bg: 'bg-blue-500/20 text-cyan-300 border-cyan-500/40 ring-1 ring-cyan-500/20' };
       case 'holiday':
         return { label: t.holiday, bg: 'bg-rose-500/20 text-rose-300 border-rose-500/30' };
       case 'weekend':
@@ -50,9 +52,9 @@ export default function CalendarGridView({
   const isMatchedFilter = (item) => {
     if (filterType === 'all') return true;
     if (filterType === 'house_shirt') return item.uniformType === 'house_shirt';
-    if (filterType === 'uniform') return item.uniformType === 'uniform';
+    if (filterType === 'uniform') return item.uniformType === 'uniform' || item.uniformType === 'uniform_swimming';
     if (filterType === 'pe') return item.uniformType === 'pe' || item.uniformType === 'pe_swimming';
-    if (filterType === 'swimming') return item.uniformType === 'pe_swimming';
+    if (filterType === 'swimming') return item.hasSwimming || item.uniformType === 'pe_swimming' || item.uniformType === 'uniform_swimming';
     if (filterType === 'holiday') return item.uniformType === 'holiday';
     if (filterType === 'event') return item.event !== null;
     return true;
@@ -141,8 +143,9 @@ export default function CalendarGridView({
                 >
                   {item.uniformType === 'house_shirt' && 'House'}
                   {item.uniformType === 'uniform' && 'Uniform'}
+                  {item.uniformType === 'uniform_swimming' && 'Uniform+Swim'}
                   {item.uniformType === 'pe' && 'PE'}
-                  {item.uniformType === 'pe_swimming' && 'PE + Swim'}
+                  {item.uniformType === 'pe_swimming' && 'PE+Swim'}
                   {item.uniformType === 'holiday' && (lang === 'zh' ? '放假' : lang === 'th' ? 'หยุด' : 'Holiday')}
                   {item.uniformType === 'weekend' && '—'}
                 </div>

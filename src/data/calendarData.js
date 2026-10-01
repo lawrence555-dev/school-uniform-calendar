@@ -19,6 +19,16 @@ export const uniformMeta = {
     heroBg: 'from-blue-950/40 via-slate-900 to-slate-950 border-blue-500/30',
     iconType: 'uniform'
   },
+  uniform_swimming: {
+    key: 'uniform_swimming',
+    nameKey: 'uniformSwimming',
+    descKey: 'uniformSwimmingDesc',
+    color: 'bg-blue-500/15 text-blue-300 border-cyan-500/40',
+    badgeColor: 'bg-blue-600 text-white font-bold',
+    dotColor: 'bg-cyan-400',
+    heroBg: 'from-blue-950/50 via-slate-900 to-slate-950 border-cyan-500/40',
+    iconType: 'uniform_swimming'
+  },
   pe: {
     key: 'pe',
     nameKey: 'pe',
@@ -33,11 +43,11 @@ export const uniformMeta = {
     key: 'pe_swimming',
     nameKey: 'peSwimming',
     descKey: 'peSwimmingDesc',
-    color: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',
-    badgeColor: 'bg-cyan-600 text-white font-bold',
+    color: 'bg-emerald-500/15 text-emerald-300 border-cyan-500/40',
+    badgeColor: 'bg-emerald-600 text-white font-bold',
     dotColor: 'bg-cyan-400',
-    heroBg: 'from-cyan-950/50 via-slate-900 to-slate-950 border-cyan-500/40',
-    iconType: 'swimming'
+    heroBg: 'from-emerald-950/50 via-slate-900 to-slate-950 border-cyan-500/40',
+    iconType: 'pe_swimming'
   },
   holiday: {
     key: 'holiday',
@@ -78,22 +88,31 @@ export const classPresets = {
 };
 
 /**
- * Calculates uniform type for any cycle day (1 to 8)
+ * Calculates base uniform and swimming combination for any cycle day (1 to 8)
  * Day 7 is ALWAYS fixed as house_shirt.
- * Day 4, 5, or 6 can be the selected swimming day (pe_swimming).
+ * The designated swimming day (Day 4, 5, or 6) keeps the scheduled base attire (Uniform or PE)
+ * and adds the extra swim gear requirement!
  */
 export function getCycleDayUniform(cycleDay, presetId = 'odd_pe', swimmingDay = 5) {
   if (cycleDay === 7) {
     return 'house_shirt';
   }
-  if (cycleDay === Number(swimmingDay)) {
-    return 'pe_swimming';
-  }
+
+  // Determine scheduled base attire for this cycle day
+  let baseUniform;
   if (presetId === 'even_pe') {
-    return (cycleDay === 2 || cycleDay === 4 || cycleDay === 6 || cycleDay === 8) ? 'pe' : 'uniform';
+    baseUniform = (cycleDay === 2 || cycleDay === 4 || cycleDay === 6 || cycleDay === 8) ? 'pe' : 'uniform';
+  } else {
+    // default: odd_pe
+    baseUniform = (cycleDay === 1 || cycleDay === 3 || cycleDay === 5) ? 'pe' : 'uniform';
   }
-  // Default: odd_pe
-  return (cycleDay === 1 || cycleDay === 3 || cycleDay === 5) ? 'pe' : 'uniform';
+
+  // If this day is the designated swimming day
+  if (cycleDay === Number(swimmingDay)) {
+    return baseUniform === 'pe' ? 'pe_swimming' : 'uniform_swimming';
+  }
+
+  return baseUniform;
 }
 
 // Base Calendar Dates & Events for Oct, Nov, Dec 2026
@@ -258,17 +277,18 @@ export function buildDynamicCalendar(classConfig) {
 
   return rawCalendarStructure.map((item) => {
     if (item.isHoliday) {
-      return { ...item, uniformType: 'holiday' };
+      return { ...item, uniformType: 'holiday', hasSwimming: false };
     }
     if (item.isWeekend) {
-      return { ...item, uniformType: 'weekend' };
+      return { ...item, uniformType: 'weekend', hasSwimming: false };
     }
 
     if (item.cycleDay) {
       const uniformType = getCycleDayUniform(item.cycleDay, presetId, swimmingDay);
-      return { ...item, uniformType };
+      const hasSwimming = item.cycleDay === swimmingDay;
+      return { ...item, uniformType, hasSwimming };
     }
 
-    return { ...item, uniformType: 'weekend' };
+    return { ...item, uniformType: 'weekend', hasSwimming: false };
   });
 }

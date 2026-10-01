@@ -14,7 +14,8 @@ import {
   Settings2, 
   ChevronRight, 
   ChevronLeft,
-  Lock
+  Lock,
+  Luggage
 } from 'lucide-react';
 import { translations } from '../translations/i18n';
 import { uniformMeta } from '../data/calendarData';
@@ -36,19 +37,21 @@ export default function TodayHeroBanner({
     : null;
 
   const meta = uniformMeta[currentItem.uniformType] || uniformMeta.uniform;
+  const isCurrentSwimDay = currentItem.hasSwimming || currentItem.uniformType === 'pe_swimming' || currentItem.uniformType === 'uniform_swimming';
+  const isNextSwimDay = nextItem && (nextItem.hasSwimming || nextItem.uniformType === 'pe_swimming' || nextItem.uniformType === 'uniform_swimming');
 
   const getUniformIcon = (type) => {
     switch (type) {
       case 'house_shirt':
         return <Flame className="w-8 h-8 text-amber-400" />;
       case 'pe':
-        return <Activity className="w-8 h-8 text-emerald-400" />;
       case 'pe_swimming':
-        return <Waves className="w-8 h-8 text-cyan-300" />;
+        return <Activity className="w-8 h-8 text-emerald-400" />;
       case 'holiday':
       case 'weekend':
         return <Sun className="w-8 h-8 text-rose-400" />;
       case 'uniform':
+      case 'uniform_swimming':
       default:
         return <Shirt className="w-8 h-8 text-blue-400" />;
     }
@@ -62,6 +65,8 @@ export default function TodayHeroBanner({
         return t.pe;
       case 'pe_swimming':
         return t.peSwimming;
+      case 'uniform_swimming':
+        return t.uniformSwimming;
       case 'holiday':
         return t.holiday;
       case 'weekend':
@@ -80,6 +85,8 @@ export default function TodayHeroBanner({
         return t.peDesc;
       case 'pe_swimming':
         return t.peSwimmingDesc;
+      case 'uniform_swimming':
+        return t.uniformSwimmingDesc;
       case 'holiday':
       case 'weekend':
         return t.holidayDesc;
@@ -165,10 +172,10 @@ export default function TodayHeroBanner({
                     <span>FIXED HOUSE</span>
                   </span>
                 )}
-                {currentItem.cycleDay === swimDayNum && (
+                {isCurrentSwimDay && (
                   <span className="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
                     <Waves className="w-2.5 h-2.5" />
-                    <span>SWIM</span>
+                    <span>SWIM GEAR</span>
                   </span>
                 )}
                 <span className="px-3 py-1 rounded-xl text-xs font-mono font-black tracking-wider bg-slate-900/90 text-amber-300 border border-amber-500/30 shadow-xs">
@@ -185,8 +192,13 @@ export default function TodayHeroBanner({
           {/* Core Notification Content */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 my-2">
             <div className="flex items-start gap-4">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-center flex-shrink-0 shadow-lg">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-center flex-shrink-0 shadow-lg relative">
                 {getUniformIcon(currentItem.uniformType)}
+                {isCurrentSwimDay && (
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-cyan-500 text-slate-950 flex items-center justify-center border-2 border-slate-950 shadow-md">
+                    <Waves className="w-3.5 h-3.5" />
+                  </div>
+                )}
               </div>
               <div className="space-y-1.5">
                 <div className="text-xs uppercase tracking-widest text-slate-400 font-mono font-bold flex items-center gap-1.5">
@@ -203,9 +215,19 @@ export default function TodayHeroBanner({
             </div>
           </div>
 
+          {/* Swimming Extra Gear Reminder Callout if swim day */}
+          {isCurrentSwimDay && (
+            <div className="mt-4 pt-3.5 border-t border-slate-800/80 flex items-center gap-2.5 text-xs text-cyan-200 bg-cyan-950/40 p-3 rounded-2xl border border-cyan-500/30">
+              <Waves className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+              <div className="flex-1 font-semibold">
+                <span>{lang === 'zh' ? '出門裝備提醒：今日有游泳課，請攜帶防水袋（泳衣、泳帽、泳鏡與浴巾）' : lang === 'th' ? 'แจ้งเตือน: วันนี้มีเรียนว่ายน้ำ อย่าลืมนำกระเป๋าชุดว่ายน้ำมาด้วย' : 'Packing Reminder: Swimming class today. Please pack your waterproof swim bag.'}</span>
+              </div>
+            </div>
+          )}
+
           {/* Special School Event Banner if applicable */}
           {currentItem.event && (
-            <div className="mt-4 pt-3.5 border-t border-slate-800/80 flex items-center gap-2.5 text-xs text-amber-300 bg-slate-950/60 p-3 rounded-2xl border border-amber-500/20">
+            <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center gap-2.5 text-xs text-amber-300 bg-slate-950/60 p-3 rounded-2xl border border-amber-500/20">
               <PartyPopper className="w-4 h-4 text-amber-400 flex-shrink-0" />
               <div className="flex-1 font-semibold">
                 <span>{t.specialEvent}: </span>
@@ -267,9 +289,9 @@ export default function TodayHeroBanner({
                   </span>
                 )}
               </div>
-              <div className="text-sm font-bold text-white mt-0.5 flex items-center gap-2">
+              <div className="text-sm font-bold text-white mt-0.5 flex flex-wrap items-center gap-2">
                 <span>{getUniformTitle(nextItem.uniformType)}</span>
-                {nextItem.uniformType === 'pe_swimming' && (
+                {isNextSwimDay && (
                   <span className="text-xs text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20 font-medium flex items-center gap-1">
                     <AlertCircle className="w-3.5 h-3.5 text-cyan-400" />
                     <span>{t.packSwimGearNotice}</span>

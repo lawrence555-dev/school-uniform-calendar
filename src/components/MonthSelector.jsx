@@ -22,7 +22,9 @@ export default function MonthSelector({
   const scheduleList = calendarSchedule || [];
   const currentMonthItems = scheduleList.filter((d) => d.month === selectedMonth);
   const schoolDaysCount = currentMonthItems.filter((d) => d.cycleDay !== null).length;
-  const swimmingDaysCount = currentMonthItems.filter((d) => d.uniformType === 'pe_swimming').length;
+  const swimmingDaysCount = currentMonthItems.filter(
+    (d) => d.hasSwimming || d.uniformType === 'pe_swimming' || d.uniformType === 'uniform_swimming'
+  ).length;
   const houseDaysCount = currentMonthItems.filter((d) => d.uniformType === 'house_shirt').length;
   const holidayDaysCount = currentMonthItems.filter((d) => d.uniformType === 'holiday').length;
 

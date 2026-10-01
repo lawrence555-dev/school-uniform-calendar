@@ -9,7 +9,8 @@ import {
   Activity, 
   Waves, 
   Sparkles, 
-  CheckCircle2
+  CheckCircle2,
+  Info
 } from 'lucide-react';
 import { translations } from '../translations/i18n';
 import { classPresets, getCycleDayUniform, uniformMeta } from '../data/calendarData';
@@ -41,7 +42,6 @@ export default function ClassConfigModal({
 
   const handleSelectPreset = (presetId) => {
     setSelectedPresetId(presetId);
-    // If swimmingDay not set or switching presets, default appropriately
     if (presetId === 'odd_pe' && swimmingDay === 6) {
       setSwimmingDay(5);
     } else if (presetId === 'even_pe' && swimmingDay === 5) {
@@ -68,10 +68,10 @@ export default function ClassConfigModal({
       case 'house_shirt':
         return <Flame className="w-4 h-4 text-amber-400" />;
       case 'pe':
-        return <Activity className="w-4 h-4 text-emerald-400" />;
       case 'pe_swimming':
-        return <Waves className="w-4 h-4 text-cyan-300" />;
+        return <Activity className="w-4 h-4 text-emerald-400" />;
       case 'uniform':
+      case 'uniform_swimming':
       default:
         return <Shirt className="w-4 h-4 text-blue-400" />;
     }
@@ -85,6 +85,8 @@ export default function ClassConfigModal({
         return t.pe;
       case 'pe_swimming':
         return t.peSwimming;
+      case 'uniform_swimming':
+        return t.uniformSwimming;
       case 'uniform':
       default:
         return t.uniform;
@@ -196,14 +198,21 @@ export default function ClassConfigModal({
 
           {/* Step 2: Swimming Day Selector (Day 4, 5, or 6) */}
           <div className="space-y-3">
-            <label className="text-xs uppercase font-mono font-bold tracking-wider text-cyan-300 flex items-center gap-1.5">
-              <Waves className="w-3.5 h-3.5 text-cyan-400" />
-              <span>{lang === 'zh' ? '2. 指定游泳課在哪一天（Day 4、Day 5 或 Day 6）' : lang === 'th' ? '2. กำหนดวันว่ายน้ำ (Day 4, Day 5 หรือ Day 6)' : '2. Designate Swimming Day (Day 4, 5, or 6)'}</span>
-            </label>
+            <div className="flex items-center justify-between">
+              <label className="text-xs uppercase font-mono font-bold tracking-wider text-cyan-300 flex items-center gap-1.5">
+                <Waves className="w-3.5 h-3.5 text-cyan-400" />
+                <span>{lang === 'zh' ? '2. 指定游泳課在哪一天（Day 4、Day 5 或 Day 6）' : lang === 'th' ? '2. กำหนดวันว่ายน้ำ (Day 4, Day 5 หรือ Day 6)' : '2. Designate Swimming Day (Day 4, 5, or 6)'}</span>
+              </label>
+            </div>
 
             <div className="grid grid-cols-3 gap-2.5">
               {swimmingOptions.map((d) => {
                 const isSelected = swimmingDay === d;
+                const isOddDay = d % 2 === 1;
+                const baseAttr = selectedPresetId === 'odd_pe'
+                  ? (isOddDay ? '體育服' : '一般校服')
+                  : (isOddDay ? '一般校服' : '體育服');
+
                 return (
                   <button
                     key={d}
@@ -219,13 +228,18 @@ export default function ClassConfigModal({
                       <Waves className={`w-3.5 h-3.5 ${isSelected ? 'text-cyan-300' : 'text-slate-500'}`} />
                       <span>DAY {d}</span>
                     </div>
-                    <span className="text-[11px] font-semibold">
-                      {lang === 'zh' ? `Day ${d} 游泳` : lang === 'th' ? `Day ${d} ว่ายน้ำ` : `Day ${d} Swim`}
+                    <span className="text-[11px] font-semibold text-center">
+                      {lang === 'zh' ? `穿${baseAttr} + 帶泳袋` : lang === 'th' ? `Day ${d} ว่ายน้ำ` : `Day ${d} Swim`}
                     </span>
                   </button>
                 );
               })}
             </div>
+
+            <p className="text-xs text-slate-400 flex items-center gap-1.5 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
+              <Info className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
+              <span>{t.swimmingDayNotice}</span>
+            </p>
           </div>
 
           {/* Step 3: 8-Day Cycle Schedule Preview */}
@@ -255,7 +269,7 @@ export default function ClassConfigModal({
                       isDay7 
                         ? 'bg-amber-950/30 border-amber-500/40' 
                         : isSwim
-                        ? 'bg-cyan-950/30 border-cyan-500/40'
+                        ? 'bg-cyan-950/30 border-cyan-500/40 ring-1 ring-cyan-500/30'
                         : 'bg-slate-950/70 border-slate-800'
                     }`}
                   >
