@@ -70,23 +70,16 @@ export default function App() {
   }, [classConfig]);
 
   // Handler for switching month tab (10, 11, 12)
+  // Only changes the month view for the calendar/list below, keeping Today/Tomorrow banner unchanged
   const handleSelectMonth = (month) => {
     setSelectedMonth(month);
-    // Automatically select the 1st day of the newly chosen month
-    const firstDay = calendarSchedule.find((d) => d.month === month);
-    if (firstDay) {
-      setSelectedDateStr(firstDay.dateStr);
-    }
   };
 
-  // Handler for selecting any specific date
+  // Handler for selecting any specific date (from date click or date stepper)
   const handleSelectDate = (dateStr) => {
     setSelectedDateStr(dateStr);
-    const item = calendarSchedule.find((d) => d.dateStr === dateStr);
-    if (item && item.month !== selectedMonth) {
-      setSelectedMonth(item.month);
-    }
   };
+
 
   const handleSaveClassConfig = (newConfig) => {
     setClassConfig(newConfig);
