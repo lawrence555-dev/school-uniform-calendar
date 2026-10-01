@@ -392,7 +392,227 @@ export const rawCalendarStructure = [
     event: { zh: '二月春假 (學生與教師放假)', en: 'February Break for Students and Teachers', th: 'วันหยุดเดือนกุมภาพันธ์สำหรับนักเรียนและครู (February Break)' } 
   },
   { dateStr: '2027-02-27', year: 2027, month: 2, day: 27, weekdayIndex: 6, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
-  { dateStr: '2027-02-28', year: 2027, month: 2, day: 28, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: true, event: null }
+  { dateStr: '2027-02-28', year: 2027, month: 2, day: 28, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+
+  // ==========================================
+  // 2027年 3月 (March 2027)
+  // ==========================================
+  { dateStr: '2027-03-01', year: 2027, month: 3, day: 1, weekdayIndex: 1, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-02', year: 2027, month: 3, day: 2, weekdayIndex: 2, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-03', year: 2027, month: 3, day: 3, weekdayIndex: 3, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-04', year: 2027, month: 3, day: 4, weekdayIndex: 4, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-05', year: 2027, month: 3, day: 5, weekdayIndex: 5, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-06', year: 2027, month: 3, day: 6, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-03-07', year: 2027, month: 3, day: 7, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-03-08', year: 2027, month: 3, day: 8, weekdayIndex: 1, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-09', year: 2027, month: 3, day: 9, weekdayIndex: 2, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-10', year: 2027, month: 3, day: 10, weekdayIndex: 3, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-11', year: 2027, month: 3, day: 11, weekdayIndex: 4, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-12', year: 2027, month: 3, day: 12, weekdayIndex: 5, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-13', year: 2027, month: 3, day: 13, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-03-14', year: 2027, month: 3, day: 14, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-03-15', year: 2027, month: 3, day: 15, weekdayIndex: 1, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-16', year: 2027, month: 3, day: 16, weekdayIndex: 2, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-17', year: 2027, month: 3, day: 17, weekdayIndex: 3, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2027-03-18', year: 2027, month: 3, day: 18, weekdayIndex: 4, cycleDay: 3, isHoliday: false, isWeekend: false, 
+    event: { zh: '第三季度結束', en: 'End of Quarter 3', th: 'สิ้นสุดไตรมาสที่ 3' } 
+  },
+  { 
+    dateStr: '2027-03-19', year: 2027, month: 3, day: 19, weekdayIndex: 5, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '教職員進修日 (學生放假不上課)', en: 'Faculty PD Day (Non-School Day for Students)', th: 'วันพัฒนาบุคลากรครู (นักเรียนหยุดเรียน)' } 
+  },
+  { dateStr: '2027-03-20', year: 2027, month: 3, day: 20, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-03-21', year: 2027, month: 3, day: 21, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { 
+    dateStr: '2027-03-22', year: 2027, month: 3, day: 22, weekdayIndex: 1, cycleDay: 4, isHoliday: false, isWeekend: false, 
+    event: { zh: '第四季度開始', en: 'Start of Quarter 4', th: 'เริ่มต้นไตรมาสที่ 4' } 
+  },
+  { 
+    dateStr: '2027-03-23', year: 2027, month: 3, day: 23, weekdayIndex: 2, cycleDay: 5, isHoliday: false, isWeekend: false, 
+    event: { zh: '發放第二學期期中進度報告', en: 'Semester 2 Progress Reports Released', th: 'แจกรายงานความก้าวหน้าทางการเรียน ภาคเรียนที่ 2' } 
+  },
+  { dateStr: '2027-03-24', year: 2027, month: 3, day: 24, weekdayIndex: 3, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2027-03-25', year: 2027, month: 3, day: 25, weekdayIndex: 4, cycleDay: 7, isHoliday: false, isWeekend: false, 
+    event: { zh: '學生主導成果發表會 (幼兒/小學) / 三方親師座談會 (中學)', en: 'Student-Led Conferences (EY&ES) / Three-Way Conferences (MS&HS)', th: 'การประชุมรายงานผลการเรียนโดยนักเรียน (EY&ES) / ประชุมสามฝ่าย (MS&HS)' } 
+  },
+  { 
+    dateStr: '2027-03-26', year: 2027, month: 3, day: 26, weekdayIndex: 5, cycleDay: 8, isHoliday: false, isWeekend: false, 
+    event: { zh: '學生主導成果發表會 (幼兒/小學) / 三方親師座談會 (中學)', en: 'Student-Led Conferences (EY&ES) / Three-Way Conferences (MS&HS)', th: 'การประชุมรายงานผลการเรียนโดยนักเรียน (EY&ES) / ประชุมสามฝ่าย (MS&HS)' } 
+  },
+  { dateStr: '2027-03-27', year: 2027, month: 3, day: 27, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-03-28', year: 2027, month: 3, day: 28, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-03-29', year: 2027, month: 3, day: 29, weekdayIndex: 1, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-30', year: 2027, month: 3, day: 30, weekdayIndex: 2, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-03-31', year: 2027, month: 3, day: 31, weekdayIndex: 3, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+
+  // ==========================================
+  // 2027年 4月 (April 2027)
+  // ==========================================
+  { dateStr: '2027-04-01', year: 2027, month: 4, day: 1, weekdayIndex: 4, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-02', year: 2027, month: 4, day: 2, weekdayIndex: 5, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-03', year: 2027, month: 4, day: 3, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-04-04', year: 2027, month: 4, day: 4, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-04-05', year: 2027, month: 4, day: 5, weekdayIndex: 1, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-06', year: 2027, month: 4, day: 6, weekdayIndex: 2, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-07', year: 2027, month: 4, day: 7, weekdayIndex: 3, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2027-04-08', year: 2027, month: 4, day: 8, weekdayIndex: 4, cycleDay: 1, isHoliday: false, isWeekend: false, 
+    event: { zh: '宋干節 / 潑水節慶祝活動', en: 'Songkran Celebrations', th: 'กิจกรรมฉลองเทศกาลสงกรานต์ (Songkran Celebrations)' } 
+  },
+  { 
+    dateStr: '2027-04-09', year: 2027, month: 4, day: 9, weekdayIndex: 5, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '卻克里王朝紀念日補假 / 春假開始 (放假)', en: 'Holiday (Chakri Day Observed) / Spring Break', th: 'วันหยุดชดเชยวันจักรี / วันหยุดฤดูใบไม้ผลิ' } 
+  },
+  { dateStr: '2027-04-10', year: 2027, month: 4, day: 10, weekdayIndex: 6, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+  { dateStr: '2027-04-11', year: 2027, month: 4, day: 11, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+  { 
+    dateStr: '2027-04-12', year: 2027, month: 4, day: 12, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '春假 (不上課)', en: 'Spring Break (No School)', th: 'วันหยุดฤดูใบไม้ผลิ (Spring Break)' } 
+  },
+  { 
+    dateStr: '2027-04-13', year: 2027, month: 4, day: 13, weekdayIndex: 2, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '宋干節國定假日 / 春假 (放假)', en: 'Public Holiday (Songkran Days) / Spring Break', th: 'วันหยุดเทศกาลสงกรานต์ (Songkran Days)' } 
+  },
+  { 
+    dateStr: '2027-04-14', year: 2027, month: 4, day: 14, weekdayIndex: 3, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '宋干節國定假日 / 春假 (放假)', en: 'Public Holiday (Songkran Days) / Spring Break', th: 'วันหยุดเทศกาลสงกรานต์ (Songkran Days)' } 
+  },
+  { 
+    dateStr: '2027-04-15', year: 2027, month: 4, day: 15, weekdayIndex: 4, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '宋干節國定假日 / 春假 (放假)', en: 'Public Holiday (Songkran Days) / Spring Break', th: 'วันหยุดเทศกาลสงกรานต์ (Songkran Days)' } 
+  },
+  { 
+    dateStr: '2027-04-16', year: 2027, month: 4, day: 16, weekdayIndex: 5, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '春假 (不上課)', en: 'Spring Break (No School)', th: 'วันหยุดฤดูใบไม้ผลิ (Spring Break)' } 
+  },
+  { dateStr: '2027-04-17', year: 2027, month: 4, day: 17, weekdayIndex: 6, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+  { dateStr: '2027-04-18', year: 2027, month: 4, day: 18, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+  { 
+    dateStr: '2027-04-19', year: 2027, month: 4, day: 19, weekdayIndex: 1, cycleDay: 2, isHoliday: false, isWeekend: false, 
+    event: { zh: '春假結束 / 恢復上課', en: 'Classes Resume', th: 'เปิดเรียนตามปกติ (Classes Resume)' } 
+  },
+  { dateStr: '2027-04-20', year: 2027, month: 4, day: 20, weekdayIndex: 2, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-21', year: 2027, month: 4, day: 21, weekdayIndex: 3, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-22', year: 2027, month: 4, day: 22, weekdayIndex: 4, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-23', year: 2027, month: 4, day: 23, weekdayIndex: 5, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-24', year: 2027, month: 4, day: 24, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-04-25', year: 2027, month: 4, day: 25, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-04-26', year: 2027, month: 4, day: 26, weekdayIndex: 1, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-27', year: 2027, month: 4, day: 27, weekdayIndex: 2, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-28', year: 2027, month: 4, day: 28, weekdayIndex: 3, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-29', year: 2027, month: 4, day: 29, weekdayIndex: 4, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-04-30', year: 2027, month: 4, day: 30, weekdayIndex: 5, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+
+  // ==========================================
+  // 2027年 5月 (May 2027)
+  // ==========================================
+  { dateStr: '2027-05-01', year: 2027, month: 5, day: 1, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-05-02', year: 2027, month: 5, day: 2, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { 
+    dateStr: '2027-05-03', year: 2027, month: 5, day: 3, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '勞動節補假 (放假)', en: 'Public Holiday (Labor Day Observed)', th: 'วันหยุดชดเชยวันแรงงานแห่งชาติ' } 
+  },
+  { 
+    dateStr: '2027-05-04', year: 2027, month: 5, day: 4, weekdayIndex: 2, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '泰王加冕紀念日 (放假)', en: 'Public Holiday (Coronation Day)', th: 'วันฉัตรมงคล (Coronation Day)' } 
+  },
+  { dateStr: '2027-05-05', year: 2027, month: 5, day: 5, weekdayIndex: 3, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-06', year: 2027, month: 5, day: 6, weekdayIndex: 4, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-07', year: 2027, month: 5, day: 7, weekdayIndex: 5, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-08', year: 2027, month: 5, day: 8, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-05-09', year: 2027, month: 5, day: 9, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-05-10', year: 2027, month: 5, day: 10, weekdayIndex: 1, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-11', year: 2027, month: 5, day: 11, weekdayIndex: 2, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-12', year: 2027, month: 5, day: 12, weekdayIndex: 3, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-13', year: 2027, month: 5, day: 13, weekdayIndex: 4, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-14', year: 2027, month: 5, day: 14, weekdayIndex: 5, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-15', year: 2027, month: 5, day: 15, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-05-16', year: 2027, month: 5, day: 16, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-05-17', year: 2027, month: 5, day: 17, weekdayIndex: 1, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-18', year: 2027, month: 5, day: 18, weekdayIndex: 2, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-19', year: 2027, month: 5, day: 19, weekdayIndex: 3, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-20', year: 2027, month: 5, day: 20, weekdayIndex: 4, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2027-05-21', year: 2027, month: 5, day: 21, weekdayIndex: 5, cycleDay: 8, isHoliday: false, isWeekend: false, 
+    event: { zh: '1-12年級優秀學生表揚大會', en: 'Grades 1 - 12 Honors Assembly', th: 'พิธีมอบรางวัลเชิดชูเกียรตินักเรียน เกรด 1-12 (Honors Assembly)' } 
+  },
+  { dateStr: '2027-05-22', year: 2027, month: 5, day: 22, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-05-23', year: 2027, month: 5, day: 23, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-05-24', year: 2027, month: 5, day: 24, weekdayIndex: 1, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-25', year: 2027, month: 5, day: 25, weekdayIndex: 2, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-26', year: 2027, month: 5, day: 26, weekdayIndex: 3, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-05-27', year: 2027, month: 5, day: 27, weekdayIndex: 4, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2027-05-28', year: 2027, month: 5, day: 28, weekdayIndex: 5, cycleDay: 5, isHoliday: false, isWeekend: false, 
+    event: { zh: '第二學期課後社團活動 (ASA) 結束', en: '2nd Semester After-School Activities Ends', th: 'สิ้นสุดกิจกรรมหลังเลิกเรียน ภาคเรียนที่ 2 (ASA)' } 
+  },
+  { dateStr: '2027-05-29', year: 2027, month: 5, day: 29, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-05-30', year: 2027, month: 5, day: 30, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-05-31', year: 2027, month: 5, day: 31, weekdayIndex: 1, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+
+  // ==========================================
+  // 2027年 6月 (June 2027)
+  // ==========================================
+  { dateStr: '2027-06-01', year: 2027, month: 6, day: 1, weekdayIndex: 2, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-06-02', year: 2027, month: 6, day: 2, weekdayIndex: 3, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2027-06-03', year: 2027, month: 6, day: 3, weekdayIndex: 4, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '泰國王后華誕 (放假)', en: 'Public Holiday (The Queen of Thailand\'s Birthday)', th: 'วันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าฯ พระบรมราชินี' } 
+  },
+  { 
+    dateStr: '2027-06-04', year: 2027, month: 6, day: 4, weekdayIndex: 5, cycleDay: 1, isHoliday: false, isWeekend: false, 
+    event: { zh: '高中部畢業典禮 2027', en: 'HS Graduation Ceremony 2027', th: 'พิธีสำเร็จการศึกษาระดับมัธยมปลาย 2027 (HS Graduation)' } 
+  },
+  { dateStr: '2027-06-05', year: 2027, month: 6, day: 5, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-06-06', year: 2027, month: 6, day: 6, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { 
+    dateStr: '2027-06-07', year: 2027, month: 6, day: 7, weekdayIndex: 1, cycleDay: 2, isHoliday: false, isWeekend: false, 
+    event: { zh: '幼兒園畢業典禮 2027', en: 'Kindergarten Graduation 2027', th: 'พิธีสำเร็จการศึกษาระดับอนุบาล 2027 (Kindergarten Graduation)' } 
+  },
+  { dateStr: '2027-06-08', year: 2027, month: 6, day: 8, weekdayIndex: 2, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-06-09', year: 2027, month: 6, day: 9, weekdayIndex: 3, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-06-10', year: 2027, month: 6, day: 10, weekdayIndex: 4, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-06-11', year: 2027, month: 6, day: 11, weekdayIndex: 5, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-06-12', year: 2027, month: 6, day: 12, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2027-06-13', year: 2027, month: 6, day: 13, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { 
+    dateStr: '2027-06-14', year: 2027, month: 6, day: 14, weekdayIndex: 1, cycleDay: 7, isHoliday: false, isWeekend: false, 
+    event: { zh: '發放第二學期成績單', en: 'Semester 2 Report Cards Released', th: 'แจกสมุดรายงานผลการเรียน ภาคเรียนที่ 2' } 
+  },
+  { 
+    dateStr: '2027-06-15', year: 2027, month: 6, day: 15, weekdayIndex: 2, cycleDay: 8, isHoliday: false, isWeekend: false, 
+    event: { zh: '學生最後上課日 (中午 12:00 提早放學 / 暑假開始)', en: 'Last Day of School for Students (Early Dismissal 12:00 p.m.) / Summer Break Begins', th: 'วันเรียนวันสุดท้ายของนักเรียน (เลิกเรียน 12:00 น. / เริ่มต้นปิดเทอมใหญ่)' } 
+  },
+  // Summer Break / Faculty Days
+  { 
+    dateStr: '2027-06-16', year: 2027, month: 6, day: 16, weekdayIndex: 3, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '教職員進修日 / 暑假 (放假)', en: 'Faculty PD Day / Summer Break', th: 'วันพัฒนาบุคลากรครู / ปิดภาคเรียนฤดูร้อน' } 
+  },
+  { 
+    dateStr: '2027-06-17', year: 2027, month: 6, day: 17, weekdayIndex: 4, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '教師最後工作日 / 暑假 (放假)', en: 'Last Work Day for Teachers / Summer Break', th: 'วันทำงานวันสุดท้ายของครู / ปิดภาคเรียนฤดูร้อน' } 
+  },
+  { 
+    dateStr: '2027-06-18', year: 2027, month: 6, day: 18, weekdayIndex: 5, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '暑假 (Summer Break)', en: 'Summer Break', th: 'ปิดภาคเรียนฤดูร้อน (Summer Break)' } 
+  },
+  { dateStr: '2027-06-19', year: 2027, month: 6, day: 19, weekdayIndex: 6, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+  { dateStr: '2027-06-20', year: 2027, month: 6, day: 20, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+  { 
+    dateStr: '2027-06-21', year: 2027, month: 6, day: 21, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false, 
+    event: { zh: '2027 暑期學校開始 / 暑假', en: 'Summer School 2027 Begins / Summer Break', th: 'เปิดเรียนภาคฤดูร้อน 2027 (Summer School)' } 
+  },
+  { dateStr: '2027-06-22', year: 2027, month: 6, day: 22, weekdayIndex: 2, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '暑假 (Summer Break)', en: 'Summer Break', th: 'ปิดภาคเรียนฤดูร้อน (Summer Break)' } },
+  { dateStr: '2027-06-23', year: 2027, month: 6, day: 23, weekdayIndex: 3, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '暑假 (Summer Break)', en: 'Summer Break', th: 'ปิดภาคเรียนฤดูร้อน (Summer Break)' } },
+  { dateStr: '2027-06-24', year: 2027, month: 6, day: 24, weekdayIndex: 4, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '暑假 (Summer Break)', en: 'Summer Break', th: 'ปิดภาคเรียนฤดูร้อน (Summer Break)' } },
+  { dateStr: '2027-06-25', year: 2027, month: 6, day: 25, weekdayIndex: 5, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '暑假 (Summer Break)', en: 'Summer Break', th: 'ปิดภาคเรียนฤดูร้อน (Summer Break)' } },
+  { dateStr: '2027-06-26', year: 2027, month: 6, day: 26, weekdayIndex: 6, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+  { dateStr: '2027-06-27', year: 2027, month: 6, day: 27, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
+  { dateStr: '2027-06-28', year: 2027, month: 6, day: 28, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '暑假 (Summer Break)', en: 'Summer Break', th: 'ปิดภาคเรียนฤดูร้อน (Summer Break)' } },
+  { dateStr: '2027-06-29', year: 2027, month: 6, day: 29, weekdayIndex: 2, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '暑假 (Summer Break)', en: 'Summer Break', th: 'ปิดภาคเรียนฤดูร้อน (Summer Break)' } },
+  { dateStr: '2027-06-30', year: 2027, month: 6, day: 30, weekdayIndex: 3, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '暑假 (Summer Break)', en: 'Summer Break', th: 'ปิดภาคเรียนฤดูร้อน (Summer Break)' } }
 ];
 
 

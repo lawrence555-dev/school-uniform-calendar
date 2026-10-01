@@ -18,6 +18,10 @@ export default function MonthSelector({
     { num: 12, label: t.december },
     { num: 1, label: t.january },
     { num: 2, label: t.february },
+    { num: 3, label: t.march },
+    { num: 4, label: t.april },
+    { num: 5, label: t.may },
+    { num: 6, label: t.june },
   ];
 
 
