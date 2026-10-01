@@ -9,9 +9,10 @@ import {
   Sparkles
 } from 'lucide-react';
 import { translations } from '../translations/i18n';
-import { uniformMeta, calendarSchedule } from '../data/calendarData';
+import { uniformMeta } from '../data/calendarData';
 
 export default function CalendarGridView({
+  calendarSchedule,
   selectedMonth,
   selectedDateStr,
   setSelectedDateStr,
@@ -20,7 +21,8 @@ export default function CalendarGridView({
 }) {
   const t = translations[lang] || translations.zh;
 
-  const monthItems = calendarSchedule.filter((d) => d.month === selectedMonth);
+  const scheduleList = calendarSchedule || [];
+  const monthItems = scheduleList.filter((d) => d.month === selectedMonth);
   if (monthItems.length === 0) return null;
 
   // First day weekday index (0 = Sun, 1 = Mon, ..., 6 = Sat)
@@ -118,7 +120,11 @@ export default function CalendarGridView({
                 </span>
 
                 {item.cycleDay ? (
-                  <span className="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-slate-900 text-amber-400 border border-slate-700">
+                  <span className={`text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.2 rounded ${
+                    item.cycleDay === 7 
+                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' 
+                      : 'bg-slate-900 text-slate-400 border border-slate-700'
+                  }`}>
                     D{item.cycleDay}
                   </span>
                 ) : item.uniformType === 'holiday' ? (

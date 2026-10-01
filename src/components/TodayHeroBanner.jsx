@@ -7,22 +7,25 @@ import {
   Calendar, 
   AlertCircle, 
   CheckCircle2, 
-  ArrowRight,
-  Sun,
-  Flame,
-  PartyPopper,
-  BookOpen,
-  ChevronRight,
-  ChevronLeft
+  ArrowRight, 
+  Sun, 
+  Flame, 
+  PartyPopper, 
+  Settings2, 
+  ChevronRight, 
+  ChevronLeft,
+  Lock
 } from 'lucide-react';
 import { translations } from '../translations/i18n';
-import { uniformMeta, calendarSchedule } from '../data/calendarData';
+import { uniformMeta } from '../data/calendarData';
 
 export default function TodayHeroBanner({ 
   selectedDateStr, 
   setSelectedDateStr, 
-  lang,
-  onOpenGuide
+  calendarSchedule,
+  classConfig,
+  onOpenClassConfig,
+  lang 
 }) {
   const t = translations[lang] || translations.zh;
 
@@ -33,7 +36,6 @@ export default function TodayHeroBanner({
     : null;
 
   const meta = uniformMeta[currentItem.uniformType] || uniformMeta.uniform;
-  const nextMeta = nextItem ? (uniformMeta[nextItem.uniformType] || uniformMeta.uniform) : null;
 
   const getUniformIcon = (type) => {
     switch (type) {
@@ -105,8 +107,29 @@ export default function TodayHeroBanner({
     setSelectedDateStr('2026-10-01');
   };
 
+  const activePresetLabel = classConfig?.id === 'even_pe'
+    ? t.presetEven
+    : classConfig?.id === 'custom'
+    ? t.presetCustom
+    : t.presetOdd;
+
   return (
     <div className="space-y-4">
+      {/* Active Class Preset Indicator Bar */}
+      <div className="flex items-center justify-between px-3 py-2 rounded-2xl bg-slate-900/70 border border-slate-800 text-xs">
+        <div className="flex items-center gap-2 truncate">
+          <Settings2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
+          <span className="text-slate-400">{t.activeClassSetting}:</span>
+          <span className="font-bold text-white truncate">{activePresetLabel}</span>
+        </div>
+        <button
+          onClick={onOpenClassConfig}
+          className="text-blue-400 hover:text-blue-300 font-bold hover:underline ml-2 flex-shrink-0 tap-effect"
+        >
+          {t.changeSetting} ➔
+        </button>
+      </div>
+
       {/* Primary Hero Card: Today's Uniform Notification */}
       <div className={`relative overflow-hidden rounded-3xl p-5 sm:p-7 border bg-gradient-to-br shadow-2xl transition-all ${meta.heroBg}`}>
         {/* Ambient background glow */}
@@ -131,9 +154,17 @@ export default function TodayHeroBanner({
 
             {/* Cycle Day Indicator */}
             {currentItem.cycleDay ? (
-              <span className="px-3 py-1 rounded-xl text-xs font-mono font-black tracking-wider bg-slate-900/90 text-amber-300 border border-amber-500/30 shadow-xs">
-                DAY {currentItem.cycleDay}
-              </span>
+              <div className="flex items-center gap-1.5">
+                {currentItem.cycleDay === 7 && (
+                  <span className="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+                    <Lock className="w-2.5 h-2.5" />
+                    <span>FIXED HOUSE</span>
+                  </span>
+                )}
+                <span className="px-3 py-1 rounded-xl text-xs font-mono font-black tracking-wider bg-slate-900/90 text-amber-300 border border-amber-500/30 shadow-xs">
+                  DAY {currentItem.cycleDay}
+                </span>
+              </div>
             ) : (
               <span className="px-3 py-1 rounded-xl text-xs font-bold bg-rose-500/10 text-rose-300 border border-rose-500/20">
                 {t.noSchool}
@@ -160,15 +191,6 @@ export default function TodayHeroBanner({
                 </p>
               </div>
             </div>
-
-            {/* Quick Action: Guide trigger on mobile */}
-            <button
-              onClick={onOpenGuide}
-              className="sm:hidden self-start px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 transition flex items-center gap-1.5"
-            >
-              <BookOpen className="w-3.5 h-3.5 text-amber-400" />
-              <span>{t.uniformGuideBtn}</span>
-            </button>
           </div>
 
           {/* Special School Event Banner if applicable */}

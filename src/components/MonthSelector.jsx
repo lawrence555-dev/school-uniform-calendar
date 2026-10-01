@@ -1,13 +1,13 @@
 import React from 'react';
 import { Calendar, List, Activity, Waves, Flame, Sun, Sparkles } from 'lucide-react';
 import { translations } from '../translations/i18n';
-import { calendarSchedule } from '../data/calendarData';
 
 export default function MonthSelector({
   selectedMonth,
   setSelectedMonth,
   viewMode,
   setViewMode,
+  calendarSchedule,
   lang,
 }) {
   const t = translations[lang] || translations.zh;
@@ -18,8 +18,9 @@ export default function MonthSelector({
     { num: 12, label: t.december },
   ];
 
-  // Calculate monthly statistics
-  const currentMonthItems = calendarSchedule.filter((d) => d.month === selectedMonth);
+  // Calculate monthly statistics from dynamic calendarSchedule
+  const scheduleList = calendarSchedule || [];
+  const currentMonthItems = scheduleList.filter((d) => d.month === selectedMonth);
   const schoolDaysCount = currentMonthItems.filter((d) => d.cycleDay !== null).length;
   const swimmingDaysCount = currentMonthItems.filter((d) => d.uniformType === 'pe_swimming').length;
   const houseDaysCount = currentMonthItems.filter((d) => d.uniformType === 'house_shirt').length;

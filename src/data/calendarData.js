@@ -61,1053 +61,242 @@ export const uniformMeta = {
   }
 };
 
-export const calendarSchedule = [
+// Preset Configurations for 8-Day Cycle
+export const classPresets = {
+  odd_pe: {
+    id: 'odd_pe',
+    nameKey: 'presetOdd',
+    descKey: 'presetOddDesc',
+    swimmingDay: 5,
+    days: {
+      1: 'pe',
+      2: 'uniform',
+      3: 'pe',
+      4: 'uniform',
+      5: 'pe_swimming',
+      6: 'uniform',
+      7: 'house_shirt', // FIXED FOR ALL CLASSES
+      8: 'uniform'
+    }
+  },
+  even_pe: {
+    id: 'even_pe',
+    nameKey: 'presetEven',
+    descKey: 'presetEvenDesc',
+    swimmingDay: 6,
+    days: {
+      1: 'uniform',
+      2: 'pe',
+      3: 'uniform',
+      4: 'pe',
+      5: 'uniform',
+      6: 'pe_swimming',
+      7: 'house_shirt', // FIXED FOR ALL CLASSES
+      8: 'pe'
+    }
+  },
+  custom: {
+    id: 'custom',
+    nameKey: 'presetCustom',
+    descKey: 'presetCustomDesc',
+    swimmingDay: 5,
+    days: {
+      1: 'pe',
+      2: 'uniform',
+      3: 'pe',
+      4: 'uniform',
+      5: 'pe_swimming',
+      6: 'uniform',
+      7: 'house_shirt', // FIXED FOR ALL CLASSES
+      8: 'uniform'
+    }
+  }
+};
+
+// Base Calendar Dates & Events for Oct, Nov, Dec 2026
+export const rawCalendarStructure = [
   // ==========================================
   // 2026年 10月 (October 2026)
   // ==========================================
-  {
-    dateStr: '2026-10-01',
-    year: 2026,
-    month: 10,
-    day: 1,
-    weekdayIndex: 4, // Thursday
-    cycleDay: 7,
-    uniformType: 'house_shirt',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-02',
-    year: 2026,
-    month: 10,
-    day: 2,
-    weekdayIndex: 5, // Friday
-    cycleDay: 8,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-03',
-    year: 2026,
-    month: 10,
-    day: 3,
-    weekdayIndex: 6, // Saturday
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-04',
-    year: 2026,
-    month: 10,
-    day: 4,
-    weekdayIndex: 0, // Sunday
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-05',
-    year: 2026,
-    month: 10,
-    day: 5,
-    weekdayIndex: 1, // Monday
-    cycleDay: 1,
-    uniformType: 'pe',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-06',
-    year: 2026,
-    month: 10,
-    day: 6,
-    weekdayIndex: 2, // Tuesday
-    cycleDay: 2,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-07',
-    year: 2026,
-    month: 10,
-    day: 7,
-    weekdayIndex: 3, // Wednesday
-    cycleDay: 3,
-    uniformType: 'pe',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-08',
-    year: 2026,
-    month: 10,
-    day: 8,
-    weekdayIndex: 4, // Thursday
-    cycleDay: 4,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-09',
-    year: 2026,
-    month: 10,
-    day: 9,
-    weekdayIndex: 5, // Friday
-    cycleDay: 5,
-    uniformType: 'pe_swimming',
-    event: {
-      zh: '第一季度結束',
-      en: 'End of Quarter 1',
-      th: 'สิ้นสุดไตรมาสที่ 1 (End of Quarter 1)',
-      icon: 'note'
-    }
+  { dateStr: '2026-10-01', year: 2026, month: 10, day: 1, weekdayIndex: 4, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-02', year: 2026, month: 10, day: 2, weekdayIndex: 5, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-03', year: 2026, month: 10, day: 3, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-10-04', year: 2026, month: 10, day: 4, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-10-05', year: 2026, month: 10, day: 5, weekdayIndex: 1, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-06', year: 2026, month: 10, day: 6, weekdayIndex: 2, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-07', year: 2026, month: 10, day: 7, weekdayIndex: 3, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-08', year: 2026, month: 10, day: 8, weekdayIndex: 4, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2026-10-09', year: 2026, month: 10, day: 9, weekdayIndex: 5, cycleDay: 5, isHoliday: false, isWeekend: false,
+    event: { zh: '第一季度結束', en: 'End of Quarter 1', th: 'สิ้นสุดไตรมาสที่ 1 (End of Q1)' }
   },
   // Fall Break 10/10 - 10/18
-  {
-    dateStr: '2026-10-10',
-    year: 2026,
-    month: 10,
-    day: 10,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
+  { dateStr: '2026-10-10', year: 2026, month: 10, day: 10, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-10-11', year: 2026, month: 10, day: 11, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-10-12', year: 2026, month: 10, day: 12, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '秋季放假 (不上課)', en: 'Fall Break (No School)', th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)' } },
+  { dateStr: '2026-10-13', year: 2026, month: 10, day: 13, weekdayIndex: 2, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '秋季放假 (不上課)', en: 'Fall Break (No School)', th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)' } },
+  { dateStr: '2026-10-14', year: 2026, month: 10, day: 14, weekdayIndex: 3, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '秋季放假 (不上課)', en: 'Fall Break (No School)', th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)' } },
+  { dateStr: '2026-10-15', year: 2026, month: 10, day: 15, weekdayIndex: 4, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '秋季放假 (不上課)', en: 'Fall Break (No School)', th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)' } },
+  { dateStr: '2026-10-16', year: 2026, month: 10, day: 16, weekdayIndex: 5, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '秋季放假 (不上課)', en: 'Fall Break (No School)', th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)' } },
+  { dateStr: '2026-10-17', year: 2026, month: 10, day: 17, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-10-18', year: 2026, month: 10, day: 18, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { 
+    dateStr: '2026-10-19', year: 2026, month: 10, day: 19, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false,
+    event: { zh: '泰王九世逝世紀念日補假 (不上課)', en: 'King Bhumibol Memorial Day Observed (No School)', th: 'วันหยุดชดเชยวันคล้ายวันสวรรคต ร.9 (ไม่มีเรียน)' }
   },
-  {
-    dateStr: '2026-10-11',
-    year: 2026,
-    month: 10,
-    day: 11,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
+  { 
+    dateStr: '2026-10-20', year: 2026, month: 10, day: 20, weekdayIndex: 2, cycleDay: 6, isHoliday: false, isWeekend: false,
+    event: { zh: '第二季度開始 / 恢復上課', en: 'Start of Quarter 2 (Classes Resume)', th: 'เริ่มต้นไตรมาสที่ 2 / เปิดเรียนปกติ' }
   },
-  {
-    dateStr: '2026-10-12',
-    year: 2026,
-    month: 10,
-    day: 12,
-    weekdayIndex: 1,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '秋季放假 (不上課)',
-      en: 'Fall Break (No School)',
-      th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)',
-      icon: 'holiday'
-    }
+  { 
+    dateStr: '2026-10-21', year: 2026, month: 10, day: 21, weekdayIndex: 3, cycleDay: 7, isHoliday: false, isWeekend: false,
+    event: { zh: '發放第一季度成績單', en: 'Quarter 1 Progress Reports Issued', th: 'แจกสมุดรายงานผลการเรียนไตรมาสที่ 1' }
   },
-  {
-    dateStr: '2026-10-13',
-    year: 2026,
-    month: 10,
-    day: 13,
-    weekdayIndex: 2,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '秋季放假 (不上課)',
-      en: 'Fall Break (No School)',
-      th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)',
-      icon: 'holiday'
-    }
+  { dateStr: '2026-10-22', year: 2026, month: 10, day: 22, weekdayIndex: 4, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-23', year: 2026, month: 10, day: 23, weekdayIndex: 5, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-24', year: 2026, month: 10, day: 24, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-10-25', year: 2026, month: 10, day: 25, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-10-26', year: 2026, month: 10, day: 26, weekdayIndex: 1, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-27', year: 2026, month: 10, day: 27, weekdayIndex: 2, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-28', year: 2026, month: 10, day: 28, weekdayIndex: 3, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-10-29', year: 2026, month: 10, day: 29, weekdayIndex: 4, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2026-10-30', year: 2026, month: 10, day: 30, weekdayIndex: 5, cycleDay: 6, isHoliday: false, isWeekend: false,
+    event: { zh: '萬聖節慶祝活動', en: 'Halloween Celebrations', th: 'กิจกรรมฉลองเทศกาลฮาโลวีน (Halloween)' }
   },
-  {
-    dateStr: '2026-10-14',
-    year: 2026,
-    month: 10,
-    day: 14,
-    weekdayIndex: 3,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '秋季放假 (不上課)',
-      en: 'Fall Break (No School)',
-      th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)',
-      icon: 'holiday'
-    }
-  },
-  {
-    dateStr: '2026-10-15',
-    year: 2026,
-    month: 10,
-    day: 15,
-    weekdayIndex: 4,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '秋季放假 (不上課)',
-      en: 'Fall Break (No School)',
-      th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)',
-      icon: 'holiday'
-    }
-  },
-  {
-    dateStr: '2026-10-16',
-    year: 2026,
-    month: 10,
-    day: 16,
-    weekdayIndex: 5,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '秋季放假 (不上課)',
-      en: 'Fall Break (No School)',
-      th: 'วันหยุดฤดูใบไม้ร่วง (Fall Break)',
-      icon: 'holiday'
-    }
-  },
-  {
-    dateStr: '2026-10-17',
-    year: 2026,
-    month: 10,
-    day: 17,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-18',
-    year: 2026,
-    month: 10,
-    day: 18,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-19',
-    year: 2026,
-    month: 10,
-    day: 19,
-    weekdayIndex: 1,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '泰王九世逝世紀念日補假 (不上課)',
-      en: 'King Bhumibol Memorial Day Observed (No School)',
-      th: 'วันหยุดชดเชยวันคล้ายวันสวรรคต ร.9 (ไม่มีเรียน)',
-      icon: 'royal'
-    }
-  },
-  {
-    dateStr: '2026-10-20',
-    year: 2026,
-    month: 10,
-    day: 20,
-    weekdayIndex: 2,
-    cycleDay: 6,
-    uniformType: 'uniform',
-    event: {
-      zh: '第二季度開始 / 恢復上課',
-      en: 'Start of Quarter 2 (Classes Resume)',
-      th: 'เริ่มต้นไตรมาสที่ 2 / เปิดเรียนปกติ',
-      icon: 'school'
-    }
-  },
-  {
-    dateStr: '2026-10-21',
-    year: 2026,
-    month: 10,
-    day: 21,
-    weekdayIndex: 3,
-    cycleDay: 7,
-    uniformType: 'house_shirt',
-    event: {
-      zh: '發放第一季度成績單',
-      en: 'Quarter 1 Progress Reports Issued',
-      th: 'แจกสมุดรายงานผลการเรียนไตรมาสที่ 1',
-      icon: 'report'
-    }
-  },
-  {
-    dateStr: '2026-10-22',
-    year: 2026,
-    month: 10,
-    day: 22,
-    weekdayIndex: 4,
-    cycleDay: 8,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-23',
-    year: 2026,
-    month: 10,
-    day: 23,
-    weekdayIndex: 5,
-    cycleDay: 1,
-    uniformType: 'pe',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-24',
-    year: 2026,
-    month: 10,
-    day: 24,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-25',
-    year: 2026,
-    month: 10,
-    day: 25,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-26',
-    year: 2026,
-    month: 10,
-    day: 26,
-    weekdayIndex: 1,
-    cycleDay: 2,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-27',
-    year: 2026,
-    month: 10,
-    day: 27,
-    weekdayIndex: 2,
-    cycleDay: 3,
-    uniformType: 'pe',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-28',
-    year: 2026,
-    month: 10,
-    day: 28,
-    weekdayIndex: 3,
-    cycleDay: 4,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-29',
-    year: 2026,
-    month: 10,
-    day: 29,
-    weekdayIndex: 4,
-    cycleDay: 5,
-    uniformType: 'pe_swimming',
-    event: null,
-  },
-  {
-    dateStr: '2026-10-30',
-    year: 2026,
-    month: 10,
-    day: 30,
-    weekdayIndex: 5,
-    cycleDay: 6,
-    uniformType: 'uniform',
-    event: {
-      zh: '萬聖節慶祝活動',
-      en: 'Halloween Celebrations',
-      th: 'กิจกรรมฉลองเทศกาลฮาโลวีน (Halloween)',
-      icon: 'halloween'
-    }
-  },
-  {
-    dateStr: '2026-10-31',
-    year: 2026,
-    month: 10,
-    day: 31,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
+  { dateStr: '2026-10-31', year: 2026, month: 10, day: 31, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
 
   // ==========================================
   // 2026年 11月 (November 2026)
   // ==========================================
-  {
-    dateStr: '2026-11-01',
-    year: 2026,
-    month: 11,
-    day: 1,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
+  { dateStr: '2026-11-01', year: 2026, month: 11, day: 1, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-11-02', year: 2026, month: 11, day: 2, weekdayIndex: 1, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-03', year: 2026, month: 11, day: 3, weekdayIndex: 2, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-04', year: 2026, month: 11, day: 4, weekdayIndex: 3, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2026-11-05', year: 2026, month: 11, day: 5, weekdayIndex: 4, cycleDay: 2, isHoliday: false, isWeekend: false,
+    event: { zh: '三方親師座談會', en: 'Three Way Conferences', th: 'การประชุมสามฝ่ายผู้ปกครอง-ครู-นักเรียน' }
   },
-  {
-    dateStr: '2026-11-02',
-    year: 2026,
-    month: 11,
-    day: 2,
-    weekdayIndex: 1,
-    cycleDay: 7,
-    uniformType: 'house_shirt',
-    event: null,
+  { 
+    dateStr: '2026-11-06', year: 2026, month: 11, day: 6, weekdayIndex: 5, cycleDay: 3, isHoliday: false, isWeekend: false,
+    event: { zh: '三方親師座談會', en: 'Three Way Conferences', th: 'การประชุมสามฝ่ายผู้ปกครอง-ครู-นักเรียน' }
   },
-  {
-    dateStr: '2026-11-03',
-    year: 2026,
-    month: 11,
-    day: 3,
-    weekdayIndex: 2,
-    cycleDay: 8,
-    uniformType: 'uniform',
-    event: null,
+  { dateStr: '2026-11-07', year: 2026, month: 11, day: 7, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-11-08', year: 2026, month: 11, day: 8, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { 
+    dateStr: '2026-11-09', year: 2026, month: 11, day: 9, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false,
+    event: { zh: '教職員進修日 (學生放假不上課)', en: 'Faculty PD Day (No School for Students)', th: 'วันพัฒนาบุคลากรครู (นักเรียนหยุดเรียน)' }
   },
-  {
-    dateStr: '2026-11-04',
-    year: 2026,
-    month: 11,
-    day: 4,
-    weekdayIndex: 3,
-    cycleDay: 1,
-    uniformType: 'pe',
-    event: null,
+  { dateStr: '2026-11-10', year: 2026, month: 11, day: 10, weekdayIndex: 2, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-11', year: 2026, month: 11, day: 11, weekdayIndex: 3, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-12', year: 2026, month: 11, day: 12, weekdayIndex: 4, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-13', year: 2026, month: 11, day: 13, weekdayIndex: 5, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-14', year: 2026, month: 11, day: 14, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-11-15', year: 2026, month: 11, day: 15, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-11-16', year: 2026, month: 11, day: 16, weekdayIndex: 1, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-17', year: 2026, month: 11, day: 17, weekdayIndex: 2, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-18', year: 2026, month: 11, day: 18, weekdayIndex: 3, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-19', year: 2026, month: 11, day: 19, weekdayIndex: 4, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2026-11-20', year: 2026, month: 11, day: 20, weekdayIndex: 5, cycleDay: 4, isHoliday: false, isWeekend: false,
+    event: { zh: '國際美食節與感恩節活動', en: 'Food Fiesta & Thanksgiving', th: 'เทศกาลอาหารนานาชาติและวันขอบคุณพระเจ้า' }
   },
-  {
-    dateStr: '2026-11-05',
-    year: 2026,
-    month: 11,
-    day: 5,
-    weekdayIndex: 4,
-    cycleDay: 2,
-    uniformType: 'uniform',
-    event: {
-      zh: '三方親師座談會',
-      en: 'Three Way Conferences',
-      th: 'การประชุมสามฝ่ายผู้ปกครอง-ครู-นักเรียน (Three Way Conferences)',
-      icon: 'conference'
-    }
+  { dateStr: '2026-11-21', year: 2026, month: 11, day: 21, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-11-22', year: 2026, month: 11, day: 22, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-11-23', year: 2026, month: 11, day: 23, weekdayIndex: 1, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-24', year: 2026, month: 11, day: 24, weekdayIndex: 2, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2026-11-25', year: 2026, month: 11, day: 25, weekdayIndex: 3, cycleDay: 7, isHoliday: false, isWeekend: false,
+    event: { zh: '水燈節慶祝活動', en: 'Loy Krathong Celebrations', th: 'กิจกรรมประเพณีลอยกระทง (Loy Krathong)' }
   },
-  {
-    dateStr: '2026-11-06',
-    year: 2026,
-    month: 11,
-    day: 6,
-    weekdayIndex: 5,
-    cycleDay: 3,
-    uniformType: 'pe',
-    event: {
-      zh: '三方親師座談會',
-      en: 'Three Way Conferences',
-      th: 'การประชุมสามฝ่ายผู้ปกครอง-ครู-นักเรียน (Three Way Conferences)',
-      icon: 'conference'
-    }
-  },
-  {
-    dateStr: '2026-11-07',
-    year: 2026,
-    month: 11,
-    day: 7,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-08',
-    year: 2026,
-    month: 11,
-    day: 8,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-09',
-    year: 2026,
-    month: 11,
-    day: 9,
-    weekdayIndex: 1,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '教職員進修日 (學生放假不上課)',
-      en: 'Faculty PD Day (No School for Students)',
-      th: 'วันพัฒนาบุคลากรครู (นักเรียนหยุดเรียน)',
-      icon: 'pd'
-    }
-  },
-  {
-    dateStr: '2026-11-10',
-    year: 2026,
-    month: 11,
-    day: 10,
-    weekdayIndex: 2,
-    cycleDay: 4,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-11',
-    year: 2026,
-    month: 11,
-    day: 11,
-    weekdayIndex: 3,
-    cycleDay: 5,
-    uniformType: 'pe_swimming',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-12',
-    year: 2026,
-    month: 11,
-    day: 12,
-    weekdayIndex: 4,
-    cycleDay: 6,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-13',
-    year: 2026,
-    month: 11,
-    day: 13,
-    weekdayIndex: 5,
-    cycleDay: 7,
-    uniformType: 'house_shirt',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-14',
-    year: 2026,
-    month: 11,
-    day: 14,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-15',
-    year: 2026,
-    month: 11,
-    day: 15,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-16',
-    year: 2026,
-    month: 11,
-    day: 16,
-    weekdayIndex: 1,
-    cycleDay: 8,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-17',
-    year: 2026,
-    month: 11,
-    day: 17,
-    weekdayIndex: 2,
-    cycleDay: 1,
-    uniformType: 'pe',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-18',
-    year: 2026,
-    month: 11,
-    day: 18,
-    weekdayIndex: 3,
-    cycleDay: 2,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-19',
-    year: 2026,
-    month: 11,
-    day: 19,
-    weekdayIndex: 4,
-    cycleDay: 3,
-    uniformType: 'pe',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-20',
-    year: 2026,
-    month: 11,
-    day: 20,
-    weekdayIndex: 5,
-    cycleDay: 4,
-    uniformType: 'uniform',
-    event: {
-      zh: '國際美食節與感恩節活動',
-      en: 'Food Fiesta & Thanksgiving',
-      th: 'เทศกาลอาหารนานาชาติและวันขอบคุณพระเจ้า (Food Fiesta)',
-      icon: 'food'
-    }
-  },
-  {
-    dateStr: '2026-11-21',
-    year: 2026,
-    month: 11,
-    day: 21,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-22',
-    year: 2026,
-    month: 11,
-    day: 22,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-23',
-    year: 2026,
-    month: 11,
-    day: 23,
-    weekdayIndex: 1,
-    cycleDay: 5,
-    uniformType: 'pe_swimming',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-24',
-    year: 2026,
-    month: 11,
-    day: 24,
-    weekdayIndex: 2,
-    cycleDay: 6,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-25',
-    year: 2026,
-    month: 11,
-    day: 25,
-    weekdayIndex: 3,
-    cycleDay: 7,
-    uniformType: 'house_shirt',
-    event: {
-      zh: '水燈節慶祝活動',
-      en: 'Loy Krathong Celebrations',
-      th: 'กิจกรรมประเพณีลอยกระทง (Loy Krathong)',
-      icon: 'loykrathong'
-    }
-  },
-  {
-    dateStr: '2026-11-26',
-    year: 2026,
-    month: 11,
-    day: 26,
-    weekdayIndex: 4,
-    cycleDay: 8,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-27',
-    year: 2026,
-    month: 11,
-    day: 27,
-    weekdayIndex: 5,
-    cycleDay: 1,
-    uniformType: 'pe',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-28',
-    year: 2026,
-    month: 11,
-    day: 28,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-29',
-    year: 2026,
-    month: 11,
-    day: 29,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-11-30',
-    year: 2026,
-    month: 11,
-    day: 30,
-    weekdayIndex: 1,
-    cycleDay: 2,
-    uniformType: 'uniform',
-    event: null,
-  },
+  { dateStr: '2026-11-26', year: 2026, month: 11, day: 26, weekdayIndex: 4, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-27', year: 2026, month: 11, day: 27, weekdayIndex: 5, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-11-28', year: 2026, month: 11, day: 28, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-11-29', year: 2026, month: 11, day: 29, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-11-30', year: 2026, month: 11, day: 30, weekdayIndex: 1, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
 
   // ==========================================
   // 2026年 12月 (December 2026)
   // ==========================================
-  {
-    dateStr: '2026-12-01',
-    year: 2026,
-    month: 12,
-    day: 1,
-    weekdayIndex: 2,
-    cycleDay: 3,
-    uniformType: 'pe',
-    event: null,
+  { dateStr: '2026-12-01', year: 2026, month: 12, day: 1, weekdayIndex: 2, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-12-02', year: 2026, month: 12, day: 2, weekdayIndex: 3, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-12-03', year: 2026, month: 12, day: 3, weekdayIndex: 4, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2026-12-04', year: 2026, month: 12, day: 4, weekdayIndex: 5, cycleDay: 6, isHoliday: false, isWeekend: false,
+    event: { zh: '泰國父親節慶祝活動', en: 'National Father\'s Day Celebrations', th: 'กิจกรรมวันพ่อแห่งชาติ (Father\'s Day)' }
   },
-  {
-    dateStr: '2026-12-02',
-    year: 2026,
-    month: 12,
-    day: 2,
-    weekdayIndex: 3,
-    cycleDay: 4,
-    uniformType: 'uniform',
-    event: null,
+  { dateStr: '2026-12-05', year: 2026, month: 12, day: 5, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-12-06', year: 2026, month: 12, day: 6, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { 
+    dateStr: '2026-12-07', year: 2026, month: 12, day: 7, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false,
+    event: { zh: '泰王九世誕辰紀念日補假 (不上課)', en: 'King Bhumibol Birthday Observed (No School)', th: 'วันหยุดชดเชยวันคล้ายวันพระราชสมภพ ร.9 (ไม่มีเรียน)' }
   },
-  {
-    dateStr: '2026-12-03',
-    year: 2026,
-    month: 12,
-    day: 3,
-    weekdayIndex: 4,
-    cycleDay: 5,
-    uniformType: 'pe_swimming',
-    event: null,
+  { dateStr: '2026-12-08', year: 2026, month: 12, day: 8, weekdayIndex: 2, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-12-09', year: 2026, month: 12, day: 9, weekdayIndex: 3, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-12-10', year: 2026, month: 12, day: 10, weekdayIndex: 4, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2026-12-11', year: 2026, month: 12, day: 11, weekdayIndex: 5, cycleDay: 2, isHoliday: false, isWeekend: false,
+    event: { zh: '第一學期課後社團活動結束', en: 'After School Activities (ASA) End', th: 'สิ้นสุดกิจกรรมหลังเลิกเรียน ภาคเรียนที่ 1' }
   },
-  {
-    dateStr: '2026-12-04',
-    year: 2026,
-    month: 12,
-    day: 4,
-    weekdayIndex: 5,
-    cycleDay: 6,
-    uniformType: 'uniform',
-    event: {
-      zh: '泰國父親節慶祝活動',
-      en: 'National Father\'s Day Celebrations',
-      th: 'กิจกรรมวันพ่อแห่งชาติ (National Father\'s Day)',
-      icon: 'father'
-    }
-  },
-  {
-    dateStr: '2026-12-05',
-    year: 2026,
-    month: 12,
-    day: 5,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-06',
-    year: 2026,
-    month: 12,
-    day: 6,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-07',
-    year: 2026,
-    month: 12,
-    day: 7,
-    weekdayIndex: 1,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '泰王九世誕辰紀念日補假 (不上課)',
-      en: 'King Bhumibol Birthday Observed (No School)',
-      th: 'วันหยุดชดเชยวันคล้ายวันพระราชสมภพ ร.9 (ไม่มีเรียน)',
-      icon: 'royal'
-    }
-  },
-  {
-    dateStr: '2026-12-08',
-    year: 2026,
-    month: 12,
-    day: 8,
-    weekdayIndex: 2,
-    cycleDay: 7,
-    uniformType: 'house_shirt',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-09',
-    year: 2026,
-    month: 12,
-    day: 9,
-    weekdayIndex: 3,
-    cycleDay: 8,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-10',
-    year: 2026,
-    month: 12,
-    day: 10,
-    weekdayIndex: 4,
-    cycleDay: 1,
-    uniformType: 'pe',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-11',
-    year: 2026,
-    month: 12,
-    day: 11,
-    weekdayIndex: 5,
-    cycleDay: 2,
-    uniformType: 'uniform',
-    event: {
-      zh: '第一學期課後社團活動結束',
-      en: 'After School Activities (ASA) End',
-      th: 'สิ้นสุดกิจกรรมหลังเลิกเรียน ภาคเรียนที่ 1 (ASA Ends)',
-      icon: 'asa'
-    }
-  },
-  {
-    dateStr: '2026-12-12',
-    year: 2026,
-    month: 12,
-    day: 12,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-13',
-    year: 2026,
-    month: 12,
-    day: 13,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-14',
-    year: 2026,
-    month: 12,
-    day: 14,
-    weekdayIndex: 1,
-    cycleDay: 3,
-    uniformType: 'pe',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-15',
-    year: 2026,
-    month: 12,
-    day: 15,
-    weekdayIndex: 2,
-    cycleDay: 4,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-16',
-    year: 2026,
-    month: 12,
-    day: 16,
-    weekdayIndex: 3,
-    cycleDay: 5,
-    uniformType: 'pe_swimming',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-17',
-    year: 2026,
-    month: 12,
-    day: 17,
-    weekdayIndex: 4,
-    cycleDay: 6,
-    uniformType: 'uniform',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-18',
-    year: 2026,
-    month: 12,
-    day: 18,
-    weekdayIndex: 5,
-    cycleDay: 7,
-    uniformType: 'house_shirt',
-    event: {
-      zh: '聖誕節活動 (中午 12:00 提早放學) / 第一學期結束',
-      en: 'Christmas Celebrations (12:00 Early Dismissal) / End of Semester 1',
-      th: 'กิจกรรมคริสต์มาส (เลิกเรียน 12:00 น.) / ปิดภาคเรียนที่ 1',
-      icon: 'christmas'
-    }
+  { dateStr: '2026-12-12', year: 2026, month: 12, day: 12, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-12-13', year: 2026, month: 12, day: 13, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
+  { dateStr: '2026-12-14', year: 2026, month: 12, day: 14, weekdayIndex: 1, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-12-15', year: 2026, month: 12, day: 15, weekdayIndex: 2, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-12-16', year: 2026, month: 12, day: 16, weekdayIndex: 3, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2026-12-17', year: 2026, month: 12, day: 17, weekdayIndex: 4, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { 
+    dateStr: '2026-12-18', year: 2026, month: 12, day: 18, weekdayIndex: 5, cycleDay: 7, isHoliday: false, isWeekend: false,
+    event: { zh: '聖誕節活動 (中午 12:00 提早放學) / 第一學期結束', en: 'Christmas Celebrations (12:00 Early Dismissal) / End of Semester 1', th: 'กิจกรรมคริสต์มาส (เลิกเรียน 12:00 น.) / ปิดภาคเรียนที่ 1' }
   },
   // Winter Break
-  {
-    dateStr: '2026-12-19',
-    year: 2026,
-    month: 12,
-    day: 19,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '寒假開始 (Winter Break)',
-      en: 'Winter Break Begins',
-      th: 'เริ่มต้นวันหยุดฤดูหนาว (Winter Break)',
-      icon: 'winter'
-    }
-  },
-  {
-    dateStr: '2026-12-20',
-    year: 2026,
-    month: 12,
-    day: 20,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-21',
-    year: 2026,
-    month: 12,
-    day: 21,
-    weekdayIndex: 1,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-22',
-    year: 2026,
-    month: 12,
-    day: 22,
-    weekdayIndex: 2,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-23',
-    year: 2026,
-    month: 12,
-    day: 23,
-    weekdayIndex: 3,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-24',
-    year: 2026,
-    month: 12,
-    day: 24,
-    weekdayIndex: 4,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '平安夜 (Christmas Eve)',
-      en: 'Christmas Eve',
-      th: 'วันคริสต์มาสอีฟ (Christmas Eve)',
-      icon: 'christmas'
-    }
-  },
-  {
-    dateStr: '2026-12-25',
-    year: 2026,
-    month: 12,
-    day: 25,
-    weekdayIndex: 5,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '聖誕節 (Christmas Day)',
-      en: 'Christmas Day',
-      th: 'วันคริสต์มาส (Christmas Day)',
-      icon: 'christmas'
-    }
-  },
-  {
-    dateStr: '2026-12-26',
-    year: 2026,
-    month: 12,
-    day: 26,
-    weekdayIndex: 6,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-27',
-    year: 2026,
-    month: 12,
-    day: 27,
-    weekdayIndex: 0,
-    cycleDay: null,
-    uniformType: 'weekend',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-28',
-    year: 2026,
-    month: 12,
-    day: 28,
-    weekdayIndex: 1,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-29',
-    year: 2026,
-    month: 12,
-    day: 29,
-    weekdayIndex: 2,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-30',
-    year: 2026,
-    month: 12,
-    day: 30,
-    weekdayIndex: 3,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: null,
-  },
-  {
-    dateStr: '2026-12-31',
-    year: 2026,
-    month: 12,
-    day: 31,
-    weekdayIndex: 4,
-    cycleDay: null,
-    uniformType: 'holiday',
-    event: {
-      zh: '跨年夜 (New Year\'s Eve)',
-      en: 'New Year\'s Eve',
-      th: 'วันสิ้นปี (New Year\'s Eve)',
-      icon: 'winter'
-    }
-  }
+  { dateStr: '2026-12-19', year: 2026, month: 12, day: 19, weekdayIndex: 6, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '寒假開始 (Winter Break)', en: 'Winter Break Begins', th: 'เริ่มต้นวันหยุดฤดูหนาว' } },
+  { dateStr: '2026-12-20', year: 2026, month: 12, day: 20, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: false, event: null },
+  { dateStr: '2026-12-21', year: 2026, month: 12, day: 21, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false, event: null },
+  { dateStr: '2026-12-22', year: 2026, month: 12, day: 22, weekdayIndex: 2, cycleDay: null, isHoliday: true, isWeekend: false, event: null },
+  { dateStr: '2026-12-23', year: 2026, month: 12, day: 23, weekdayIndex: 3, cycleDay: null, isHoliday: true, isWeekend: false, event: null },
+  { dateStr: '2026-12-24', year: 2026, month: 12, day: 24, weekdayIndex: 4, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '平安夜 (Christmas Eve)', en: 'Christmas Eve', th: 'วันคริสต์มาสอีฟ' } },
+  { dateStr: '2026-12-25', year: 2026, month: 12, day: 25, weekdayIndex: 5, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '聖誕節 (Christmas Day)', en: 'Christmas Day', th: 'วันคริสต์มาส' } },
+  { dateStr: '2026-12-26', year: 2026, month: 12, day: 26, weekdayIndex: 6, cycleDay: null, isHoliday: true, isWeekend: false, event: null },
+  { dateStr: '2026-12-27', year: 2026, month: 12, day: 27, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: false, event: null },
+  { dateStr: '2026-12-28', year: 2026, month: 12, day: 28, weekdayIndex: 1, cycleDay: null, isHoliday: true, isWeekend: false, event: null },
+  { dateStr: '2026-12-29', year: 2026, month: 12, day: 29, weekdayIndex: 2, cycleDay: null, isHoliday: true, isWeekend: false, event: null },
+  { dateStr: '2026-12-30', year: 2026, month: 12, day: 30, weekdayIndex: 3, cycleDay: null, isHoliday: true, isWeekend: false, event: null },
+  { dateStr: '2026-12-31', year: 2026, month: 12, day: 31, weekdayIndex: 4, cycleDay: null, isHoliday: true, isWeekend: false, event: { zh: '跨年夜 (New Year\'s Eve)', en: 'New Year\'s Eve', th: 'วันสิ้นปี' } }
 ];
+
+/**
+ * Dynamic Schedule Builder
+ * Generates the full 3-month calendar dynamically according to the active class's 8-day cycle config
+ * Note: Day 7 is STRICTLY FIXED as 'house_shirt' for all classes.
+ */
+export function buildDynamicCalendar(classConfig) {
+  const daysMapping = classConfig?.days || classPresets.odd_pe.days;
+  const swimmingDay = classConfig?.swimmingDay !== undefined ? classConfig.swimmingDay : 5;
+
+  return rawCalendarStructure.map((item) => {
+    if (item.isHoliday) {
+      return { ...item, uniformType: 'holiday' };
+    }
+    if (item.isWeekend) {
+      return { ...item, uniformType: 'weekend' };
+    }
+
+    if (item.cycleDay) {
+      // Day 7 is ALWAYS fixed as House Shirt!
+      if (item.cycleDay === 7) {
+        return { ...item, uniformType: 'house_shirt' };
+      }
+
+      // If this cycle day is designated as swimming day
+      if (item.cycleDay === swimmingDay) {
+        return { ...item, uniformType: 'pe_swimming' };
+      }
+
+      // Check class mapping for this day
+      const mappedUniform = daysMapping[item.cycleDay] || (item.cycleDay % 2 === 1 ? 'pe' : 'uniform');
+      return { ...item, uniformType: mappedUniform };
+    }
+
+    return { ...item, uniformType: 'weekend' };
+  });
+}

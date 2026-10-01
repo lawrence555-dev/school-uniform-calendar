@@ -1,7 +1,7 @@
 export const translations = {
   zh: {
     appTitle: '學校行事曆與著裝穿搭通知',
-    appSubtitle: '每日穿著提醒 ✕ 輪替週期 ✕ 節慶活動',
+    appSubtitle: '每日穿著提醒 ✕ 班級自訂輪替 ✕ 節慶活動',
     todayDressCode: '今日著裝通知',
     tomorrowDressCode: '明日著裝預告',
     todayIs: '今天是',
@@ -12,15 +12,32 @@ export const translations = {
     weekend: '週末放假',
     prepReminder: '出門裝備清單',
     
+    // Class Configuration
+    classConfigBtn: '班級穿著設定',
+    classConfigTitle: '設定您孩子班級的 8 日穿著週期',
+    classConfigSubtitle: 'Day 7 恆定為學院服；奇數/偶數天體育課可依班級自由設定',
+    activeClassSetting: '目前班級課表',
+    changeSetting: '切換班級設定',
+    presetOdd: '奇數日體育組 (Day 1, 3, 5 體育/游泳)',
+    presetOddDesc: 'D1 體育 ｜ D2 校服 ｜ D3 體育 ｜ D4 校服 ｜ D5 體育+游泳 ｜ D6 校服 ｜ D7 學院服 ｜ D8 校服',
+    presetEven: '偶數日體育組 (Day 2, 4, 6 體育/游泳)',
+    presetEvenDesc: 'D1 校服 ｜ D2 體育 ｜ D3 校服 ｜ D4 體育 ｜ D5 校服 ｜ D6 體育+游泳 ｜ D7 學院服 ｜ D8 體育',
+    presetCustom: '自訂 8 日輪替 (Custom)',
+    presetCustomDesc: '手動為 Day 1～Day 8 指定穿著與游泳日',
+    applySetting: '儲存並套用課表',
+    fixedHouseNote: '🔒 Day 7 為全校固定「學院服日」，不可更動。',
+    swimmingDayLabel: '哪一天需要帶「游泳裝備」？',
+    noSwimming: '無游泳課',
+
     // Uniform Types
-    houseShirt: '學院服',
-    houseShirtDesc: '著所屬學院顏色T恤 ＋ 運動褲/短褲 ＋ 運動鞋',
-    uniform: '一般校服',
+    houseShirt: '學院服 (House Shirt)',
+    houseShirtDesc: '著所屬學院代表色 T 恤 ＋ 運動褲/短褲 ＋ 運動鞋',
+    uniform: '一般校服 (Uniform)',
     uniformDesc: '標準短袖制服上衣 ＋ 學校制服褲/裙 ＋ 皮鞋/黑白襪',
-    pe: '體育服 (PE)',
-    peDesc: '學校運動短袖T恤 ＋ 運動短褲 ＋ 專業運動鞋',
-    peSwimming: '體育服 ＋ 游泳裝備',
-    peSwimmingDesc: '穿著體育服，並攜帶專用防水袋（泳衣/泳褲、泳帽、泳鏡、浴巾）',
+    pe: '體育服 (PE Kit)',
+    peDesc: '學校運動短袖 T 恤 ＋ 運動短褲 ＋ 專業運動鞋',
+    peSwimming: '體育服 ＋ 游泳裝備 (PE + Swim)',
+    peSwimmingDesc: '穿著體育服，並攜帶防水袋（泳衣、泳帽、泳鏡、浴巾）',
     holiday: '假期不上課',
     holidayDesc: '今日學校放假，學生無需到校',
 
@@ -43,8 +60,6 @@ export const translations = {
     prevMonth: '上個月',
     nextMonth: '下個月',
     selectDateToView: '點擊日期查看穿搭與活動細節',
-    uniformGuideBtn: '制服穿搭圖文指南',
-    guideTitle: '各類型制服穿搭與攜帶清單',
     close: '關閉',
     quickSummary: '當月統計',
     daysCount: '天',
@@ -60,7 +75,7 @@ export const translations = {
 
   en: {
     appTitle: 'School Calendar & Daily Uniform Guide',
-    appSubtitle: 'Daily Dress Code Alerts ✕ Cycle Days ✕ School Events',
+    appSubtitle: 'Daily Dress Code Alerts ✕ Dynamic Class Cycle ✕ School Events',
     todayDressCode: "Today's Dress Code",
     tomorrowDressCode: "Tomorrow's Dress Code",
     todayIs: 'Today is',
@@ -70,6 +85,23 @@ export const translations = {
     noSchool: 'No School / Holiday',
     weekend: 'Weekend',
     prepReminder: 'Packing Checklist',
+
+    // Class Configuration
+    classConfigBtn: 'Class Setup',
+    classConfigTitle: 'Set Your Child\'s 8-Day Uniform Cycle',
+    classConfigSubtitle: 'Day 7 is fixed as House Shirt. Configure PE & swimming days according to class group.',
+    activeClassSetting: 'Active Class Group',
+    changeSetting: 'Change Setup',
+    presetOdd: 'Odd Days PE Group (Days 1, 3, 5 PE/Swim)',
+    presetOddDesc: 'D1: PE | D2: Uniform | D3: PE | D4: Uniform | D5: PE+Swim | D6: Uniform | D7: House Shirt | D8: Uniform',
+    presetEven: 'Even Days PE Group (Days 2, 4, 6 PE/Swim)',
+    presetEvenDesc: 'D1: Uniform | D2: PE | D3: Uniform | D4: PE | D5: Uniform | D6: PE+Swim | D7: House Shirt | D8: PE',
+    presetCustom: 'Custom 8-Day Schedule',
+    presetCustomDesc: 'Manually choose dress code and swimming day for each cycle day.',
+    applySetting: 'Save & Update Schedule',
+    fixedHouseNote: '🔒 Day 7 is fixed school-wide as House Shirt Day.',
+    swimmingDayLabel: 'Which cycle day has Swimming?',
+    noSwimming: 'No Swimming',
 
     // Uniform Types
     houseShirt: 'House Shirt',
@@ -102,8 +134,6 @@ export const translations = {
     prevMonth: 'Prev Month',
     nextMonth: 'Next Month',
     selectDateToView: 'Tap any date for full uniform details & schedule',
-    uniformGuideBtn: 'Uniform Dress Guide',
-    guideTitle: 'Uniform Guidelines & Equipment Checklist',
     close: 'Close',
     quickSummary: 'Monthly Summary',
     daysCount: 'days',
@@ -119,7 +149,7 @@ export const translations = {
 
   th: {
     appTitle: 'ปฏิทินโรงเรียนและการแต่งกายประจำวัน',
-    appSubtitle: 'แจ้งเตือนชุดที่ต้องใส่ ✕ รอบวันเรียน ✕ กิจกรรมสำคัญ',
+    appSubtitle: 'แจ้งเตือนชุดที่ต้องใส่ ✕ กำหนดตามห้องเรียน ✕ กิจกรรมสำคัญ',
     todayDressCode: 'การแต่งกายประจำวันนี้',
     tomorrowDressCode: 'การแต่งกายวันพรุ่งนี้',
     todayIs: 'วันนี้คือ',
@@ -129,6 +159,23 @@ export const translations = {
     noSchool: 'วันหยุด (ไม่มีเรียน)',
     weekend: 'วันหยุดสุดสัปดาห์',
     prepReminder: 'สิ่งที่ต้องเตรียมใส่กระเป๋า',
+
+    // Class Configuration
+    classConfigBtn: 'ตั้งค่าห้องเรียน',
+    classConfigTitle: 'ตั้งค่ารอบการแต่งกาย 8 วันของห้องเรียน',
+    classConfigSubtitle: 'Day 7 สวมเสื้อประจำบ้านเสมอ สามารถปรับวันเรียนพละและว่ายน้ำได้ตามห้องเรียน',
+    activeClassSetting: 'กลุ่มห้องเรียนปัจจุบัน',
+    changeSetting: 'เปลี่ยนการตั้งค่า',
+    presetOdd: 'กลุ่มวันคี่เรียนพละ (Day 1, 3, 5)',
+    presetOddDesc: 'D1: พละ | D2: นักเรียน | D3: พละ | D4: นักเรียน | D5: พละ+ว่ายน้ำ | D6: นักเรียน | D7: เสื้อบ้าน | D8: นักเรียน',
+    presetEven: 'กลุ่มวันคู่เรียนพละ (Day 2, 4, 6)',
+    presetEvenDesc: 'D1: นักเรียน | D2: พละ | D3: นักเรียน | D4: พละ | D5: นักเรียน | D6: พละ+ว่ายน้ำ | D7: เสื้อบ้าน | D8: พละ',
+    presetCustom: 'กำหนดเอง 8 วัน (Custom)',
+    presetCustomDesc: 'เลือกชุดที่ต้องใส่และวันว่ายน้ำสำหรับแต่ละวัน Day 1 ถึง Day 8 ด้วยตนเอง',
+    applySetting: 'บันทึกและใช้งานปฏิทิน',
+    fixedHouseNote: '🔒 Day 7 เป็นวันใส่เสื้อประจำบ้านของทั้งโรงเรียน (แก้ไขไม่ได้)',
+    swimmingDayLabel: 'วัน Day ใดที่มีคาบเรียนว่ายน้ำ?',
+    noSwimming: 'ไม่มีว่ายน้ำ',
 
     // Uniform Types
     houseShirt: 'เสื้อประจำบ้าน (House Shirt)',
@@ -161,8 +208,6 @@ export const translations = {
     prevMonth: 'เดือนก่อนหน้า',
     nextMonth: 'เดือนถัดไป',
     selectDateToView: 'แตะที่วันที่เพื่อดูรายละเอียดการแต่งกายและกิจกรรม',
-    uniformGuideBtn: 'คู่มือการแต่งกายนักเรียน',
-    guideTitle: 'คำแนะนำการแต่งกายและอุปกรณ์ที่ต้องเตรียม',
     close: 'ปิด',
     quickSummary: 'สรุปประจำเดือน',
     daysCount: 'วัน',

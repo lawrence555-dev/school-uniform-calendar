@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Calendar as CalendarIcon, 
   Shirt, 
   Sparkles, 
-  BookOpen, 
+  Settings2, 
   List, 
   CheckCircle2, 
   Waves, 
@@ -11,7 +11,8 @@ import {
   Activity, 
   Sun,
   ChevronRight,
-  Info
+  Info,
+  Lock
 } from 'lucide-react';
 import HeaderNavbar from './components/HeaderNavbar';
 import TodayHeroBanner from './components/TodayHeroBanner';
@@ -19,9 +20,11 @@ import MonthSelector from './components/MonthSelector';
 import CalendarGridView from './components/CalendarGridView';
 import ScheduleListView from './components/ScheduleListView';
 import FilterBar from './components/FilterBar';
-import UniformGuideModal from './components/UniformGuideModal';
+import ClassConfigModal from './components/ClassConfigModal';
 import { translations } from './translations/i18n';
-import { calendarSchedule, uniformMeta } from './data/calendarData';
+import { classPresets, buildDynamicCalendar, uniformMeta } from './data/calendarData';
+
+const STORAGE_KEY = 'school_class_uniform_config';
 
 export default function App() {
   const [lang, setLang] = useState('zh');
@@ -29,7 +32,38 @@ export default function App() {
   const [selectedDateStr, setSelectedDateStr] = useState('2026-10-01');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'list'
   const [filterType, setFilterType] = useState('all');
-  const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
+
+  // Initialize Class Configuration from localStorage, or default to odd_pe
+  const [classConfig, setClassConfig] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (e) {
+      console.warn('Failed to load class configuration:', e);
+    }
+    return classPresets.odd_pe;
+  });
+
+  // Prompt user to configure class schedule on first open if never set
+  useEffect(() => {
+    try {
+      const hasConfigured = localStorage.getItem(STORAGE_KEY);
+      if (!hasConfigured) {
+        // Automatically open the class setup modal on first visit
+        setIsConfigModalOpen(true);
+      }
+    } catch (e) {
+      // ignore localStorage errors in restricted environments
+    }
+  }, []);
+
+  // Dynamically generate the 3-month schedule based on active classConfig
+  const calendarSchedule = useMemo(() => {
+    return buildDynamicCalendar(classConfig);
+  }, [classConfig]);
 
   // When selectedDateStr changes, keep selectedMonth in sync
   useEffect(() => {
@@ -37,7 +71,16 @@ export default function App() {
     if (item && item.month !== selectedMonth) {
       setSelectedMonth(item.month);
     }
-  }, [selectedDateStr]);
+  }, [selectedDateStr, calendarSchedule, selectedMonth]);
+
+  const handleSaveClassConfig = (newConfig) => {
+    setClassConfig(newConfig);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newConfig));
+    } catch (e) {
+      console.warn('Failed to persist class config:', e);
+    }
+  };
 
   const t = translations[lang] || translations.zh;
 
@@ -47,19 +90,22 @@ export default function App() {
       <HeaderNavbar 
         lang={lang} 
         setLang={setLang} 
-        onOpenGuide={() => setIsGuideOpen(true)} 
+        onOpenClassConfig={() => setIsConfigModalOpen(true)}
+        classConfig={classConfig}
       />
 
       {/* Main Container (Mobile First, max-w-3xl) */}
       <main className="max-w-3xl mx-auto px-3.5 sm:px-6 py-5 sm:py-8 space-y-6">
         
-        {/* Prominent Live Dress Code Hero Banner (Defaults to 2026-10-01 Day 7 ➔ House Shirt) */}
+        {/* Prominent Live Dress Code Hero Banner */}
         <section>
           <TodayHeroBanner
             selectedDateStr={selectedDateStr}
             setSelectedDateStr={setSelectedDateStr}
+            calendarSchedule={calendarSchedule}
+            classConfig={classConfig}
+            onOpenClassConfig={() => setIsConfigModalOpen(true)}
             lang={lang}
-            onOpenGuide={() => setIsGuideOpen(true)}
           />
         </section>
 
@@ -70,6 +116,7 @@ export default function App() {
             setSelectedMonth={setSelectedMonth}
             viewMode={viewMode}
             setViewMode={setViewMode}
+            calendarSchedule={calendarSchedule}
             lang={lang}
           />
         </section>
@@ -87,6 +134,7 @@ export default function App() {
         <section className="animate-fadeIn">
           {viewMode === 'grid' ? (
             <CalendarGridView
+              calendarSchedule={calendarSchedule}
               selectedMonth={selectedMonth}
               selectedDateStr={selectedDateStr}
               setSelectedDateStr={setSelectedDateStr}
@@ -95,6 +143,7 @@ export default function App() {
             />
           ) : (
             <ScheduleListView
+              calendarSchedule={calendarSchedule}
               selectedMonth={selectedMonth}
               selectedDateStr={selectedDateStr}
               setSelectedDateStr={setSelectedDateStr}
@@ -104,47 +153,62 @@ export default function App() {
           )}
         </section>
 
-        {/* Quick Uniform Legend Card */}
+        {/* Quick Uniform Legend Card with Class Setup Trigger */}
         <section className="glass-card rounded-2xl p-4 border border-slate-800/80 shadow-lg text-xs text-slate-400 space-y-2.5">
           <div className="flex items-center justify-between">
             <span className="font-bold text-slate-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
               <Info className="w-3.5 h-3.5 text-blue-400" />
-              <span>{lang === 'zh' ? '制服顏色標示' : lang === 'th' ? 'สัญลักษณ์สีเครื่องแบบ' : 'Uniform Color Legend'}</span>
+              <span>{lang === 'zh' ? '著裝顏色說明' : lang === 'th' ? 'สัญลักษณ์สีการแต่งกาย' : 'Uniform Color Guide'}</span>
             </span>
             <button
-              onClick={() => setIsGuideOpen(true)}
-              className="text-blue-400 hover:text-blue-300 font-bold hover:underline"
+              onClick={() => setIsConfigModalOpen(true)}
+              className="text-blue-400 hover:text-blue-300 font-bold hover:underline flex items-center gap-1 tap-effect"
             >
-              {t.uniformGuideBtn} ➔
+              <Settings2 className="w-3 h-3" />
+              <span>{t.classConfigBtn} ➔</span>
             </button>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-            <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div className="flex items-center gap-2 p-2 rounded-xl bg-amber-950/20 border border-amber-500/30">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-400 flex-shrink-0" />
-              <span className="text-slate-300 truncate">{t.houseShirt} (Day 7)</span>
+              <div className="truncate">
+                <span className="text-amber-300 font-bold">{t.houseShirt}</span>
+                <span className="text-[10px] text-amber-400/80 block">Day 7 (🔒 固定)</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div className="flex items-center gap-2 p-2 rounded-xl bg-blue-950/20 border border-blue-500/30">
               <span className="w-2.5 h-2.5 rounded-full bg-blue-400 flex-shrink-0" />
-              <span className="text-slate-300 truncate">{t.uniform} (Day 2/4/6/8)</span>
+              <div className="truncate">
+                <span className="text-blue-300 font-bold">{t.uniform}</span>
+                <span className="text-[10px] text-blue-400/80 block">{lang === 'zh' ? '校服日' : lang === 'th' ? 'ชุดนักเรียน' : 'Uniform Days'}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div className="flex items-center gap-2 p-2 rounded-xl bg-emerald-950/20 border border-emerald-500/30">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 flex-shrink-0" />
-              <span className="text-slate-300 truncate">{t.pe} (Day 1/3)</span>
+              <div className="truncate">
+                <span className="text-emerald-300 font-bold">{t.pe}</span>
+                <span className="text-[10px] text-emerald-400/80 block">{lang === 'zh' ? '體育課日' : lang === 'th' ? 'เรียนพละ' : 'PE Days'}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div className="flex items-center gap-2 p-2 rounded-xl bg-cyan-950/20 border border-cyan-500/30">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 flex-shrink-0" />
-              <span className="text-slate-300 truncate">{t.peSwimming} (Day 5)</span>
+              <div className="truncate">
+                <span className="text-cyan-300 font-bold">{t.peSwimming}</span>
+                <span className="text-[10px] text-cyan-400/80 block">{lang === 'zh' ? '體育+游泳' : lang === 'th' ? 'พละ+ว่ายน้ำ' : 'PE & Swimming'}</span>
+              </div>
             </div>
           </div>
         </section>
 
       </main>
 
-      {/* Uniform Guide Modal */}
-      <UniformGuideModal
-        isOpen={isGuideOpen}
-        onClose={() => setIsGuideOpen(false)}
+      {/* Dynamic Class Configuration Setup Modal */}
+      <ClassConfigModal
+        isOpen={isConfigModalOpen}
+        onClose={() => setIsConfigModalOpen(false)}
+        classConfig={classConfig}
+        onSaveConfig={handleSaveClassConfig}
         lang={lang}
       />
 

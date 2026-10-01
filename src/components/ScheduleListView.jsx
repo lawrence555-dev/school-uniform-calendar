@@ -6,15 +6,16 @@ import {
   Flame, 
   Sun, 
   Calendar, 
-  PartyPopper,
-  CheckCircle2,
-  Sparkles,
-  Luggage
+  PartyPopper, 
+  CheckCircle2, 
+  Sparkles, 
+  Lock 
 } from 'lucide-react';
 import { translations } from '../translations/i18n';
-import { uniformMeta, calendarSchedule } from '../data/calendarData';
+import { uniformMeta } from '../data/calendarData';
 
 export default function ScheduleListView({
+  calendarSchedule,
   selectedMonth,
   selectedDateStr,
   setSelectedDateStr,
@@ -23,7 +24,8 @@ export default function ScheduleListView({
 }) {
   const t = translations[lang] || translations.zh;
 
-  const monthItems = calendarSchedule.filter((d) => d.month === selectedMonth);
+  const scheduleList = calendarSchedule || [];
+  const monthItems = scheduleList.filter((d) => d.month === selectedMonth);
 
   const getUniformIcon = (type) => {
     switch (type) {
@@ -113,7 +115,11 @@ export default function ScheduleListView({
                       </span>
                     )}
                     {item.cycleDay && (
-                      <span className="px-2 py-0.2 rounded text-[10px] font-mono font-bold bg-slate-800 text-amber-300 border border-slate-700">
+                      <span className={`px-2 py-0.2 rounded text-[10px] font-mono font-bold border ${
+                        item.cycleDay === 7
+                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                          : 'bg-slate-800 text-slate-300 border-slate-700'
+                      }`}>
                         DAY {item.cycleDay}
                       </span>
                     )}
