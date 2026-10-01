@@ -20,10 +20,12 @@ export default function ScheduleListView({
   selectedMonth,
   selectedDateStr,
   setSelectedDateStr,
+  todayDateStr,
   filterType,
   lang
 }) {
   const t = translations[lang] || translations.zh;
+  const currentTodayStr = todayDateStr || '2026-10-01';
 
   const scheduleList = calendarSchedule || [];
   const monthItems = scheduleList.filter((d) => d.month === selectedMonth);
@@ -82,7 +84,7 @@ export default function ScheduleListView({
     <div className="space-y-3">
       {filteredItems.map((item) => {
         const isSelected = item.dateStr === selectedDateStr;
-        const isToday = item.dateStr === '2026-10-01';
+        const isToday = item.dateStr === currentTodayStr;
         const meta = uniformMeta[item.uniformType] || uniformMeta.uniform;
         const isSwimDay = item.hasSwimming || item.uniformType === 'pe_swimming' || item.uniformType === 'uniform_swimming';
 

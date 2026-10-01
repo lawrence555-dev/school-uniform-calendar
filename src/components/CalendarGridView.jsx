@@ -16,10 +16,12 @@ export default function CalendarGridView({
   selectedMonth,
   selectedDateStr,
   setSelectedDateStr,
+  todayDateStr,
   filterType,
   lang
 }) {
   const t = translations[lang] || translations.zh;
+  const currentTodayStr = todayDateStr || '2026-10-01';
 
   const scheduleList = calendarSchedule || [];
   const monthItems = scheduleList.filter((d) => d.month === selectedMonth);
@@ -98,7 +100,7 @@ export default function CalendarGridView({
         {/* Day Cells */}
         {monthItems.map((item) => {
           const isSelected = item.dateStr === selectedDateStr;
-          const isToday = item.dateStr === '2026-10-01';
+          const isToday = item.dateStr === currentTodayStr;
           const baseAttire = getBaseAttireInfo(item.uniformType);
           const isSwimDay = item.hasSwimming || item.uniformType === 'pe_swimming' || item.uniformType === 'uniform_swimming';
           const matchesFilter = isMatchedFilter(item);

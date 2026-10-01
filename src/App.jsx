@@ -23,14 +23,25 @@ import ScheduleListView from './components/ScheduleListView';
 import FilterBar from './components/FilterBar';
 import ClassConfigModal from './components/ClassConfigModal';
 import { translations } from './translations/i18n';
-import { classPresets, buildDynamicCalendar, uniformMeta } from './data/calendarData';
+import { classPresets, buildDynamicCalendar, uniformMeta, getTodayDateStr } from './data/calendarData';
 
 const STORAGE_KEY = 'school_class_uniform_config_v3';
 
 export default function App() {
   const [lang, setLang] = useState('zh');
-  const [selectedMonth, setSelectedMonth] = useState(10); // 10 = Oct, 11 = Nov, 12 = Dec
-  const [selectedDateStr, setSelectedDateStr] = useState('2026-10-01');
+  
+  // Real today date string (e.g. '2026-10-02')
+  const todayStr = useMemo(() => getTodayDateStr(), []);
+
+  // Determine initial month based on today's month if in school year [10, 11, 12, 1, 2, 3, 4, 5, 6]
+  const initialMonth = useMemo(() => {
+    const todayMonth = new Date().getMonth() + 1;
+    const validMonths = [10, 11, 12, 1, 2, 3, 4, 5, 6];
+    return validMonths.includes(todayMonth) ? todayMonth : 10;
+  }, []);
+
+  const [selectedMonth, setSelectedMonth] = useState(initialMonth);
+  const [selectedDateStr, setSelectedDateStr] = useState(todayStr);
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'list'
   const [filterType, setFilterType] = useState('all');
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
@@ -115,6 +126,7 @@ export default function App() {
             calendarSchedule={calendarSchedule}
             classConfig={classConfig}
             onOpenClassConfig={() => setIsConfigModalOpen(true)}
+            todayDateStr={todayStr}
             lang={lang}
           />
         </section>
@@ -148,6 +160,7 @@ export default function App() {
               selectedMonth={selectedMonth}
               selectedDateStr={selectedDateStr}
               setSelectedDateStr={handleSelectDate}
+              todayDateStr={todayStr}
               filterType={filterType}
               lang={lang}
             />
@@ -157,6 +170,7 @@ export default function App() {
               selectedMonth={selectedMonth}
               selectedDateStr={selectedDateStr}
               setSelectedDateStr={handleSelectDate}
+              todayDateStr={todayStr}
               filterType={filterType}
               lang={lang}
             />

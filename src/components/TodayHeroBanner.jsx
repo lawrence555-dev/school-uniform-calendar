@@ -27,9 +27,11 @@ export default function TodayHeroBanner({
   calendarSchedule,
   classConfig,
   onOpenClassConfig,
+  todayDateStr,
   lang 
 }) {
   const t = translations[lang] || translations.zh;
+  const currentTodayStr = todayDateStr || '2026-10-01';
 
   const currentItem = calendarSchedule.find((d) => d.dateStr === selectedDateStr) || calendarSchedule[0];
   const currentIndex = calendarSchedule.findIndex((d) => d.dateStr === selectedDateStr);
@@ -97,7 +99,7 @@ export default function TodayHeroBanner({
     }
   };
 
-  const isToday = currentItem.dateStr === '2026-10-01';
+  const isToday = currentItem.dateStr === currentTodayStr;
 
   const handlePrevDay = () => {
     if (currentIndex > 0) {
@@ -112,7 +114,7 @@ export default function TodayHeroBanner({
   };
 
   const resetToToday = () => {
-    setSelectedDateStr('2026-10-01');
+    setSelectedDateStr(currentTodayStr);
   };
 
   const activePresetLabel = classConfig?.id === 'even_pe'
@@ -260,7 +262,11 @@ export default function TodayHeroBanner({
                 onClick={resetToToday}
                 className="px-3 py-1 rounded-lg text-[11px] font-bold text-blue-400 hover:text-blue-300 bg-blue-500/10 border border-blue-500/20 transition tap-effect"
               >
-                {lang === 'zh' ? '回到今天 (10/01)' : lang === 'th' ? 'กลับไปวันนี้ (01 ต.ค.)' : 'Back to Today (Oct 1)'}
+                {lang === 'zh'
+                  ? `回到今天 (${currentTodayStr.slice(5).replace('-', '/')})`
+                  : lang === 'th'
+                  ? `กลับไปวันนี้ (${currentTodayStr.slice(5).replace('-', '/')})`
+                  : `Back to Today (${currentTodayStr.slice(5).replace('-', '/')})`}
               </button>
             )}
 
