@@ -234,11 +234,12 @@ export default function App() {
 
       {/* Footer */}
       <footer className="max-w-3xl mx-auto px-4 text-center text-xs text-slate-500 space-y-1.5 pt-6">
-        <div>International School Calendar & Uniform Notifier - 2026 Term 1</div>
+        <div>International School Calendar & Uniform Notifier - 2026 / 2027</div>
         <div className="text-[11px] text-slate-600">
-          October - December 2026 - 8-Day Rotation Cycle - Multi-language Support (EN / TH / 繁中)
+          October 2026 - January 2027 - 8-Day Rotation Cycle - Multi-language Support (EN / TH / 繁中)
         </div>
       </footer>
+
     </div>
   );
 }

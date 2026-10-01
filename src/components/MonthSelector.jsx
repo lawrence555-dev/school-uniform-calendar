@@ -16,7 +16,9 @@ export default function MonthSelector({
     { num: 10, label: t.october },
     { num: 11, label: t.november },
     { num: 12, label: t.december },
+    { num: 1, label: t.january },
   ];
+
 
   // Calculate monthly statistics from dynamic calendarSchedule
   const scheduleList = calendarSchedule || [];
