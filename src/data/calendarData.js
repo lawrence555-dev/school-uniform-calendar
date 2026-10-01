@@ -296,36 +296,36 @@ export const rawCalendarStructure = [
   { dateStr: '2027-01-09', year: 2027, month: 1, day: 9, weekdayIndex: 6, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
   { dateStr: '2027-01-10', year: 2027, month: 1, day: 10, weekdayIndex: 0, cycleDay: null, isHoliday: true, isWeekend: true, event: null },
   { 
-    dateStr: '2027-01-11', year: 2027, month: 1, day: 11, weekdayIndex: 1, cycleDay: 8, isHoliday: false, isWeekend: false, 
+    dateStr: '2027-01-11', year: 2027, month: 1, day: 11, weekdayIndex: 1, cycleDay: 1, isHoliday: false, isWeekend: false, 
     event: { zh: '第三季度 / 第二學期開學 (恢復上課)', en: 'Start of Quarter 3 / Semester 2 (Classes Resume)', th: 'เริ่มต้นไตรมาสที่ 3 / ภาคเรียนที่ 2 (เปิดเรียน)' } 
   },
   { 
-    dateStr: '2027-01-12', year: 2027, month: 1, day: 12, weekdayIndex: 2, cycleDay: 1, isHoliday: false, isWeekend: false, 
+    dateStr: '2027-01-12', year: 2027, month: 1, day: 12, weekdayIndex: 2, cycleDay: 2, isHoliday: false, isWeekend: false, 
     event: { zh: '發放第一學期成績單', en: 'Semester 1 Report Cards Released', th: 'แจกสมุดรายงานผลการเรียน ภาคเรียนที่ 1' } 
   },
-  { dateStr: '2027-01-13', year: 2027, month: 1, day: 13, weekdayIndex: 3, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-13', year: 2027, month: 1, day: 13, weekdayIndex: 3, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
   { 
-    dateStr: '2027-01-14', year: 2027, month: 1, day: 14, weekdayIndex: 4, cycleDay: 3, isHoliday: false, isWeekend: false, 
+    dateStr: '2027-01-14', year: 2027, month: 1, day: 14, weekdayIndex: 4, cycleDay: 4, isHoliday: false, isWeekend: false, 
     event: { zh: '泰國教師節敬師禮慶祝活動', en: 'Wai Khru\' - National Teachers\' Day Celebrations', th: 'พิธีไหว้ครูและกิจกรรมวันครูแห่งชาติ (Wai Khru)' } 
   },
-  { dateStr: '2027-01-15', year: 2027, month: 1, day: 15, weekdayIndex: 5, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-15', year: 2027, month: 1, day: 15, weekdayIndex: 5, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
   { dateStr: '2027-01-16', year: 2027, month: 1, day: 16, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
   { dateStr: '2027-01-17', year: 2027, month: 1, day: 17, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
-  { dateStr: '2027-01-18', year: 2027, month: 1, day: 18, weekdayIndex: 1, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
-  { dateStr: '2027-01-19', year: 2027, month: 1, day: 19, weekdayIndex: 2, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
-  { dateStr: '2027-01-20', year: 2027, month: 1, day: 20, weekdayIndex: 3, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
-  { dateStr: '2027-01-21', year: 2027, month: 1, day: 21, weekdayIndex: 4, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
-  { dateStr: '2027-01-22', year: 2027, month: 1, day: 22, weekdayIndex: 5, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-18', year: 2027, month: 1, day: 18, weekdayIndex: 1, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-19', year: 2027, month: 1, day: 19, weekdayIndex: 2, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-20', year: 2027, month: 1, day: 20, weekdayIndex: 3, cycleDay: 8, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-21', year: 2027, month: 1, day: 21, weekdayIndex: 4, cycleDay: 1, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-22', year: 2027, month: 1, day: 22, weekdayIndex: 5, cycleDay: 2, isHoliday: false, isWeekend: false, event: null },
   { dateStr: '2027-01-23', year: 2027, month: 1, day: 23, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
   { dateStr: '2027-01-24', year: 2027, month: 1, day: 24, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
   { 
-    dateStr: '2027-01-25', year: 2027, month: 1, day: 25, weekdayIndex: 1, cycleDay: 2, isHoliday: false, isWeekend: false, 
+    dateStr: '2027-01-25', year: 2027, month: 1, day: 25, weekdayIndex: 1, cycleDay: 3, isHoliday: false, isWeekend: false, 
     event: { zh: '第二學期課後社團活動 (ASA) 開始', en: '2nd Semester After-School Activities (ASA) Begins', th: 'เริ่มต้นกิจกรรมหลังเลิกเรียน ภาคเรียนที่ 2 (ASA)' } 
   },
-  { dateStr: '2027-01-26', year: 2027, month: 1, day: 26, weekdayIndex: 2, cycleDay: 3, isHoliday: false, isWeekend: false, event: null },
-  { dateStr: '2027-01-27', year: 2027, month: 1, day: 27, weekdayIndex: 3, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
-  { dateStr: '2027-01-28', year: 2027, month: 1, day: 28, weekdayIndex: 4, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
-  { dateStr: '2027-01-29', year: 2027, month: 1, day: 29, weekdayIndex: 5, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-26', year: 2027, month: 1, day: 26, weekdayIndex: 2, cycleDay: 4, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-27', year: 2027, month: 1, day: 27, weekdayIndex: 3, cycleDay: 5, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-28', year: 2027, month: 1, day: 28, weekdayIndex: 4, cycleDay: 6, isHoliday: false, isWeekend: false, event: null },
+  { dateStr: '2027-01-29', year: 2027, month: 1, day: 29, weekdayIndex: 5, cycleDay: 7, isHoliday: false, isWeekend: false, event: null },
   { dateStr: '2027-01-30', year: 2027, month: 1, day: 30, weekdayIndex: 6, cycleDay: null, isHoliday: false, isWeekend: true, event: null },
   { dateStr: '2027-01-31', year: 2027, month: 1, day: 31, weekdayIndex: 0, cycleDay: null, isHoliday: false, isWeekend: true, event: null }
 ];
