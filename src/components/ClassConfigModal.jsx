@@ -10,7 +10,8 @@ import {
   Waves, 
   Sparkles, 
   CheckCircle2,
-  Info
+  Info,
+  CircleOff
 } from 'lucide-react';
 import { translations } from '../translations/i18n';
 import { classPresets, getCycleDayUniform, uniformMeta } from '../data/calendarData';
@@ -31,8 +32,11 @@ export default function ClassConfigModal({
     classConfig?.id === 'even_pe' ? 'even_pe' : 'odd_pe'
   );
   
-  // Swimming day is constrained to Day 4, Day 5, or Day 6
+  // Swimming day is optional: null, 4, 5, or 6
   const [swimmingDay, setSwimmingDay] = useState(() => {
+    if (classConfig?.swimmingDay === null || classConfig?.swimmingDay === 0) {
+      return null;
+    }
     const current = Number(classConfig?.swimmingDay);
     if (current === 4 || current === 5 || current === 6) {
       return current;
@@ -42,18 +46,13 @@ export default function ClassConfigModal({
 
   const handleSelectPreset = (presetId) => {
     setSelectedPresetId(presetId);
-    if (presetId === 'odd_pe' && swimmingDay === 6) {
-      setSwimmingDay(5);
-    } else if (presetId === 'even_pe' && swimmingDay === 5) {
-      setSwimmingDay(6);
-    }
   };
 
   const handleSave = () => {
     const finalConfig = {
       id: selectedPresetId,
       nameKey: selectedPresetId === 'even_pe' ? 'presetEven' : 'presetOdd',
-      swimmingDay: Number(swimmingDay)
+      swimmingDay: swimmingDay !== null ? Number(swimmingDay) : null
     };
 
     onSaveConfig(finalConfig);
@@ -61,7 +60,6 @@ export default function ClassConfigModal({
   };
 
   const cycleDaysList = [1, 2, 3, 4, 5, 6, 7, 8];
-  const swimmingOptions = [4, 5, 6];
 
   const getUniformIcon = (type) => {
     switch (type) {
@@ -196,22 +194,45 @@ export default function ClassConfigModal({
             </div>
           </div>
 
-          {/* Step 2: Swimming Day Selector (Day 4, 5, or 6) */}
+          {/* Step 2: Swimming Day Selector (Optional: No Swimming, Day 4, Day 5, or Day 6) */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <label className="text-xs uppercase font-mono font-bold tracking-wider text-cyan-300 flex items-center gap-1.5">
                 <Waves className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{lang === 'zh' ? '2. 指定游泳課在哪一天（Day 4、Day 5 或 Day 6）' : lang === 'th' ? '2. กำหนดวันว่ายน้ำ (Day 4, Day 5 หรือ Day 6)' : '2. Designate Swimming Day (Day 4, 5, or 6)'}</span>
+                <span>{lang === 'zh' ? '2. 指定游泳課日（選填）' : lang === 'th' ? '2. กำหนดวันว่ายน้ำ (เลือกได้)' : '2. Swimming Day (Optional)'}</span>
               </label>
+              <span className="text-[11px] text-slate-400">
+                {lang === 'zh' ? '若該年級無游泳課可選「無」' : lang === 'th' ? 'เลือกไม่มีได้หากไม่มีเรียน' : 'Optional for older grades'}
+              </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-2.5">
-              {swimmingOptions.map((d) => {
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {/* Option: No Swimming */}
+              <button
+                type="button"
+                onClick={() => setSwimmingDay(null)}
+                className={`p-3 rounded-2xl border transition flex flex-col items-center justify-center gap-1.5 tap-effect ${
+                  swimmingDay === null
+                    ? 'bg-slate-800 border-2 border-slate-500 text-white shadow-lg'
+                    : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-center gap-1 text-xs font-mono font-bold">
+                  <CircleOff className={`w-3.5 h-3.5 ${swimmingDay === null ? 'text-slate-300' : 'text-slate-600'}`} />
+                  <span>NONE</span>
+                </div>
+                <span className="text-[11px] font-semibold text-center truncate w-full">
+                  {t.noSwimmingShort}
+                </span>
+              </button>
+
+              {/* Options: Day 4, Day 5, Day 6 */}
+              {[4, 5, 6].map((d) => {
                 const isSelected = swimmingDay === d;
                 const isOddDay = d % 2 === 1;
                 const baseAttr = selectedPresetId === 'odd_pe'
-                  ? (isOddDay ? '體育服' : '一般校服')
-                  : (isOddDay ? '一般校服' : '體育服');
+                  ? (isOddDay ? '體育' : '校服')
+                  : (isOddDay ? '校服' : '體育');
 
                 return (
                   <button
@@ -228,8 +249,8 @@ export default function ClassConfigModal({
                       <Waves className={`w-3.5 h-3.5 ${isSelected ? 'text-cyan-300' : 'text-slate-500'}`} />
                       <span>DAY {d}</span>
                     </div>
-                    <span className="text-[11px] font-semibold text-center">
-                      {lang === 'zh' ? `穿${baseAttr} + 帶泳袋` : lang === 'th' ? `Day ${d} ว่ายน้ำ` : `Day ${d} Swim`}
+                    <span className="text-[11px] font-semibold text-center truncate w-full">
+                      {lang === 'zh' ? `穿${baseAttr}+帶泳袋` : lang === 'th' ? `Day ${d} ว่ายน้ำ` : `Day ${d} Swim`}
                     </span>
                   </button>
                 );
@@ -259,7 +280,7 @@ export default function ClassConfigModal({
               {cycleDaysList.map((dayNum) => {
                 const uniformType = getCycleDayUniform(dayNum, selectedPresetId, swimmingDay);
                 const isDay7 = dayNum === 7;
-                const isSwim = dayNum === swimmingDay;
+                const isSwim = swimmingDay !== null && dayNum === swimmingDay;
                 const meta = uniformMeta[uniformType] || uniformMeta.uniform;
 
                 return (

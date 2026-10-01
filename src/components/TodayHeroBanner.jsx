@@ -15,7 +15,8 @@ import {
   ChevronRight, 
   ChevronLeft,
   Lock,
-  Luggage
+  Luggage,
+  CircleOff
 } from 'lucide-react';
 import { translations } from '../translations/i18n';
 import { uniformMeta } from '../data/calendarData';
@@ -118,7 +119,8 @@ export default function TodayHeroBanner({
     ? t.presetEven
     : t.presetOdd;
 
-  const swimDayNum = classConfig?.swimmingDay || (classConfig?.id === 'even_pe' ? 6 : 5);
+  const hasSwim = classConfig?.swimmingDay !== null && classConfig?.swimmingDay !== undefined && Number(classConfig?.swimmingDay) > 0;
+  const swimDayNum = hasSwim ? Number(classConfig.swimmingDay) : null;
 
   return (
     <div className="space-y-4">
@@ -128,9 +130,15 @@ export default function TodayHeroBanner({
           <Settings2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
           <span className="text-slate-400">{t.activeClassSetting}:</span>
           <span className="font-bold text-white truncate">{activePresetLabel}</span>
-          <span className="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex-shrink-0">
-            Day {swimDayNum} Swim
-          </span>
+          {swimDayNum ? (
+            <span className="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex-shrink-0">
+              Day {swimDayNum} Swim
+            </span>
+          ) : (
+            <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-slate-800 text-slate-400 border border-slate-700 flex-shrink-0">
+              {t.noSwimmingShort}
+            </span>
+          )}
         </div>
         <button
           onClick={onOpenClassConfig}

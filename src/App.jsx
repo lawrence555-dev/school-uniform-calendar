@@ -12,7 +12,8 @@ import {
   Sun, 
   ChevronRight, 
   Info, 
-  Lock 
+  Lock,
+  CircleOff
 } from 'lucide-react';
 import HeaderNavbar from './components/HeaderNavbar';
 import TodayHeroBanner from './components/TodayHeroBanner';
@@ -24,7 +25,7 @@ import ClassConfigModal from './components/ClassConfigModal';
 import { translations } from './translations/i18n';
 import { classPresets, buildDynamicCalendar, uniformMeta } from './data/calendarData';
 
-const STORAGE_KEY = 'school_class_uniform_config_v2';
+const STORAGE_KEY = 'school_class_uniform_config_v3';
 
 export default function App() {
   const [lang, setLang] = useState('zh');
@@ -86,7 +87,8 @@ export default function App() {
   };
 
   const t = translations[lang] || translations.zh;
-  const swimDayNum = classConfig?.swimmingDay || (classConfig?.id === 'even_pe' ? 6 : 5);
+  const hasSwim = classConfig?.swimmingDay !== null && classConfig?.swimmingDay !== undefined && Number(classConfig?.swimmingDay) > 0;
+  const swimDayNum = hasSwim ? Number(classConfig.swimmingDay) : null;
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-20 font-sans selection:bg-blue-600 selection:text-white">
@@ -199,8 +201,17 @@ export default function App() {
             <div className="flex items-center gap-2 p-2 rounded-xl bg-cyan-950/20 border border-cyan-500/30">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 flex-shrink-0" />
               <div className="truncate">
-                <span className="text-cyan-300 font-bold">{lang === 'zh' ? '攜帶游泳裝備' : lang === 'th' ? 'เตรียมชุดว่ายน้ำ' : 'Swim Gear'}</span>
-                <span className="text-[10px] text-cyan-400/80 block">{lang === 'zh' ? `Day ${swimDayNum} 游泳` : lang === 'th' ? `Day ${swimDayNum} ว่ายน้ำ` : `Day ${swimDayNum} Swim`}</span>
+                {swimDayNum ? (
+                  <>
+                    <span className="text-cyan-300 font-bold">{lang === 'zh' ? '攜帶游泳裝備' : lang === 'th' ? 'เตรียมชุดว่ายน้ำ' : 'Swim Gear'}</span>
+                    <span className="text-[10px] text-cyan-400/80 block">{lang === 'zh' ? `Day ${swimDayNum} 游泳` : lang === 'th' ? `Day ${swimDayNum} ว่ายน้ำ` : `Day ${swimDayNum} Swim`}</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-slate-300 font-bold">{t.noSwimmingShort}</span>
+                    <span className="text-[10px] text-slate-400 block">{lang === 'zh' ? '高年級無泳課' : lang === 'th' ? 'ระดับชั้นโต' : 'Upper Grades'}</span>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -31,7 +31,7 @@ export const uniformMeta = {
   },
   pe: {
     key: 'pe',
-    nameKey: 'pe',
+    nameKey: 'peDesc',
     descKey: 'peDesc',
     color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
     badgeColor: 'bg-emerald-600 text-white font-bold',
@@ -88,10 +88,9 @@ export const classPresets = {
 };
 
 /**
- * Calculates base uniform and swimming combination for any cycle day (1 to 8)
+ * Calculates base uniform and optional swimming combination for any cycle day (1 to 8)
  * Day 7 is ALWAYS fixed as house_shirt.
- * The designated swimming day (Day 4, 5, or 6) keeps the scheduled base attire (Uniform or PE)
- * and adds the extra swim gear requirement!
+ * Swimming day is optional (can be null/none for older students).
  */
 export function getCycleDayUniform(cycleDay, presetId = 'odd_pe', swimmingDay = 5) {
   if (cycleDay === 7) {
@@ -107,8 +106,8 @@ export function getCycleDayUniform(cycleDay, presetId = 'odd_pe', swimmingDay = 
     baseUniform = (cycleDay === 1 || cycleDay === 3 || cycleDay === 5) ? 'pe' : 'uniform';
   }
 
-  // If this day is the designated swimming day
-  if (cycleDay === Number(swimmingDay)) {
+  // If a valid swimming day is designated (Day 4, 5, or 6)
+  if (swimmingDay && Number(swimmingDay) > 0 && cycleDay === Number(swimmingDay)) {
     return baseUniform === 'pe' ? 'pe_swimming' : 'uniform_swimming';
   }
 
@@ -268,12 +267,13 @@ export const rawCalendarStructure = [
 
 /**
  * Dynamic Schedule Builder
- * Generates the full 3-month calendar dynamically according to the active class's preset and swimming day.
+ * Generates the full 3-month calendar dynamically according to the active class's preset and optional swimming day.
  * Note: Day 7 is STRICTLY FIXED as 'house_shirt' for all classes.
  */
 export function buildDynamicCalendar(classConfig) {
   const presetId = classConfig?.id || 'odd_pe';
-  const swimmingDay = classConfig?.swimmingDay !== undefined ? Number(classConfig.swimmingDay) : (presetId === 'odd_pe' ? 5 : 6);
+  const hasValidSwim = classConfig?.swimmingDay !== null && classConfig?.swimmingDay !== undefined && Number(classConfig?.swimmingDay) > 0;
+  const swimmingDay = hasValidSwim ? Number(classConfig.swimmingDay) : null;
 
   return rawCalendarStructure.map((item) => {
     if (item.isHoliday) {
@@ -285,7 +285,7 @@ export function buildDynamicCalendar(classConfig) {
 
     if (item.cycleDay) {
       const uniformType = getCycleDayUniform(item.cycleDay, presetId, swimmingDay);
-      const hasSwimming = item.cycleDay === swimmingDay;
+      const hasSwimming = swimmingDay !== null && item.cycleDay === swimmingDay;
       return { ...item, uniformType, hasSwimming };
     }
 
