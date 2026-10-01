@@ -12,8 +12,8 @@ import {
   Sun, 
   ChevronRight, 
   Info, 
-  Lock,
-  CircleOff
+  Lock, 
+  CircleOff 
 } from 'lucide-react';
 import HeaderNavbar from './components/HeaderNavbar';
 import TodayHeroBanner from './components/TodayHeroBanner';
@@ -69,13 +69,24 @@ export default function App() {
     return buildDynamicCalendar(classConfig);
   }, [classConfig]);
 
-  // When selectedDateStr changes, keep selectedMonth in sync
-  useEffect(() => {
-    const item = calendarSchedule.find((d) => d.dateStr === selectedDateStr);
+  // Handler for switching month tab (10, 11, 12)
+  const handleSelectMonth = (month) => {
+    setSelectedMonth(month);
+    // Automatically select the 1st day of the newly chosen month
+    const firstDay = calendarSchedule.find((d) => d.month === month);
+    if (firstDay) {
+      setSelectedDateStr(firstDay.dateStr);
+    }
+  };
+
+  // Handler for selecting any specific date
+  const handleSelectDate = (dateStr) => {
+    setSelectedDateStr(dateStr);
+    const item = calendarSchedule.find((d) => d.dateStr === dateStr);
     if (item && item.month !== selectedMonth) {
       setSelectedMonth(item.month);
     }
-  }, [selectedDateStr, calendarSchedule, selectedMonth]);
+  };
 
   const handleSaveClassConfig = (newConfig) => {
     setClassConfig(newConfig);
@@ -107,7 +118,7 @@ export default function App() {
         <section>
           <TodayHeroBanner
             selectedDateStr={selectedDateStr}
-            setSelectedDateStr={setSelectedDateStr}
+            setSelectedDateStr={handleSelectDate}
             calendarSchedule={calendarSchedule}
             classConfig={classConfig}
             onOpenClassConfig={() => setIsConfigModalOpen(true)}
@@ -119,7 +130,7 @@ export default function App() {
         <section>
           <MonthSelector
             selectedMonth={selectedMonth}
-            setSelectedMonth={setSelectedMonth}
+            setSelectedMonth={handleSelectMonth}
             viewMode={viewMode}
             setViewMode={setViewMode}
             calendarSchedule={calendarSchedule}
@@ -143,7 +154,7 @@ export default function App() {
               calendarSchedule={calendarSchedule}
               selectedMonth={selectedMonth}
               selectedDateStr={selectedDateStr}
-              setSelectedDateStr={setSelectedDateStr}
+              setSelectedDateStr={handleSelectDate}
               filterType={filterType}
               lang={lang}
             />
@@ -152,7 +163,7 @@ export default function App() {
               calendarSchedule={calendarSchedule}
               selectedMonth={selectedMonth}
               selectedDateStr={selectedDateStr}
-              setSelectedDateStr={setSelectedDateStr}
+              setSelectedDateStr={handleSelectDate}
               filterType={filterType}
               lang={lang}
             />
