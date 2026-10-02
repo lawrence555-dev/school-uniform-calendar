@@ -12,17 +12,18 @@ export const translations = {
     weekend: '週末放假',
     prepReminder: '出門裝備清單',
     
-    // Class Configuration
-    classConfigBtn: '班級穿著設定',
-    classConfigTitle: '設定學生班級 8 日穿著週期',
-    classConfigSubtitle: 'Day 7 全校固定為學院服；游泳課為選填（高年級無泳課可選「無游泳課」）',
-    activeClassSetting: '目前班級設定',
+    // Class & Multi-Child Configuration
+    classConfigBtn: '小孩穿著設定',
+    classConfigTitle: '設定學生 8 日穿著週期與泳課',
+    classConfigSubtitle: '支援多位小孩個別設定（體育日奇/偶週期與游泳課日）；Day 7 全校固定為學院服',
+    activeClassSetting: '目前設定',
     changeSetting: '更換設定',
     presetOdd: '奇數日體育組 (Day 1, 3, 5 體育課)',
     presetOddDesc: 'D1 體育 | D2 校服 | D3 體育 | D4 校服 | D5 體育 | D6 校服 | D7 學院服 | D8 校服',
     presetEven: '偶數日體育組 (Day 2, 4, 6 體育課)',
     presetEvenDesc: 'D1 校服 | D2 體育 | D3 校服 | D4 體育 | D5 校服 | D6 體育 | D7 學院服 | D8 體育',
     applySetting: '儲存並套用課表',
+    saveAllChildren: '儲存所有小孩設定',
     fixedHouseNote: 'Day 7 為全校固定「學院服日」，不可更動。',
     swimmingDayLabel: '游泳課日（選填，若無泳課可選「無」）：',
     swimmingDayNotice: '若有選定游泳日，當天依原課表穿著（校服或體育服），並請額外攜帶游泳裝備袋。',
@@ -30,6 +31,30 @@ export const translations = {
     noSwimmingShort: '無游泳課',
     packSwimGearNotice: '明日有游泳課，請記得另外攜帶泳衣、泳帽與泳鏡。',
     bringSwimGearBadge: '需另帶游泳裝備',
+
+    // Multi-child Management
+    childrenProfiles: '小孩檔案設定',
+    allChildren: '全部小孩',
+    child: '小孩',
+    childTab: '小孩',
+    addChild: '+ 新增小孩',
+    childName: '小孩名稱 / 暱稱',
+    deleteChild: '刪除小孩',
+    maxChildrenReached: '最多可設定 4 位小孩',
+    childThemeColor: '代表色',
+    childSetup: '小孩穿著設定',
+    childrenCount: '位小孩',
+    sameAttireAll: '所有小孩今日穿著相同',
+    differentAttireToday: '多位小孩著裝不同',
+    colorBlue: '湛藍',
+    colorRose: '櫻粉',
+    colorEmerald: '翡翠綠',
+    colorAmber: '金黃',
+    colorPurple: '紫羅蘭',
+    confirmDeleteChild: '確定要刪除這位小孩的設定嗎？',
+    swimmingBagFor: '請為 {name} 準備游泳裝備袋',
+    multiChildNotice: '多位小孩',
+    selectChildToFilter: '切換小孩視圖',
 
     // Uniform Types
     houseShirt: '學院服 (House Shirt)',
@@ -104,7 +129,7 @@ export const translations = {
 
   en: {
     appTitle: 'School Calendar & Daily Uniform Guide',
-    appSubtitle: 'Daily Dress Code Alerts - Dynamic Class Cycle - School Events',
+    appSubtitle: 'Daily Dress Code Alerts - Multi-Child Setup - School Events',
     todayDressCode: "Today's Dress Code",
     tomorrowDressCode: "Tomorrow's Dress Code",
     todayIs: 'Today is',
@@ -115,17 +140,18 @@ export const translations = {
     weekend: 'Weekend',
     prepReminder: 'Packing Checklist',
 
-    // Class Configuration
-    classConfigBtn: 'Class Setup',
-    classConfigTitle: 'Set Student Class 8-Day Uniform Cycle',
-    classConfigSubtitle: 'Day 7 is fixed as House Shirt. Swimming day is optional (select "No Swimming" if grade has no swim).',
-    activeClassSetting: 'Active Class Group',
+    // Class & Multi-Child Configuration
+    classConfigBtn: 'Children Setup',
+    classConfigTitle: 'Set Student 8-Day Uniform Cycle & Swim Days',
+    classConfigSubtitle: 'Supports multi-child custom profiles (Odd/Even PE cycle & swimming day). Day 7 is fixed as House Shirt.',
+    activeClassSetting: 'Active Setup',
     changeSetting: 'Change Setup',
     presetOdd: 'Odd Days PE Group (Days 1, 3, 5 PE)',
     presetOddDesc: 'D1: PE | D2: Uniform | D3: PE | D4: Uniform | D5: PE | D6: Uniform | D7: House Shirt | D8: Uniform',
     presetEven: 'Even Days PE Group (Days 2, 4, 6 PE)',
     presetEvenDesc: 'D1: Uniform | D2: PE | D3: Uniform | D4: PE | D5: Uniform | D6: PE | D7: House Shirt | D8: PE',
     applySetting: 'Save & Update Schedule',
+    saveAllChildren: 'Save All Children Profiles',
     fixedHouseNote: 'Day 7 is fixed school-wide as House Shirt Day.',
     swimmingDayLabel: 'Swimming Day (Optional - select None if no swim class):',
     swimmingDayNotice: 'On swimming day, wear regular scheduled attire (Uniform or PE) and pack swimming bag separately.',
@@ -133,6 +159,30 @@ export const translations = {
     noSwimmingShort: 'No Swimming',
     packSwimGearNotice: 'Swimming class tomorrow. Please remember to pack swim gear bag.',
     bringSwimGearBadge: 'Bring Swim Gear',
+
+    // Multi-child Management
+    childrenProfiles: 'Children Profiles',
+    allChildren: 'All Children',
+    child: 'Child',
+    childTab: 'Child',
+    addChild: '+ Add Child',
+    childName: 'Child Name / Nickname',
+    deleteChild: 'Delete Child',
+    maxChildrenReached: 'Maximum 4 children allowed',
+    childThemeColor: 'Color Theme',
+    childSetup: 'Child Uniform Setup',
+    childrenCount: 'children',
+    sameAttireAll: 'All children wear the same attire today',
+    differentAttireToday: 'Children have different attire today',
+    colorBlue: 'Blue',
+    colorRose: 'Rose',
+    colorEmerald: 'Emerald',
+    colorAmber: 'Amber',
+    colorPurple: 'Purple',
+    confirmDeleteChild: 'Are you sure you want to remove this child profile?',
+    swimmingBagFor: 'Pack swimming bag for {name}',
+    multiChildNotice: 'Multi-Child',
+    selectChildToFilter: 'Switch Child View',
 
     // Uniform Types
     houseShirt: 'House Shirt',
@@ -206,7 +256,7 @@ export const translations = {
 
   th: {
     appTitle: 'ปฏิทินโรงเรียนและการแต่งกายประจำวัน',
-    appSubtitle: 'แจ้งเตือนชุดที่ต้องใส่ - กำหนดตามห้องเรียน - กิจกรรมสำคัญ',
+    appSubtitle: 'แจ้งเตือนชุดที่ต้องใส่ - ตั้งค่ารายบุคคลสำหรับเด็กหลายคน - กิจกรรมสำคัญ',
     todayDressCode: 'การแต่งกายประจำวันนี้',
     tomorrowDressCode: 'การแต่งกายวันพรุ่งนี้',
     todayIs: 'วันนี้คือ',
@@ -217,17 +267,18 @@ export const translations = {
     weekend: 'วันหยุดสุดสัปดาห์',
     prepReminder: 'สิ่งที่ต้องเตรียมใส่กระเป๋า',
 
-    // Class Configuration
-    classConfigBtn: 'ตั้งค่าห้องเรียน',
-    classConfigTitle: 'ตั้งค่ารอบการแต่งกาย 8 วันของห้องเรียน',
-    classConfigSubtitle: 'Day 7 สวมเสื้อประจำบ้านเสมอ คาบว่ายน้ำเป็นตัวเลือก (เลือกว่าไม่มีว่ายน้ำได้สำหรับระดับชั้นโต)',
-    activeClassSetting: 'กลุ่มห้องเรียนปัจจุบัน',
+    // Class & Multi-Child Configuration
+    classConfigBtn: 'ตั้งค่าเด็กๆ',
+    classConfigTitle: 'ตั้งค่ารอบการแต่งกาย 8 วันและวันว่ายน้ำ',
+    classConfigSubtitle: 'รองรับการตั้งค่าแยกรายบุคคลสำหรับเด็ก 1-4 คน (วันคี่/คู่ และวันว่ายน้ำ) Day 7 สวมเสื้อบ้านเสมอ',
+    activeClassSetting: 'การตั้งค่าปัจจุบัน',
     changeSetting: 'เปลี่ยนการตั้งค่า',
     presetOdd: 'กลุ่มวันคี่เรียนพละ (Day 1, 3, 5)',
     presetOddDesc: 'D1: พละ | D2: นักเรียน | D3: พละ | D4: นักเรียน | D5: พละ | D6: นักเรียน | D7: เสื้อบ้าน | D8: นักเรียน',
     presetEven: 'กลุ่มวันคู่เรียนพละ (Day 2, 4, 6)',
     presetEvenDesc: 'D1: นักเรียน | D2: พละ | D3: นักเรียน | D4: พละ | D5: นักเรียน | D6: พละ | D7: เสื้อบ้าน | D8: พละ',
     applySetting: 'บันทึกและใช้งานปฏิทิน',
+    saveAllChildren: 'บันทึกข้อมูลเด็กทุกคน',
     fixedHouseNote: 'Day 7 เป็นวันใส่เสื้อประจำบ้านของทั้งโรงเรียน (แก้ไขไม่ได้)',
     swimmingDayLabel: 'วันเรียนว่ายน้ำ (เลือกได้ หรือเลือก "ไม่มี"):',
     swimmingDayNotice: 'หากมีว่ายน้ำ ให้แต่งกายตามตารางปกติ และเตรียมกระเป๋าชุดว่ายน้ำแยกมาต่างหาก',
@@ -235,6 +286,30 @@ export const translations = {
     noSwimmingShort: 'ไม่มีว่ายน้ำ',
     packSwimGearNotice: 'พรุ่งนี้มีเรียนว่ายน้ำ อย่าลืมเตรียมกระเป๋าชุดว่ายน้ำ แว่นตา และหมวกว่ายน้ำ',
     bringSwimGearBadge: 'เตรียมอุปกรณ์ว่ายน้ำ',
+
+    // Multi-child Management
+    childrenProfiles: 'ตั้งค่าโปรไฟล์เด็ก',
+    allChildren: 'เด็กทุกคน',
+    child: 'เด็ก',
+    childTab: 'เด็ก',
+    addChild: '+ เพิ่มเด็ก',
+    childName: 'ชื่อ / ชื่อเล่นของเด็ก',
+    deleteChild: 'ลบเด็ก',
+    maxChildrenReached: 'ตั้งค่าเด็กได้สูงสุด 4 คน',
+    childThemeColor: 'สีประจำตัว',
+    childSetup: 'การตั้งค่าชุดของเด็ก',
+    childrenCount: 'คน',
+    sameAttireAll: 'เด็กทุกคนแต่งกายเหมือนกันในวันนี้',
+    differentAttireToday: 'เด็กแต่ละคนแต่งกายต่างกันในวันนี้',
+    colorBlue: 'สีฟ้า',
+    colorRose: 'สีชมพู',
+    colorEmerald: 'สีเขียว',
+    colorAmber: 'สีเหลืองทอง',
+    colorPurple: 'สีม่วง',
+    confirmDeleteChild: 'คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลเด็กคนนี้?',
+    swimmingBagFor: 'เตรียมกระเป๋าว่ายน้ำสำหรับ {name}',
+    multiChildNotice: 'เด็กหลายคน',
+    selectChildToFilter: 'เปลี่ยนมุมมองเด็ก',
 
     // Uniform Types
     houseShirt: 'เสื้อประจำบ้าน (House Shirt)',
@@ -307,3 +382,4 @@ export const translations = {
     weekdaysFull: ['วันอาทิตย์', 'วันจันทร์', 'วันอังคาร', 'วันพุธ', 'วันพฤหัสบดี', 'วันศุกร์', 'วันเสาร์'],
   }
 };
+

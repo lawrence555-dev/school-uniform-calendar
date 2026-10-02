@@ -13,7 +13,8 @@ import {
   ChevronRight, 
   Info, 
   Lock, 
-  CircleOff 
+  CircleOff,
+  Users
 } from 'lucide-react';
 import HeaderNavbar from './components/HeaderNavbar';
 import TodayHeroBanner from './components/TodayHeroBanner';
@@ -23,9 +24,17 @@ import ScheduleListView from './components/ScheduleListView';
 import FilterBar from './components/FilterBar';
 import ClassConfigModal from './components/ClassConfigModal';
 import { translations } from './translations/i18n';
-import { classPresets, buildDynamicCalendar, uniformMeta, getTodayDateStr } from './data/calendarData';
+import { 
+  classPresets, 
+  buildDynamicCalendar, 
+  uniformMeta, 
+  getTodayDateStr, 
+  defaultChildrenProfiles,
+  childColorThemes 
+} from './data/calendarData';
 
-const STORAGE_KEY = 'school_class_uniform_config_v3';
+const CHILDREN_STORAGE_KEY = 'school_children_profiles_v1';
+const LEGACY_STORAGE_KEY = 'school_class_uniform_config_v3';
 
 export default function App() {
   const [lang, setLang] = useState('zh');
@@ -46,28 +55,47 @@ export default function App() {
   const [filterType, setFilterType] = useState('all');
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
 
-  // Initialize Class Configuration from localStorage, or default to odd_pe
-  const [classConfig, setClassConfig] = useState(() => {
+  // Initialize Children Profiles from localStorage, with legacy migration support
+  const [childrenProfiles, setChildrenProfiles] = useState(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.id === 'odd_pe' || parsed.id === 'even_pe') {
+      const savedProfiles = localStorage.getItem(CHILDREN_STORAGE_KEY);
+      if (savedProfiles) {
+        const parsed = JSON.parse(savedProfiles);
+        if (Array.isArray(parsed) && parsed.length > 0) {
           return parsed;
         }
       }
+
+      // Check legacy single-child configuration
+      const legacySaved = localStorage.getItem(LEGACY_STORAGE_KEY);
+      if (legacySaved) {
+        const legacyParsed = JSON.parse(legacySaved);
+        if (legacyParsed && (legacyParsed.id === 'odd_pe' || legacyParsed.id === 'even_pe')) {
+          return [
+            {
+              id: 'child_1',
+              name: '大寶 Leo',
+              color: 'blue',
+              presetId: legacyParsed.id,
+              swimmingDay: legacyParsed.swimmingDay ?? 5
+            }
+          ];
+        }
+      }
     } catch (e) {
-      console.warn('Failed to load class configuration:', e);
+      console.warn('Failed to load children profiles from storage:', e);
     }
-    return classPresets.odd_pe;
+    return defaultChildrenProfiles;
   });
 
-  // Prompt user to configure class schedule on first open if never set
+  // Selected Child View Filter: 'all' | specific childId
+  const [selectedChildId, setSelectedChildId] = useState('all');
+
+  // Prompt user to configure children profiles on first open if never set
   useEffect(() => {
     try {
-      const hasConfigured = localStorage.getItem(STORAGE_KEY);
+      const hasConfigured = localStorage.getItem(CHILDREN_STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (!hasConfigured) {
-        // Automatically open the class setup modal on first visit
         setIsConfigModalOpen(true);
       }
     } catch (e) {
@@ -75,35 +103,48 @@ export default function App() {
     }
   }, []);
 
-  // Dynamically generate the 3-month schedule based on active classConfig
-  const calendarSchedule = useMemo(() => {
-    return buildDynamicCalendar(classConfig);
-  }, [classConfig]);
+  // Dynamically compute calendar schedules map for all children
+  const childrenSchedules = useMemo(() => {
+    const map = {};
+    childrenProfiles.forEach((child) => {
+      map[child.id] = buildDynamicCalendar(child);
+    });
+    return map;
+  }, [childrenProfiles]);
 
-  // Handler for switching month tab (10, 11, 12)
-  // Only changes the month view for the calendar/list below, keeping Today/Tomorrow banner unchanged
+  // Primary active schedule for single child mode
+  const activeCalendarSchedule = useMemo(() => {
+    if (selectedChildId !== 'all' && childrenSchedules[selectedChildId]) {
+      return childrenSchedules[selectedChildId];
+    }
+    const firstChildId = childrenProfiles[0]?.id;
+    return (firstChildId && childrenSchedules[firstChildId]) || buildDynamicCalendar(defaultChildrenProfiles[0]);
+  }, [selectedChildId, childrenSchedules, childrenProfiles]);
+
+  // Handlers
   const handleSelectMonth = (month) => {
     setSelectedMonth(month);
   };
 
-  // Handler for selecting any specific date (from date click or date stepper)
   const handleSelectDate = (dateStr) => {
     setSelectedDateStr(dateStr);
   };
 
-
-  const handleSaveClassConfig = (newConfig) => {
-    setClassConfig(newConfig);
+  const handleSaveChildrenProfiles = (newProfiles) => {
+    setChildrenProfiles(newProfiles);
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(newConfig));
+      localStorage.setItem(CHILDREN_STORAGE_KEY, JSON.stringify(newProfiles));
     } catch (e) {
-      console.warn('Failed to persist class config:', e);
+      console.warn('Failed to persist children profiles:', e);
+    }
+
+    // If active selectedChildId is no longer in newProfiles, reset to 'all'
+    if (selectedChildId !== 'all' && !newProfiles.some((p) => p.id === selectedChildId)) {
+      setSelectedChildId('all');
     }
   };
 
   const t = translations[lang] || translations.zh;
-  const hasSwim = classConfig?.swimmingDay !== null && classConfig?.swimmingDay !== undefined && Number(classConfig?.swimmingDay) > 0;
-  const swimDayNum = hasSwim ? Number(classConfig.swimmingDay) : null;
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-20 font-sans selection:bg-blue-600 selection:text-white">
@@ -112,7 +153,7 @@ export default function App() {
         lang={lang} 
         setLang={setLang} 
         onOpenClassConfig={() => setIsConfigModalOpen(true)}
-        classConfig={classConfig}
+        childrenProfiles={childrenProfiles}
       />
 
       {/* Main Container (Mobile First, max-w-3xl) */}
@@ -123,8 +164,10 @@ export default function App() {
           <TodayHeroBanner
             selectedDateStr={selectedDateStr}
             setSelectedDateStr={handleSelectDate}
-            calendarSchedule={calendarSchedule}
-            classConfig={classConfig}
+            calendarSchedule={activeCalendarSchedule}
+            childrenProfiles={childrenProfiles}
+            childrenSchedules={childrenSchedules}
+            selectedChildId={selectedChildId}
             onOpenClassConfig={() => setIsConfigModalOpen(true)}
             todayDateStr={todayStr}
             lang={lang}
@@ -138,7 +181,10 @@ export default function App() {
             setSelectedMonth={handleSelectMonth}
             viewMode={viewMode}
             setViewMode={setViewMode}
-            calendarSchedule={calendarSchedule}
+            calendarSchedule={activeCalendarSchedule}
+            childrenProfiles={childrenProfiles}
+            selectedChildId={selectedChildId}
+            setSelectedChildId={setSelectedChildId}
             lang={lang}
           />
         </section>
@@ -156,7 +202,10 @@ export default function App() {
         <section className="animate-fadeIn">
           {viewMode === 'grid' ? (
             <CalendarGridView
-              calendarSchedule={calendarSchedule}
+              calendarSchedule={activeCalendarSchedule}
+              childrenProfiles={childrenProfiles}
+              childrenSchedules={childrenSchedules}
+              selectedChildId={selectedChildId}
               selectedMonth={selectedMonth}
               selectedDateStr={selectedDateStr}
               setSelectedDateStr={handleSelectDate}
@@ -166,7 +215,10 @@ export default function App() {
             />
           ) : (
             <ScheduleListView
-              calendarSchedule={calendarSchedule}
+              calendarSchedule={activeCalendarSchedule}
+              childrenProfiles={childrenProfiles}
+              childrenSchedules={childrenSchedules}
+              selectedChildId={selectedChildId}
               selectedMonth={selectedMonth}
               selectedDateStr={selectedDateStr}
               setSelectedDateStr={handleSelectDate}
@@ -219,17 +271,8 @@ export default function App() {
             <div className="flex items-center gap-2 p-2 rounded-xl bg-cyan-950/20 border border-cyan-500/30">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 flex-shrink-0" />
               <div className="truncate">
-                {swimDayNum ? (
-                  <>
-                    <span className="text-cyan-300 font-bold">{lang === 'zh' ? '攜帶游泳裝備' : lang === 'th' ? 'เตรียมชุดว่ายน้ำ' : 'Swim Gear'}</span>
-                    <span className="text-[10px] text-cyan-400/80 block">{lang === 'zh' ? `Day ${swimDayNum} 游泳` : lang === 'th' ? `Day ${swimDayNum} ว่ายน้ำ` : `Day ${swimDayNum} Swim`}</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-slate-300 font-bold">{t.noSwimmingShort}</span>
-                    <span className="text-[10px] text-slate-400 block">{lang === 'zh' ? '高年級無泳課' : lang === 'th' ? 'ระดับชั้นโต' : 'Upper Grades'}</span>
-                  </>
-                )}
+                <span className="text-cyan-300 font-bold">{lang === 'zh' ? '攜帶游泳裝備' : lang === 'th' ? 'เตรียมชุดว่ายน้ำ' : 'Swim Gear'}</span>
+                <span className="text-[10px] text-cyan-400/80 block">{lang === 'zh' ? '有泳課之週期日' : lang === 'th' ? 'วันที่มีเรียนว่ายน้ำ' : 'Designated Swim Day'}</span>
               </div>
             </div>
           </div>
@@ -237,12 +280,12 @@ export default function App() {
 
       </main>
 
-      {/* Dynamic Class Configuration Setup Modal */}
+      {/* Dynamic Class & Multi-Child Configuration Setup Modal */}
       <ClassConfigModal
         isOpen={isConfigModalOpen}
         onClose={() => setIsConfigModalOpen(false)}
-        classConfig={classConfig}
-        onSaveConfig={handleSaveClassConfig}
+        childrenProfiles={childrenProfiles}
+        onSaveChildren={handleSaveChildrenProfiles}
         lang={lang}
       />
 
@@ -250,7 +293,7 @@ export default function App() {
       <footer className="max-w-3xl mx-auto px-4 text-center text-xs text-slate-500 space-y-1.5 pt-6">
         <div>International School Calendar & Uniform Notifier - 2026 / 2027</div>
         <div className="text-[11px] text-slate-600">
-          October 2026 - January 2027 - 8-Day Rotation Cycle - Multi-language Support (EN / TH / 繁中)
+          October 2026 - June 2027 - 8-Day Rotation Cycle - Multi-Child Support - Multi-language (EN / TH / 繁中)
         </div>
       </footer>
 

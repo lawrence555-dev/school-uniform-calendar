@@ -1,6 +1,7 @@
 import React from 'react';
-import { Calendar, List, Waves, Flame, Sun, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, List, Waves, Flame, Sun, ChevronLeft, ChevronRight, Users, User } from 'lucide-react';
 import { translations } from '../translations/i18n';
+import { childColorThemes } from '../data/calendarData';
 
 export default function MonthSelector({
   selectedMonth,
@@ -8,6 +9,9 @@ export default function MonthSelector({
   viewMode,
   setViewMode,
   calendarSchedule,
+  childrenProfiles = [],
+  selectedChildId = 'all',
+  setSelectedChildId,
   lang,
 }) {
   const t = translations[lang] || translations.zh;
@@ -51,6 +55,49 @@ export default function MonthSelector({
 
   return (
     <div className="space-y-3">
+      {/* Child Switcher Tabs (Only if > 1 child) */}
+      {childrenProfiles.length > 1 && (
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar p-1.5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm">
+          <button
+            type="button"
+            onClick={() => setSelectedChildId && setSelectedChildId('all')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap tap-effect ${
+              selectedChildId === 'all'
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+            }`}
+          >
+            <Users className="w-3.5 h-3.5" />
+            <span>{t.allChildren}</span>
+            <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+              selectedChildId === 'all' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-400'
+            }`}>
+              {childrenProfiles.length}
+            </span>
+          </button>
+
+          {childrenProfiles.map((child) => {
+            const isSelected = selectedChildId === child.id;
+            const theme = childColorThemes[child.color] || childColorThemes.blue;
+            return (
+              <button
+                key={child.id}
+                type="button"
+                onClick={() => setSelectedChildId && setSelectedChildId(child.id)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap tap-effect border ${
+                  isSelected
+                    ? `${theme.bgLight} ${theme.text} ${theme.border} ring-2 ${theme.ring} shadow-xs`
+                    : 'bg-transparent text-slate-400 border-transparent hover:text-slate-200 hover:bg-slate-800/50'
+                }`}
+              >
+                <span className={`w-2 h-2 rounded-full ${theme.dot}`} />
+                <span>{child.name}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Precision Header & Month Scroller Card */}
       <div className="glass-card rounded-2xl p-3 sm:p-4 border border-slate-800 shadow-xl space-y-3">
         {/* Top Control Bar: Active Month Title with Steppers (Left) + View Switcher (Right) */}

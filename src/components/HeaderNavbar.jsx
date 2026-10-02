@@ -1,8 +1,8 @@
 import React from 'react';
-import { Shirt, Globe, Settings2, Sparkles, Calendar as CalendarIcon } from 'lucide-react';
+import { Shirt, Globe, Settings2, Sparkles, Calendar as CalendarIcon, Users, User } from 'lucide-react';
 import { translations } from '../translations/i18n';
 
-export default function HeaderNavbar({ lang, setLang, onOpenClassConfig, classConfig }) {
+export default function HeaderNavbar({ lang, setLang, onOpenClassConfig, childrenProfiles = [] }) {
   const t = translations[lang] || translations.zh;
 
   const languages = [
@@ -10,6 +10,8 @@ export default function HeaderNavbar({ lang, setLang, onOpenClassConfig, classCo
     { code: 'en', short: 'EN', label: 'EN', full: 'English' },
     { code: 'th', short: 'TH', label: 'ไทย', full: 'ภาษาไทย' },
   ];
+
+  const hasMultipleChildren = childrenProfiles.length > 1;
 
   return (
     <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-slate-800/80">
@@ -34,17 +36,25 @@ export default function HeaderNavbar({ lang, setLang, onOpenClassConfig, classCo
           </div>
         </div>
 
-        {/* Right Actions: Class Setup Button + Language Switcher */}
+        {/* Right Actions: Children Setup Button + Language Switcher */}
         <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-          {/* Class Setup Modal Trigger */}
+          {/* Children Setup Modal Trigger */}
           <button
             onClick={onOpenClassConfig}
             className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600/30 hover:to-indigo-600/30 text-blue-300 border border-blue-500/30 transition shadow-xs tap-effect"
             title={t.classConfigBtn}
           >
-            <Settings2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
-            <span className="hidden sm:inline">{t.classConfigBtn}</span>
-            <span className="sm:hidden">{lang === 'zh' ? '班級' : lang === 'th' ? 'ตั้งค่า' : 'Setup'}</span>
+            {hasMultipleChildren ? (
+              <Users className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
+            ) : (
+              <Settings2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
+            )}
+            <span className="hidden sm:inline">
+              {hasMultipleChildren ? `${childrenProfiles.length} ${t.childrenCount}` : t.classConfigBtn}
+            </span>
+            <span className="sm:hidden">
+              {hasMultipleChildren ? `${childrenProfiles.length}人` : (lang === 'zh' ? '設定' : lang === 'th' ? 'ตั้งค่า' : 'Setup')}
+            </span>
           </button>
 
           {/* Language Selector */}
@@ -69,4 +79,3 @@ export default function HeaderNavbar({ lang, setLang, onOpenClassConfig, classCo
     </header>
   );
 }
-

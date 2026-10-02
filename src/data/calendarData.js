@@ -87,6 +87,80 @@ export const classPresets = {
   }
 };
 
+// Color Themes for Children Profiles
+export const childColorThemes = {
+  blue: {
+    id: 'blue',
+    nameKey: 'colorBlue',
+    colorName: 'blue',
+    bgLight: 'bg-blue-500/20',
+    border: 'border-blue-500/40',
+    text: 'text-blue-300',
+    dot: 'bg-blue-400',
+    ring: 'ring-blue-500/40',
+    badgeBg: 'bg-blue-600 text-white',
+    heroBg: 'from-blue-950/40 via-slate-900 to-slate-950 border-blue-500/30'
+  },
+  rose: {
+    id: 'rose',
+    nameKey: 'colorRose',
+    colorName: 'rose',
+    bgLight: 'bg-rose-500/20',
+    border: 'border-rose-500/40',
+    text: 'text-rose-300',
+    dot: 'bg-rose-400',
+    ring: 'ring-rose-500/40',
+    badgeBg: 'bg-rose-600 text-white',
+    heroBg: 'from-rose-950/40 via-slate-900 to-slate-950 border-rose-500/30'
+  },
+  emerald: {
+    id: 'emerald',
+    nameKey: 'colorEmerald',
+    colorName: 'emerald',
+    bgLight: 'bg-emerald-500/20',
+    border: 'border-emerald-500/40',
+    text: 'text-emerald-300',
+    dot: 'bg-emerald-400',
+    ring: 'ring-emerald-500/40',
+    badgeBg: 'bg-emerald-600 text-white',
+    heroBg: 'from-emerald-950/40 via-slate-900 to-slate-950 border-emerald-500/30'
+  },
+  amber: {
+    id: 'amber',
+    nameKey: 'colorAmber',
+    colorName: 'amber',
+    bgLight: 'bg-amber-500/20',
+    border: 'border-amber-500/40',
+    text: 'text-amber-300',
+    dot: 'bg-amber-400',
+    ring: 'ring-amber-500/40',
+    badgeBg: 'bg-amber-600 text-white',
+    heroBg: 'from-amber-950/40 via-slate-900 to-slate-950 border-amber-500/30'
+  },
+  purple: {
+    id: 'purple',
+    nameKey: 'colorPurple',
+    colorName: 'purple',
+    bgLight: 'bg-purple-500/20',
+    border: 'border-purple-500/40',
+    text: 'text-purple-300',
+    dot: 'bg-purple-400',
+    ring: 'ring-purple-500/40',
+    badgeBg: 'bg-purple-600 text-white',
+    heroBg: 'from-purple-950/40 via-slate-900 to-slate-950 border-purple-500/30'
+  }
+};
+
+export const defaultChildrenProfiles = [
+  {
+    id: 'child_1',
+    name: '大寶 Leo',
+    color: 'blue',
+    presetId: 'odd_pe',
+    swimmingDay: 5
+  }
+];
+
 /**
  * Calculates base uniform and optional swimming combination for any cycle day (1 to 8)
  * Day 7 is ALWAYS fixed as house_shirt.
@@ -622,7 +696,7 @@ export const rawCalendarStructure = [
  * Note: Day 7 is STRICTLY FIXED as 'house_shirt' for all classes.
  */
 export function buildDynamicCalendar(classConfig) {
-  const presetId = classConfig?.id || 'odd_pe';
+  const presetId = classConfig?.presetId || classConfig?.id || 'odd_pe';
   const hasValidSwim = classConfig?.swimmingDay !== null && classConfig?.swimmingDay !== undefined && Number(classConfig?.swimmingDay) > 0;
   const swimmingDay = hasValidSwim ? Number(classConfig.swimmingDay) : null;
 
