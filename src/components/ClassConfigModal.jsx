@@ -36,7 +36,10 @@ export default function ClassConfigModal({
   // Local list of children profiles
   const [localChildren, setLocalChildren] = useState(() => {
     if (childrenProfiles && childrenProfiles.length > 0) {
-      return JSON.parse(JSON.stringify(childrenProfiles));
+      return childrenProfiles.map((c) => ({
+        ...c,
+        houseDay: c.houseDay !== undefined ? c.houseDay : 7
+      }));
     }
     return [
       {
@@ -44,7 +47,8 @@ export default function ClassConfigModal({
         name: '大寶 Leo',
         color: 'blue',
         presetId: 'odd_pe',
-        swimmingDay: 5
+        swimmingDay: 5,
+        houseDay: 7
       }
     ];
   });
@@ -55,7 +59,12 @@ export default function ClassConfigModal({
   useEffect(() => {
     if (isOpen) {
       if (childrenProfiles && childrenProfiles.length > 0) {
-        setLocalChildren(JSON.parse(JSON.stringify(childrenProfiles)));
+        setLocalChildren(
+          childrenProfiles.map((c) => ({
+            ...c,
+            houseDay: c.houseDay !== undefined ? c.houseDay : 7
+          }))
+        );
       } else {
         setLocalChildren([
           {
@@ -63,7 +72,8 @@ export default function ClassConfigModal({
             name: '大寶 Leo',
             color: 'blue',
             presetId: 'odd_pe',
-            swimmingDay: 5
+            swimmingDay: 5,
+            houseDay: 7
           }
         ]);
       }
@@ -96,7 +106,8 @@ export default function ClassConfigModal({
       name: lang === 'zh' ? `小孩 ${nextIdx}` : lang === 'th' ? `เด็กคนที่ ${nextIdx}` : `Child ${nextIdx}`,
       color: defaultColor,
       presetId: defaultPreset,
-      swimmingDay: defaultSwim
+      swimmingDay: defaultSwim,
+      houseDay: 7
     };
 
     setLocalChildren((prev) => [...prev, newChild]);
@@ -117,7 +128,8 @@ export default function ClassConfigModal({
     const sanitized = localChildren.map((child, idx) => ({
       ...child,
       name: (child.name || '').trim() || (lang === 'zh' ? `小孩 ${idx + 1}` : lang === 'th' ? `เด็ก ${idx + 1}` : `Child ${idx + 1}`),
-      swimmingDay: child.swimmingDay !== null && child.swimmingDay !== undefined ? Number(child.swimmingDay) : null
+      swimmingDay: child.swimmingDay !== null && child.swimmingDay !== undefined ? Number(child.swimmingDay) : null,
+      houseDay: child.houseDay !== null && child.houseDay !== undefined ? Number(child.houseDay) : null
     }));
 
     onSaveChildren(sanitized);
@@ -225,7 +237,7 @@ export default function ClassConfigModal({
         {/* Modal Body - Scrollable */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-6 text-sm text-slate-300">
           
-          {/* Step 1: Child Name & Color Customization */}
+          {/* Child Name & Color Customization */}
           <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800/90 space-y-4 shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               {/* Name Input */}
@@ -273,7 +285,7 @@ export default function ClassConfigModal({
             </div>
           </div>
 
-          {/* Step 2: Preset Options (Odd vs Even) */}
+          {/* Step 1: Preset Options (Odd vs Even) */}
           <div className="space-y-3">
             <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-400 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-blue-400" />
@@ -343,12 +355,84 @@ export default function ClassConfigModal({
             </div>
           </div>
 
+          {/* Step 2: House Shirt Day Selector (Optional: None, Day 1 to Day 8, default Day 7) */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="text-xs uppercase font-mono font-bold tracking-wider text-amber-300 flex items-center gap-1.5">
+                <Flame className="w-3.5 h-3.5 text-amber-400" />
+                <span>{lang === 'zh' ? '2. 指定學院服日（可自訂）' : lang === 'th' ? '2. กำหนดวันใส่เสื้อบ้าน (เลือกได้)' : '2. House Shirt Day (Customizable)'}</span>
+              </label>
+              <span className="text-[11px] text-slate-400">
+                {lang === 'zh' ? '預設 Day 7，亦可選 Day 1~8 或無' : lang === 'th' ? 'ค่าเริ่มต้น Day 7 หรือเลือก 1-8' : 'Default Day 7, or choose 1-8'}
+              </span>
+            </div>
+
+            {/* 9 Options Touch-Friendly Grid (Mobile 3-cols, Desktop 9-cols) */}
+            <div className="grid grid-cols-3 sm:grid-cols-9 gap-2">
+              {/* Option: No House Shirt */}
+              <button
+                type="button"
+                onClick={() => handleUpdateActiveChild('houseDay', null)}
+                className={`p-2.5 sm:p-2 rounded-2xl sm:rounded-xl border transition flex flex-col items-center justify-center gap-1 tap-effect ${
+                  activeChild.houseDay === null
+                    ? 'bg-slate-800 border-2 border-slate-500 text-white shadow-lg'
+                    : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-center gap-1 text-[11px] font-mono font-bold">
+                  <CircleOff className={`w-3 h-3 ${activeChild.houseDay === null ? 'text-slate-300' : 'text-slate-600'}`} />
+                  <span>NONE</span>
+                </div>
+                <span className="text-[10px] font-semibold text-center truncate w-full">
+                  {t.noHouseShirtShort || '無學院服'}
+                </span>
+              </button>
+
+              {/* Options: Day 1 to Day 8 */}
+              {cycleDaysList.map((d) => {
+                const isSelected = activeChild.houseDay === d;
+                const isDefaultDay7 = d === 7;
+
+                return (
+                  <button
+                    key={d}
+                    type="button"
+                    onClick={() => handleUpdateActiveChild('houseDay', d)}
+                    className={`p-2.5 sm:p-2 rounded-2xl sm:rounded-xl border transition flex flex-col items-center justify-center gap-1 tap-effect relative ${
+                      isSelected
+                        ? 'bg-amber-950/50 border-2 border-amber-400 text-amber-200 shadow-lg shadow-amber-500/20 ring-1 ring-amber-400/40'
+                        : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                    }`}
+                  >
+                    {isDefaultDay7 && (
+                      <span className="absolute -top-1.5 right-1 px-1 py-0.2 rounded-md bg-amber-500 text-slate-950 text-[8px] font-black tracking-tighter">
+                        {t.defaultHouseDayBadge || '預設'}
+                      </span>
+                    )}
+                    <div className="flex items-center gap-1 text-[11px] font-mono font-bold">
+                      <Flame className={`w-3 h-3 ${isSelected ? 'text-amber-300' : 'text-slate-500'}`} />
+                      <span>DAY {d}</span>
+                    </div>
+                    <span className="text-[10px] font-semibold text-center truncate w-full">
+                      {isDefaultDay7 ? (lang === 'zh' ? '預設' : 'Default') : (t.shortHouse || '學院')}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <p className="text-xs text-slate-400 flex items-center gap-1.5 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
+              <Info className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+              <span>{t.houseDayNotice || (lang === 'zh' ? '可依每位小孩班級/年級自訂學院服週期日（例如不同年級可能在不同天穿學院服）。' : 'Customize the House Shirt cycle day for each child.')}</span>
+            </p>
+          </div>
+
           {/* Step 3: Swimming Day Selector (Optional: No Swimming, Day 4, Day 5, or Day 6) */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <label className="text-xs uppercase font-mono font-bold tracking-wider text-cyan-300 flex items-center gap-1.5">
                 <Waves className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{lang === 'zh' ? '2. 指定游泳課日（選填）' : lang === 'th' ? '2. กำหนดวันว่ายน้ำ (เลือกได้)' : '2. Swimming Day (Optional)'}</span>
+                <span>{lang === 'zh' ? '3. 指定游泳課日（選填）' : lang === 'th' ? '3. กำหนดวันว่ายน้ำ (เลือกได้)' : '3. Swimming Day (Optional)'}</span>
               </label>
               <span className="text-[11px] text-slate-400">
                 {lang === 'zh' ? '若無游泳課可選「無」' : lang === 'th' ? 'เลือกไม่มีได้หากไม่มีเรียน' : 'Select None if no swim'}
@@ -418,17 +502,19 @@ export default function ClassConfigModal({
               <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-400">
                 {lang === 'zh' ? `【${activeChild.name}】8 日週期著裝預覽` : lang === 'th' ? `พรีวิวตาราง 8 วันของ【${activeChild.name}】` : `8-Day Cycle Preview for ${activeChild.name}`}
               </label>
-              <span className="text-[11px] text-amber-400 font-bold flex items-center gap-1">
-                <Lock className="w-3 h-3" />
-                <span>{lang === 'zh' ? 'Day 7 固定學院服' : lang === 'th' ? 'Day 7 เสื้อบ้าน' : 'Day 7 House Shirt'}</span>
-              </span>
+              {activeChild.houseDay !== null && (
+                <span className="text-[11px] text-amber-400 font-bold flex items-center gap-1">
+                  <Flame className="w-3 h-3" />
+                  <span>{lang === 'zh' ? `Day ${activeChild.houseDay} 學院服` : lang === 'th' ? `Day ${activeChild.houseDay} เสื้อบ้าน` : `Day ${activeChild.houseDay} House Shirt`}</span>
+                </span>
+              )}
             </div>
 
             {/* Grid of 8 cycle days */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               {cycleDaysList.map((dayNum) => {
-                const uniformType = getCycleDayUniform(dayNum, activeChild.presetId, activeChild.swimmingDay);
-                const isDay7 = dayNum === 7;
+                const uniformType = getCycleDayUniform(dayNum, activeChild.presetId, activeChild.swimmingDay, activeChild.houseDay);
+                const isHouse = activeChild.houseDay !== null && dayNum === activeChild.houseDay;
                 const isSwim = activeChild.swimmingDay !== null && dayNum === activeChild.swimmingDay;
                 const meta = uniformMeta[uniformType] || uniformMeta.uniform;
 
@@ -436,8 +522,8 @@ export default function ClassConfigModal({
                   <div
                     key={dayNum}
                     className={`p-3 rounded-2xl border flex flex-col justify-between gap-2 relative ${
-                      isDay7 
-                        ? 'bg-amber-950/30 border-amber-500/40' 
+                      isHouse 
+                        ? 'bg-amber-950/30 border-amber-500/40 ring-1 ring-amber-500/30' 
                         : isSwim
                         ? 'bg-cyan-950/30 border-cyan-500/40 ring-1 ring-cyan-500/30'
                         : 'bg-slate-950/70 border-slate-800'
@@ -448,18 +534,20 @@ export default function ClassConfigModal({
                       <span className="font-mono font-bold text-xs text-slate-300">
                         DAY {dayNum}
                       </span>
-                      {isDay7 && (
-                        <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 flex items-center gap-1">
-                          <Lock className="w-2.5 h-2.5" />
-                          <span>FIXED</span>
-                        </span>
-                      )}
-                      {isSwim && (
-                        <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-cyan-500/20 text-cyan-300 flex items-center gap-1">
-                          <Waves className="w-2.5 h-2.5" />
-                          <span>SWIM</span>
-                        </span>
-                      )}
+                      <div className="flex items-center gap-1">
+                        {isHouse && (
+                          <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 flex items-center gap-1">
+                            <Flame className="w-2.5 h-2.5" />
+                            <span>HOUSE</span>
+                          </span>
+                        )}
+                        {isSwim && (
+                          <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-cyan-500/20 text-cyan-300 flex items-center gap-1">
+                            <Waves className="w-2.5 h-2.5" />
+                            <span>SWIM</span>
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     {/* Uniform Pill Display */}

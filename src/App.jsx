@@ -62,7 +62,10 @@ export default function App() {
       if (savedProfiles) {
         const parsed = JSON.parse(savedProfiles);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
+          return parsed.map((p) => ({
+            ...p,
+            houseDay: p.houseDay !== undefined ? p.houseDay : 7
+          }));
         }
       }
 
@@ -77,7 +80,8 @@ export default function App() {
               name: '大寶 Leo',
               color: 'blue',
               presetId: legacyParsed.id,
-              swimmingDay: legacyParsed.swimmingDay ?? 5
+              swimmingDay: legacyParsed.swimmingDay ?? 5,
+              houseDay: legacyParsed.houseDay ?? 7
             }
           ];
         }
@@ -251,7 +255,7 @@ export default function App() {
               <span className="w-2.5 h-2.5 rounded-full bg-amber-400 flex-shrink-0" />
               <div className="truncate">
                 <span className="text-amber-300 font-bold">{t.houseShirt}</span>
-                <span className="text-[10px] text-amber-400/80 block">{lang === 'zh' ? 'Day 7 (固定學院服)' : lang === 'th' ? 'Day 7 (เสื้อบ้าน)' : 'Day 7 (Fixed House)'}</span>
+                <span className="text-[10px] text-amber-400/80 block">{lang === 'zh' ? '學院服日 (自訂 Day 1~8)' : lang === 'th' ? 'วันเสื้อบ้าน (เลือก Day 1~8)' : 'House Day (Day 1~8)'}</span>
               </div>
             </div>
             <div className="flex items-center gap-2 p-2 rounded-xl bg-blue-950/20 border border-blue-500/30">

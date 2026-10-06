@@ -157,17 +157,22 @@ export const defaultChildrenProfiles = [
     name: '大寶 Leo',
     color: 'blue',
     presetId: 'odd_pe',
-    swimmingDay: 5
+    swimmingDay: 5,
+    houseDay: 7
   }
 ];
 
 /**
  * Calculates base uniform and optional swimming combination for any cycle day (1 to 8)
- * Day 7 is ALWAYS fixed as house_shirt.
+ * House shirt day is configurable per child (default Day 7, or custom Day 1-8 / null).
  * Swimming day is optional (can be null/none for older students).
  */
-export function getCycleDayUniform(cycleDay, presetId = 'odd_pe', swimmingDay = 5) {
-  if (cycleDay === 7) {
+export function getCycleDayUniform(cycleDay, presetId = 'odd_pe', swimmingDay = 5, houseDay = 7) {
+  const hasValidHouse = houseDay !== null && houseDay !== undefined && Number(houseDay) > 0;
+  const targetHouseDay = hasValidHouse ? Number(houseDay) : null;
+
+  // Designated House Shirt cycle day takes precedence
+  if (targetHouseDay !== null && cycleDay === targetHouseDay) {
     return 'house_shirt';
   }
 
@@ -176,11 +181,11 @@ export function getCycleDayUniform(cycleDay, presetId = 'odd_pe', swimmingDay = 
   if (presetId === 'even_pe') {
     baseUniform = (cycleDay === 2 || cycleDay === 4 || cycleDay === 6 || cycleDay === 8) ? 'pe' : 'uniform';
   } else {
-    // default: odd_pe
-    baseUniform = (cycleDay === 1 || cycleDay === 3 || cycleDay === 5) ? 'pe' : 'uniform';
+    // default: odd_pe (Days 1, 3, 5, 7 are PE, Days 2, 4, 6, 8 are Uniform)
+    baseUniform = (cycleDay === 1 || cycleDay === 3 || cycleDay === 5 || cycleDay === 7) ? 'pe' : 'uniform';
   }
 
-  // If a valid swimming day is designated (Day 4, 5, or 6)
+  // If a valid swimming day is designated (Day 4, 5, or 6, etc.)
   if (swimmingDay && Number(swimmingDay) > 0 && cycleDay === Number(swimmingDay)) {
     return baseUniform === 'pe' ? 'pe_swimming' : 'uniform_swimming';
   }
@@ -692,13 +697,14 @@ export const rawCalendarStructure = [
 
 /**
  * Dynamic Schedule Builder
- * Generates the full 3-month calendar dynamically according to the active class's preset and optional swimming day.
- * Note: Day 7 is STRICTLY FIXED as 'house_shirt' for all classes.
+ * Generates the full 3-month calendar dynamically according to the active class's preset, swimming day, and house shirt day.
  */
 export function buildDynamicCalendar(classConfig) {
   const presetId = classConfig?.presetId || classConfig?.id || 'odd_pe';
   const hasValidSwim = classConfig?.swimmingDay !== null && classConfig?.swimmingDay !== undefined && Number(classConfig?.swimmingDay) > 0;
   const swimmingDay = hasValidSwim ? Number(classConfig.swimmingDay) : null;
+  const hasValidHouse = classConfig?.houseDay !== null && classConfig?.houseDay !== undefined && Number(classConfig?.houseDay) > 0;
+  const houseDay = hasValidHouse ? Number(classConfig.houseDay) : (classConfig?.houseDay === null ? null : 7);
 
   return rawCalendarStructure.map((item) => {
     if (item.isHoliday) {
@@ -709,7 +715,7 @@ export function buildDynamicCalendar(classConfig) {
     }
 
     if (item.cycleDay) {
-      const uniformType = getCycleDayUniform(item.cycleDay, presetId, swimmingDay);
+      const uniformType = getCycleDayUniform(item.cycleDay, presetId, swimmingDay, houseDay);
       const hasSwimming = swimmingDay !== null && item.cycleDay === swimmingDay;
       return { ...item, uniformType, hasSwimming };
     }
